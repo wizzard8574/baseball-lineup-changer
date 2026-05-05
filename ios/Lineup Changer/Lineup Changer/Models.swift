@@ -60,7 +60,7 @@ enum FieldPosition: String, CaseIterable, Identifiable, Codable {
     }
 }
 
-struct Player: Identifiable, Codable, Equatable {
+struct Player: Identifiable, Codable, Equatable, Hashable{
     let id: UUID
     var name: String
     var number: String
@@ -128,9 +128,20 @@ struct Player: Identifiable, Codable, Equatable {
         try container.encodeIfPresent(gameChangerStats, forKey: .gameChangerStats)
         try container.encode(notes, forKey: .notes)
     }
+    
 }
 
-struct Coach: Identifiable, Codable, Equatable {
+extension Player {
+    static func == (lhs: Player, rhs: Player) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+struct Coach: Identifiable, Codable, Equatable , Hashable{
     let id: UUID
     var name: String
     var number: String

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MessageUI
 
 // MARK: - Player Detail
 
@@ -23,10 +24,14 @@ struct PlayerDetailView: View {
     @State private var editedName: String = ""
     @State private var editedNumber: String = ""
     @State private var editedCellNumber: String = ""
+    @State private var isGuestPlayer = false
     @State private var selectedSpeedRating: Int = 1
     @State private var selectedPosition: FieldPosition = .firstBase
     @State private var selectedRating: Int = 1
     @State private var editedNotes: String = ""
+    @State private var isShowingMessageComposer = false
+    @State private var messageAlertText: String?
+    @State private var duplicateNumberAlertText: String?
     @FocusState private var focusedField: PlayerDetailFocusedField?
     @Environment(\.dismiss) private var dismiss
     
@@ -80,15 +85,17 @@ struct PlayerDetailView: View {
                                     .foregroundStyle(.blue)
                             }
                         }
-
-                        if let textURL = phoneTextURL(for: editedCellNumber) {
-                            Link(destination: textURL) {
-                                Image(systemName: "message.fill")
-                                    .foregroundStyle(.green)
-                            }
+                        Button {
+                            presentMessageComposer()
+                        } label: {
+                            Image(systemName: "message.fill")
+                                .foregroundStyle(.green)
                         }
+                        .buttonStyle(.plain)
                     }
                 }
+                
+                Toggle("Guest", isOn: $isGuestPlayer)
                 
                 if !isPhoneNumberValidOrEmpty(editedCellNumber) {
                     Text("Cell # must contain exactly 10 digits.")
@@ -184,7 +191,9 @@ struct PlayerDetailView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Save") {
                     savePlayerInfo()
-                    dismiss()
+                    if duplicateNumberAlertText == nil {
+                        dismiss()
+                    }
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(!isPhoneNumberValidOrEmpty(editedCellNumber))
@@ -197,10 +206,30 @@ struct PlayerDetailView: View {
                 }
             }
         }
+        .sheet(isPresented: $isShowingMessageComposer) {
+            MessageComposerView(recipients: [phoneDigits(editedCellNumber)], body: "")
+        }
+        .alert("Unable to Text", isPresented: Binding(
+            get: { messageAlertText != nil },
+            set: { if !$0 { messageAlertText = nil } }
+        )) {
+            Button("OK", role: .cancel) { messageAlertText = nil }
+        } message: {
+            Text(messageAlertText ?? "")
+        }
+        .alert("Duplicate Player Number", isPresented: Binding(
+            get: { duplicateNumberAlertText != nil },
+            set: { if !$0 { duplicateNumberAlertText = nil } }
+        )) {
+            Button("OK", role: .cancel) { duplicateNumberAlertText = nil }
+        } message: {
+            Text(duplicateNumberAlertText ?? "")
+        }
         .onAppear {
             editedName = currentPlayer?.name ?? player.name
             editedNumber = currentPlayer?.number ?? player.number
             editedCellNumber = currentPlayer?.cell ?? player.cell
+            isGuestPlayer = (currentPlayer?.status ?? player.status) == .guest
             selectedSpeedRating = currentPlayer?.speedRating ?? player.speedRating
             editedNotes = currentPlayer?.notes ?? player.notes
 
@@ -208,19 +237,51 @@ struct PlayerDetailView: View {
         }
     }
     
+    private func presentMessageComposer() {
+        let recipient = phoneDigits(editedCellNumber)
+
+        guard recipient.count == 10 else {
+            messageAlertText = "This player does not have a valid 10-digit cell number."
+            return
+        }
+
+        guard MFMessageComposeViewController.canSendText() else {
+            messageAlertText = "Text messaging is not available on this device."
+            return
+        }
+
+        isShowingMessageComposer = true
+    }
+
     private func selectFirstAvailablePosition() {
         if let first = availablePositions.first {
             selectedPosition = first
         }
     }
 
+    private func isDuplicateNonGuestNumber(_ number: String) -> Bool {
+        let trimmedNumber = number.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedNumber.isEmpty else { return false }
+
+        return viewModel.players.contains { otherPlayer in
+            otherPlayer.id != player.id
+            && otherPlayer.status != .guest
+            && otherPlayer.number.trimmingCharacters(in: .whitespacesAndNewlines) == trimmedNumber
+        }
+    }
+
     private func savePlayerInfo() {
         guard isPhoneNumberValidOrEmpty(editedCellNumber) else { return }
+        if !isGuestPlayer, isDuplicateNonGuestNumber(editedNumber) {
+            duplicateNumberAlertText = "A non-guest player with number #\(editedNumber) already exists. Check Guest if this is a guest player using the same number."
+            return
+        }
         viewModel.renamePlayer(playerID: player.id, newName: editedName)
         viewModel.updatePlayerNumber(playerID: player.id, newNumber: editedNumber)
         viewModel.updatePlayerCell(playerID: player.id, newCell: editedCellNumber)
         viewModel.updatePlayerSpeed(playerID: player.id, speedRating: selectedSpeedRating)
         viewModel.updatePlayerNotes(playerID: player.id, notes: editedNotes)
+        viewModel.setPlayerStatus(playerID: player.id, status: isGuestPlayer ? .guest : .active)
     }
     
 }

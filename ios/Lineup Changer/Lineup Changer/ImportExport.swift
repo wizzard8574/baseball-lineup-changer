@@ -34,7 +34,7 @@ private func inningLineupsWithoutGameChangerStats(_ lineups: [Int: [FieldPositio
 private func teamSnapshotWithoutGameChangerStats(_ snapshot: TeamSnapshot) -> TeamSnapshot {
     TeamSnapshot(
         players: snapshot.players.map { playerWithoutGameChangerStats($0) },
-        coaches: snapshot.coaches,
+        coaches: [],
         pitcherID: snapshot.pitcherID,
         catcherID: snapshot.catcherID,
         lineup: lineupWithoutGameChangerStats(snapshot.lineup),
@@ -52,6 +52,7 @@ private func teamSnapshotWithoutGameChangerStats(_ snapshot: TeamSnapshot) -> Te
 
 func exportAppStateData() -> Data {
     var exportState = currentAppState()
+    exportState.coaches = []
     exportState.players = exportState.players.map { playerWithoutGameChangerStats($0) }
     exportState.lineup = lineupWithoutGameChangerStats(exportState.lineup)
     exportState.inningLineups = inningLineupsWithoutGameChangerStats(exportState.inningLineups)

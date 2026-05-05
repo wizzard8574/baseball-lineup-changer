@@ -26,38 +26,27 @@ private enum SettingsDataSection: String, CaseIterable, Identifiable {
     }
 }
 
-private enum SettingsActiveSheet: Identifiable {
-    case playerImport
-    case coachImport
-    case gameChangerImport
-    case share
-
-    var id: String {
-        switch self {
-        case .playerImport: return "playerImport"
-        case .coachImport: return "coachImport"
-        case .gameChangerImport: return "gameChangerImport"
-        case .share: return "share"
-        }
-    }
-}
-
 struct SettingsDataSectionView: View {
     @ObservedObject var viewModel: LineupViewModel
 
     @State private var selectedDataSection: SettingsDataSection = .player
-    @State private var activeSheet: SettingsActiveSheet?
     @State private var isImportingPlayerOnly = false
     @State private var backupStatusMessage = ""
     @State private var gameChangerStatusMessage = ""
     @State private var shareURL: URL?
-    @State private var playerShareURL: URL?
+
+    @State private var isShowingPlayerImportPicker = false
+    @State private var isShowingCoachImportPicker = false
+    @State private var isShowingGameChangerImportPicker = false
+    @State private var isShowingShareSheet = false
+
     @State private var isShowingDeletePlayerDialog = false
     @State private var isShowingDeleteCoachDialog = false
     @State private var isShowingDeletePlayerDataConfirmation = false
 
     var body: some View {
-        Section("Data") {
+        Group {
+            Section("Data") {
             Picker("Data Section", selection: $selectedDataSection) {
                 ForEach(SettingsDataSection.allCases) { section in
                     Text(section.pickerTitle).tag(section)
@@ -76,77 +65,75 @@ struct SettingsDataSectionView: View {
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
+            }
         }
-        .sheet(item: $activeSheet) { sheet in
-            switch sheet {
-            case .playerImport:
-                ImportDocumentPicker(
-                    contentTypes: [.json, .data],
-                    onPick: { url in
-                        do {
-                            let data = try Data(contentsOf: url)
-                            if isImportingPlayerOnly {
-                                try viewModel.importPlayerNameNumberData(data)
-                                backupStatusMessage = "Player import complete."
-                            } else {
-                                try viewModel.importAppStateData(data)
-                                backupStatusMessage = "Player data import complete."
-                            }
-                        } catch {
-                            backupStatusMessage = "Import failed: \(error.localizedDescription)"
+        .sheet(isPresented: $isShowingPlayerImportPicker) {
+            ImportDocumentPicker(
+                contentTypes: [.json, .data],
+                onPick: { url in
+                    do {
+                        let data = try Data(contentsOf: url)
+                        if isImportingPlayerOnly {
+                            try viewModel.importPlayerNameNumberData(data)
+                            backupStatusMessage = "Player import complete."
+                        } else {
+                            try viewModel.importAppStateData(data)
+                            backupStatusMessage = "Player data import complete."
                         }
-                        activeSheet = nil
-                    },
-                    onCancel: {
-                        backupStatusMessage = "Import cancelled."
-                        activeSheet = nil
+                    } catch {
+                        backupStatusMessage = "Import failed: \(error.localizedDescription)"
                     }
-                )
-
-            case .coachImport:
-                ImportDocumentPicker(
-                    contentTypes: [.json, .data],
-                    onPick: { url in
-                        do {
-                            let data = try Data(contentsOf: url)
-                            try viewModel.importCoachData(data)
-                            backupStatusMessage = "Coach import complete."
-                        } catch {
-                            backupStatusMessage = "Coach import failed: \(error.localizedDescription)"
-                        }
-                        activeSheet = nil
-                    },
-                    onCancel: {
-                        backupStatusMessage = "Coach import cancelled."
-                        activeSheet = nil
-                    }
-                )
-
-            case .gameChangerImport:
-                ImportDocumentPicker(
-                    contentTypes: [.commaSeparatedText, .plainText, .data],
-                    onPick: { url in
-                        do {
-                            let data = try Data(contentsOf: url)
-                            let matchedCount = try viewModel.importGameChangerStatsData(data)
-                            gameChangerStatusMessage = "Imported GameChanger stats for \(matchedCount) player(s)."
-                        } catch {
-                            gameChangerStatusMessage = "Import failed: \(error.localizedDescription)"
-                        }
-                        activeSheet = nil
-                    },
-                    onCancel: {
-                        gameChangerStatusMessage = "Import cancelled."
-                        activeSheet = nil
-                    }
-                )
-
-            case .share:
-                if let shareURL {
-                    ActivityView(activityItems: [shareURL])
-                } else {
-                    Text("No backup file available to share.")
+                    isShowingPlayerImportPicker = false
+                },
+                onCancel: {
+                    backupStatusMessage = "Import cancelled."
+                    isShowingPlayerImportPicker = false
                 }
+            )
+        }
+        .sheet(isPresented: $isShowingCoachImportPicker) {
+            ImportDocumentPicker(
+                contentTypes: [.json, .data],
+                onPick: { url in
+                    do {
+                        let data = try Data(contentsOf: url)
+                        try viewModel.importCoachData(data)
+                        backupStatusMessage = "Coach import complete."
+                    } catch {
+                        backupStatusMessage = "Coach import failed: \(error.localizedDescription)"
+                    }
+                    isShowingCoachImportPicker = false
+                },
+                onCancel: {
+                    backupStatusMessage = "Coach import cancelled."
+                    isShowingCoachImportPicker = false
+                }
+            )
+        }
+        .sheet(isPresented: $isShowingGameChangerImportPicker) {
+            ImportDocumentPicker(
+                contentTypes: [.commaSeparatedText, .plainText, .data],
+                onPick: { url in
+                    do {
+                        let data = try Data(contentsOf: url)
+                        let matchedCount = try viewModel.importGameChangerStatsData(data)
+                        gameChangerStatusMessage = "Imported GameChanger stats for \(matchedCount) player(s)."
+                    } catch {
+                        gameChangerStatusMessage = "Import failed: \(error.localizedDescription)"
+                    }
+                    isShowingGameChangerImportPicker = false
+                },
+                onCancel: {
+                    gameChangerStatusMessage = "Import cancelled."
+                    isShowingGameChangerImportPicker = false
+                }
+            )
+        }
+        .sheet(isPresented: $isShowingShareSheet) {
+            if let shareURL {
+                ActivityView(activityItems: [shareURL])
+            } else {
+                Text("No backup file available to share.")
             }
         }
         .confirmationDialog("Delete Player", isPresented: $isShowingDeletePlayerDialog, titleVisibility: .visible) {
@@ -202,7 +189,7 @@ struct SettingsDataSectionView: View {
         VStack(alignment: .leading, spacing: 14) {
             Button {
                 isImportingPlayerOnly = true
-                activeSheet = .playerImport
+                isShowingPlayerImportPicker = true
             } label: {
                 Label("Import Player", systemImage: "square.and.arrow.down")
             }
@@ -212,9 +199,8 @@ struct SettingsDataSectionView: View {
                     let data = viewModel.exportPlayerNameNumberData()
                     let url = FileManager.default.temporaryDirectory.appendingPathComponent("LineupChanger-Players.json")
                     try data.write(to: url, options: .atomic)
-                    playerShareURL = url
                     shareURL = url
-                    activeSheet = .share
+                    isShowingShareSheet = true
                     backupStatusMessage = "Player file ready to share."
                 } catch {
                     backupStatusMessage = "Share player failed: \(error.localizedDescription)"
@@ -240,7 +226,7 @@ struct SettingsDataSectionView: View {
         VStack(alignment: .leading, spacing: 14) {
             Button {
                 isImportingPlayerOnly = false
-                activeSheet = .playerImport
+                isShowingPlayerImportPicker = true
             } label: {
                 Label("Import Player Data", systemImage: "square.and.arrow.down")
             }
@@ -251,7 +237,7 @@ struct SettingsDataSectionView: View {
                     let url = FileManager.default.temporaryDirectory.appendingPathComponent("LineupChanger-Player-Data.json")
                     try data.write(to: url, options: .atomic)
                     shareURL = url
-                    activeSheet = .share
+                    isShowingShareSheet = true
                     backupStatusMessage = "Player data file ready to share."
                 } catch {
                     backupStatusMessage = "Share player data failed: \(error.localizedDescription)"
@@ -276,7 +262,7 @@ struct SettingsDataSectionView: View {
     private var coachesSection: some View {
         VStack(alignment: .leading, spacing: 14) {
             Button {
-                activeSheet = .coachImport
+                isShowingCoachImportPicker = true
             } label: {
                 Label("Import Coaches", systemImage: "square.and.arrow.down")
             }
@@ -287,7 +273,7 @@ struct SettingsDataSectionView: View {
                     let url = FileManager.default.temporaryDirectory.appendingPathComponent("LineupChanger-Coaches.json")
                     try data.write(to: url, options: .atomic)
                     shareURL = url
-                    activeSheet = .share
+                    isShowingShareSheet = true
                     backupStatusMessage = "Coach file ready to share."
                 } catch {
                     backupStatusMessage = "Share coaches failed: \(error.localizedDescription)"
@@ -312,7 +298,7 @@ struct SettingsDataSectionView: View {
     private var gameChangerSection: some View {
         VStack(alignment: .leading, spacing: 14) {
             Button {
-                activeSheet = .gameChangerImport
+                isShowingGameChangerImportPicker = true
             } label: {
                 Label("Import GameChanger Stats", systemImage: "square.and.arrow.down")
             }

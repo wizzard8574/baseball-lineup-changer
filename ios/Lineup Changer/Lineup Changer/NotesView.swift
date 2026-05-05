@@ -1,5 +1,6 @@
 import SwiftUI
 import Foundation
+import MessageUI
 
 private enum NotesGroup: String, CaseIterable, Identifiable {
     case players = "Players"
@@ -8,14 +9,30 @@ private enum NotesGroup: String, CaseIterable, Identifiable {
     var id: String { rawValue }
 }
 
+private struct TextMessageDraft: Identifiable {
+    let id = UUID()
+    let recipients: [String]
+    let body: String
+}
+
 struct NotesView: View {
     @ObservedObject var viewModel: LineupViewModel
     @FocusState private var isEditing: Bool
     @State private var selectedNotesGroup: NotesGroup = .players
+    @State private var messageDraft: TextMessageDraft?
+    @State private var messageAlertText: String?
     // coach notes are persisted in viewModel.coachNotes
     
     private var allContactNumbers: [String] {
         viewModel.players.map(\.cell) + viewModel.coaches.map(\.cell)
+    }
+
+    private var allTeamRecipients: [String] {
+        validRecipients(from: allContactNumbers)
+    }
+
+    private var coachRecipients: [String] {
+        validRecipients(from: viewModel.coaches.map(\.cell))
     }
     
     private var sortedPlayers: [Player] {
@@ -38,8 +55,18 @@ struct NotesView: View {
     
     var body: some View {
         NavigationStack {
-            GeometryReader { geo in
+            ZStack {
+                AppSportsBackground()
+
+                GeometryReader { geo in
                 VStack(spacing: 8) {
+                    TeamPickerView(viewModel: viewModel)
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 14)
+                        .background(Color(uiColor: .systemBackground).opacity(0.92), in: RoundedRectangle(cornerRadius: 26, style: .continuous))
+                        .padding(.horizontal)
+
                     Picker("Notes Group", selection: $selectedNotesGroup) {
                         ForEach(NotesGroup.allCases) { group in
                             Text(group.rawValue).tag(group)
@@ -50,20 +77,19 @@ struct NotesView: View {
                     if selectedNotesGroup == .players {
                         VStack(alignment: .leading, spacing: 4) {
                             HStack {
-                                Text("Pre Game Notes")
-                                    .font(.headline)
-                                    .foregroundStyle(.secondary)
+                                notesSectionHeader("Pre Game Notes")
 
                                 Spacer()
 
-                                if let url = groupTextURL(for: allContactNumbers, body: preGameTextMessage) {
-                                    Link(destination: url) {
-                                        Label("Text Team", systemImage: "message.fill")
-                                    }
-                                    .font(.caption.weight(.semibold))
-                                    .buttonStyle(.borderedProminent)
-                                    .controlSize(.small)
+                                Button {
+                                    presentMessageComposer(recipients: allTeamRecipients, body: preGameTextMessage)
+                                } label: {
+                                    Label("Text Team", systemImage: "message.fill")
                                 }
+                                .font(.caption.weight(.semibold))
+                                .buttonStyle(.borderedProminent)
+                                .controlSize(.small)
+                                .disabled(allTeamRecipients.isEmpty)
 
                                 Button {
                                     viewModel.preGameNotes = ""
@@ -88,20 +114,19 @@ struct NotesView: View {
 
                         VStack(alignment: .leading, spacing: 4) {
                             HStack {
-                                Text("Post Game Notes")
-                                    .font(.headline)
-                                    .foregroundStyle(.secondary)
+                                notesSectionHeader("Post Game Notes")
 
                                 Spacer()
 
-                                if let url = groupTextURL(for: allContactNumbers, body: postGameTextMessage) {
-                                    Link(destination: url) {
-                                        Label("Text Team", systemImage: "message.fill")
-                                    }
-                                    .font(.caption.weight(.semibold))
-                                    .buttonStyle(.borderedProminent)
-                                    .controlSize(.small)
+                                Button {
+                                    presentMessageComposer(recipients: allTeamRecipients, body: postGameTextMessage)
+                                } label: {
+                                    Label("Text Team", systemImage: "message.fill")
                                 }
+                                .font(.caption.weight(.semibold))
+                                .buttonStyle(.borderedProminent)
+                                .controlSize(.small)
+                                .disabled(allTeamRecipients.isEmpty)
 
                                 Button {
                                     viewModel.postGameNotes = ""
@@ -126,20 +151,19 @@ struct NotesView: View {
                     } else {
                         VStack(alignment: .leading, spacing: 4) {
                             HStack {
-                                Text("Coaches Notes")
-                                    .font(.headline)
-                                    .foregroundStyle(.secondary)
+                                notesSectionHeader("Coaches Notes")
 
                                 Spacer()
 
-                                if let url = groupTextURL(for: viewModel.coaches.map(\.cell), body: coachesTextMessage) {
-                                    Link(destination: url) {
-                                        Label("Text Coaches", systemImage: "message.fill")
-                                    }
-                                    .font(.caption.weight(.semibold))
-                                    .buttonStyle(.borderedProminent)
-                                    .controlSize(.small)
+                                Button {
+                                    presentMessageComposer(recipients: coachRecipients, body: coachesTextMessage)
+                                } label: {
+                                    Label("Text Coaches", systemImage: "message.fill")
                                 }
+                                .font(.caption.weight(.semibold))
+                                .buttonStyle(.borderedProminent)
+                                .controlSize(.small)
+                                .disabled(coachRecipients.isEmpty)
 
                                 Button {
                                     viewModel.coachNotes = ""
@@ -167,8 +191,26 @@ struct NotesView: View {
                 .padding(.top, 8)
                 .padding(.bottom, 8)
             }
-            .navigationTitle("Notes")
+            }
+            .navigationTitle("")
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack(spacing: 10) {
+                        Image(systemName: "note.text")
+                            .font(.title2.weight(.bold))
+                            .foregroundStyle(.white)
+                            .shadow(color: .black.opacity(0.45), radius: 2, x: 0, y: 1)
+
+                        Text("Notes")
+                            .font(.title.bold())
+                            .foregroundStyle(.white)
+                            .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 2)
+                    }
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 6)
+                    .background(.black.opacity(0.25), in: Capsule())
+                }
+
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
                     Button("Done") {
@@ -176,7 +218,47 @@ struct NotesView: View {
                     }
                 }
             }
+            .sheet(item: $messageDraft) { draft in
+                MessageComposerView(recipients: draft.recipients, body: draft.body)
+            }
+            .alert("Unable to Text", isPresented: Binding(
+                get: { messageAlertText != nil },
+                set: { if !$0 { messageAlertText = nil } }
+            )) {
+                Button("OK", role: .cancel) { messageAlertText = nil }
+            } message: {
+                Text(messageAlertText ?? "")
+            }
         }
+    }
+
+    private func notesSectionHeader(_ title: String) -> some View {
+        Text(title)
+            .font(.headline.weight(.bold))
+            .foregroundStyle(.white)
+            .textCase(nil)
+            .shadow(color: .black.opacity(0.45), radius: 2, x: 0, y: 1)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 4)
+            .background(.black.opacity(0.22), in: Capsule())
+    }
+
+    private func validRecipients(from numbers: [String]) -> [String] {
+        Array(Set(numbers.map { phoneDigits($0) }.filter { $0.count == 10 })).sorted()
+    }
+
+    private func presentMessageComposer(recipients: [String], body: String) {
+        guard !recipients.isEmpty else {
+            messageAlertText = "No valid 10-digit cell numbers were found."
+            return
+        }
+
+        guard MFMessageComposeViewController.canSendText() else {
+            messageAlertText = "Text messaging is not available on this device."
+            return
+        }
+
+        messageDraft = TextMessageDraft(recipients: recipients, body: body)
     }
 
     private var preGameTextMessage: String {

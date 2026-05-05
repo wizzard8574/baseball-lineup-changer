@@ -13,6 +13,7 @@ struct LineupOrderView: View {
     @ObservedObject var viewModel: LineupViewModel
     @State private var isShowingLineupShareSheet = false
     @State private var lineupPDFURL: URL?
+    @State private var scorebookPDFURL: URL?
     @State private var lineupExportMessage = ""
 
     private var orderedPlayers: [Player] {
@@ -65,11 +66,14 @@ struct LineupOrderView: View {
 
     private var baseballView: some View {
         NavigationStack {
-            Form {
-                Section("Team - \(viewModel.selectedTeamName)") {
+            ZStack {
+                AppSportsBackground()
+
+                Form {
+                Section {
                     TeamPickerView(viewModel: viewModel)
                 }
-                Section("Print / Save") {
+                Section(header: lineupSectionHeader("Print / Save")) {
                     Button("Share Lineup Grid") {
                         do {
                             lineupPDFURL = try viewModel.createLineupGridPDF()
@@ -80,13 +84,24 @@ struct LineupOrderView: View {
                         }
                     }
 
+                    Button("Share Book") {
+                        do {
+                            scorebookPDFURL = try viewModel.createScorebookPDF()
+                            lineupPDFURL = scorebookPDFURL
+                            isShowingLineupShareSheet = true
+                            lineupExportMessage = "Scorebook ready."
+                        } catch {
+                            lineupExportMessage = "Could not create scorebook: \(error.localizedDescription)"
+                        }
+                    }
+
                     if !lineupExportMessage.isEmpty {
                         Text(lineupExportMessage)
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                     }
                 }
-                Section("Batting Order") {
+                Section(header: lineupSectionHeader("Batting Order")) {
                     if displayedBatters.isEmpty {
                         Text("Add players first, then they will appear here.")
                             .foregroundStyle(.secondary)
@@ -100,7 +115,7 @@ struct LineupOrderView: View {
 
                                     VStack(alignment: .leading, spacing: 3) {
                                         HStack(spacing: 4) {
-                                            Text(viewModel.displayLabel(for: player))
+                                            Text(lineupDisplayLabel(for: player))
                                             if player.status == .guest {
                                                 Text("(Guest)")
                                                     .italic()
@@ -135,14 +150,14 @@ struct LineupOrderView: View {
                 }
 
                 if viewModel.showOnlyNineBattersAndDH {
-                    Section("Designated Hitter") {
+                    Section(header: lineupSectionHeader("Designated Hitter")) {
                         Picker("DH", selection: Binding(
                             get: { viewModel.designatedHitterID },
                             set: { viewModel.designatedHitterID = $0 }
                         )) {
                             Text("No DH selected").tag(UUID?.none)
                             ForEach(viewModel.activePlayers) { player in
-                                Text(viewModel.displayLabel(for: player)).tag(Optional(player.id))
+                                Text(lineupDisplayLabel(for: player)).tag(Optional(player.id))
                             }
                         }
 
@@ -152,7 +167,7 @@ struct LineupOrderView: View {
                         )) {
                             Text("Select player").tag(UUID?.none)
                             ForEach(viewModel.activePlayers) { player in
-                                Text(viewModel.displayLabel(for: player)).tag(Optional(player.id))
+                                Text(lineupDisplayLabel(for: player)).tag(Optional(player.id))
                             }
                         }
 
@@ -162,7 +177,7 @@ struct LineupOrderView: View {
                                 Text("DH")
                                     .fontWeight(.semibold)
                                     .frame(width: 34, alignment: .leading)
-                                Text(viewModel.displayLabel(for: dh))
+                                Text(lineupDisplayLabel(for: dh))
                                 Spacer()
                             }
                         }
@@ -173,22 +188,43 @@ struct LineupOrderView: View {
                                 Text("For")
                                     .fontWeight(.semibold)
                                     .frame(width: 34, alignment: .leading)
-                                Text(viewModel.displayLabel(for: dhFor))
+                                Text(lineupDisplayLabel(for: dhFor))
                                 Spacer()
                             }
                         }
                     }
                 }
 
-                Section("How this works") {
+                Section(header: lineupSectionHeader("How this works")) {
                     Text(viewModel.showOnlyNineBattersAndDH ? "Settings are set to show the first 9 batters plus a DH. Use Edit to reorder the batting order." : "All players are shown in the batting order. Use Edit to reorder them.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
+                }
+                .scrollContentBackground(.hidden)
             }
-            .navigationTitle("Lineup")
+            .navigationTitle("")
             .toolbar {
-                EditButton()
+                ToolbarItem(placement: .principal) {
+                    HStack(spacing: 10) {
+                        Image(systemName: "list.number")
+                            .font(.title2.weight(.bold))
+                            .foregroundStyle(.white)
+                            .shadow(color: .black.opacity(0.45), radius: 2, x: 0, y: 1)
+
+                        Text("Lineup")
+                            .font(.title.bold())
+                            .foregroundStyle(.white)
+                            .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 2)
+                    }
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 6)
+                    .background(.black.opacity(0.25), in: Capsule())
+                }
+
+                ToolbarItem(placement: .topBarTrailing) {
+                    EditButton()
+                }
             }
             .onAppear {
                 viewModel.syncBattingOrder()
@@ -201,6 +237,31 @@ struct LineupOrderView: View {
                 }
             }
         }
+    }
+
+    private func lineupDisplayLabel(for player: Player) -> String {
+        let nameParts = player.name.split(separator: " ").map(String.init)
+
+        let baseLabel: String
+        if viewModel.showFullNameAndNumber {
+            baseLabel = player.number.isEmpty ? player.name : "#\(player.number) \(player.name)"
+        } else {
+            let firstName = nameParts.first ?? player.name
+            baseLabel = player.number.isEmpty ? firstName : "#\(player.number) \(firstName)"
+        }
+
+        return player.status == .guest ? "\(baseLabel) (Guest)" : baseLabel
+    }
+
+    private func lineupSectionHeader(_ title: String) -> some View {
+        Text(title)
+            .font(.headline.weight(.bold))
+            .foregroundStyle(.white)
+            .textCase(nil)
+            .shadow(color: .black.opacity(0.45), radius: 2, x: 0, y: 1)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 4)
+            .background(.black.opacity(0.22), in: Capsule())
     }
 
     private var comingSoonView: some View {
@@ -219,165 +280,9 @@ struct LineupOrderView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
             }
+            .scrollContentBackground(.hidden)
+            .background(Color.clear)
             .navigationTitle("Lineup")
         }
-    }
-}
-
-struct BaseballFieldLineupView: View {
-    let lineup: [FieldPosition: Player]
-    let showRatings: Bool
-    let showFullNameAndNumber: Bool
-
-    var body: some View {
-        GeometryReader { geometry in
-            let width = geometry.size.width
-            let height = geometry.size.height
-
-            ZStack {
-                RoundedRectangle(cornerRadius: 24)
-                    .fill(Color.green.opacity(0.22))
-
-                outfieldShape(width: width, height: height)
-                    .fill(Color.green.opacity(0.35))
-
-                infieldShape(width: width, height: height)
-                    .fill(Color.brown.opacity(0.45))
-
-
-                baseDiamond(width: width, height: height)
-                    .stroke(Color.white.opacity(0.95), lineWidth: 2)
-
-                baseMarker(at: CGPoint(x: width * 0.50, y: height * 0.82), size: 18)
-                baseMarker(at: CGPoint(x: width * 0.75, y: height * 0.60), size: 13)
-                baseMarker(at: CGPoint(x: width * 0.50, y: height * 0.39), size: 13)
-                baseMarker(at: CGPoint(x: width * 0.25, y: height * 0.60), size: 13)
-
-                Circle()
-                    .fill(Color.brown.opacity(0.45))
-                    .frame(width: 64, height: 64)
-                    .position(x: width * 0.50, y: height * 0.61)
-
-                positionMarker(.centerField, at: CGPoint(x: width * 0.50, y: height * 0.14))
-                positionMarker(.leftField, at: CGPoint(x: width * 0.20, y: height * 0.28))
-                positionMarker(.rightField, at: CGPoint(x: width * 0.80, y: height * 0.28))
-                positionMarker(.shortstop, at: CGPoint(x: width * 0.36, y: height * 0.45))
-                positionMarker(.secondBase, at: CGPoint(x: width * 0.64, y: height * 0.45))
-                positionMarker(.thirdBase, at: CGPoint(x: width * 0.25, y: height * 0.62))
-                positionMarker(.firstBase, at: CGPoint(x: width * 0.75, y: height * 0.62))
-                positionMarker(.pitcher, at: CGPoint(x: width * 0.50, y: height * 0.62))
-                positionMarker(.catcher, at: CGPoint(x: width * 0.50, y: height * 0.90))
-            }
-            .padding(.horizontal, 10)
-            .padding(.vertical, 8)
-        }
-    }
-
-    private func outfieldShape(width: CGFloat, height: CGFloat) -> Path {
-        Path { path in
-            path.move(to: CGPoint(x: width * 0.05, y: height * 0.56))
-            path.addQuadCurve(
-                to: CGPoint(x: width * 0.95, y: height * 0.56),
-                control: CGPoint(x: width * 0.50, y: height * -0.04)
-            )
-            path.addLine(to: CGPoint(x: width * 0.50, y: height * 0.92))
-            path.closeSubpath()
-        }
-    }
-
-    private func infieldShape(width: CGFloat, height: CGFloat) -> Path {
-        Path { path in
-            path.move(to: CGPoint(x: width * 0.50, y: height * 0.82))
-            path.addLine(to: CGPoint(x: width * 0.75, y: height * 0.60))
-            path.addQuadCurve(
-                to: CGPoint(x: width * 0.50, y: height * 0.39),
-                control: CGPoint(x: width * 0.66, y: height * 0.43)
-            )
-            path.addQuadCurve(
-                to: CGPoint(x: width * 0.25, y: height * 0.60),
-                control: CGPoint(x: width * 0.34, y: height * 0.43)
-            )
-            path.closeSubpath()
-        }
-    }
-
-
-    private func baseDiamond(width: CGFloat, height: CGFloat) -> Path {
-        Path { path in
-            path.move(to: CGPoint(x: width * 0.50, y: height * 0.82))
-            path.addLine(to: CGPoint(x: width * 0.75, y: height * 0.60))
-            path.addLine(to: CGPoint(x: width * 0.50, y: height * 0.39))
-            path.addLine(to: CGPoint(x: width * 0.25, y: height * 0.60))
-            path.closeSubpath()
-        }
-    }
-
-    private func baseMarker(at point: CGPoint, size: CGFloat) -> some View {
-        Rectangle()
-            .fill(Color.white)
-            .frame(width: size, height: size)
-            .rotationEffect(.degrees(45))
-            .position(point)
-    }
-
-    private func positionMarker(_ position: FieldPosition, at point: CGPoint) -> some View {
-        let player = lineup[position]
-        let rating = player?.positionRatings[position]
-        let positionText = label(for: position)
-
-        return VStack(spacing: 3) {
-            Text(positionText)
-                .font(.caption2)
-                .fontWeight(.bold)
-                .foregroundStyle(.white)
-                .padding(.horizontal, 7)
-                .padding(.vertical, 3)
-                .background(Color.green.opacity(0.9))
-                .clipShape(Capsule())
-
-            Text(playerLabel(player))
-                .font(.caption2)
-                .lineLimit(1)
-                .minimumScaleFactor(0.55)
-                .foregroundStyle(Color(uiColor: .label))
-                .padding(.horizontal, 7)
-                .padding(.vertical, 4)
-                .frame(width: 96)
-                .background(Color(uiColor: .systemBackground).opacity(0.92))
-                .clipShape(RoundedRectangle(cornerRadius: 7))
-
-            if showRatings, let rating {
-                Text("Rating \(rating)")
-                    .font(.caption2)
-                    .foregroundStyle(Color(uiColor: .label))
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(Color(uiColor: .systemBackground).opacity(0.80))
-                    .clipShape(Capsule())
-            }
-        }
-        .position(point)
-    }
-
-    private func playerLabel(_ player: Player?) -> String {
-        guard let player else { return "—" }
-
-        let nameParts = player.name.split(separator: " ").map(String.init)
-        let lastName = nameParts.last ?? player.name
-        let firstInitial = nameParts.first?.first.map { "\($0)." } ?? ""
-        let initialLastName = firstInitial.isEmpty ? lastName : "\(firstInitial) \(lastName)"
-
-        let baseLabel: String
-        if showFullNameAndNumber {
-            baseLabel = player.number.isEmpty ? player.name : "#\(player.number) \(player.name)"
-        } else {
-            baseLabel = player.number.isEmpty ? initialLastName : "#\(player.number) \(initialLastName)"
-        }
-
-        return player.status == .guest ? "\(baseLabel) (Guest)" : baseLabel
-    }
-
-    private func label(for position: FieldPosition) -> String {
-        position.rawValue
     }
 }

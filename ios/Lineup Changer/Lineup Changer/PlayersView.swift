@@ -54,6 +54,8 @@ struct PlayerListView: View {
     @ObservedObject var viewModel: LineupViewModel
     @State private var newPlayerName = ""
     @State private var newCoachName = ""
+    @State private var newPlayerDraft: Player?
+    @State private var newCoachDraft: Coach?
     @FocusState private var focusedField: PlayerListFocusedField?
 
     private enum PlayerListFocusedField {
@@ -72,30 +74,40 @@ struct PlayerListView: View {
 
     private var baseballView: some View {
         NavigationStack {
-            VStack(spacing: 12) {
-                VStack(alignment: .leading, spacing: 8) {
-                    TeamPickerView(viewModel: viewModel)
-                }
-                .padding(.horizontal)
-                .onChange(of: viewModel.selectedTeamIndex) { _, _ in
-                    focusedField = nil
-                }
+            ZStack {
+                AppSportsBackground()
 
                 List {
-                    Section("Coaches") {
+                    Section {
+                        TeamPickerView(viewModel: viewModel)
+                            .onChange(of: viewModel.selectedTeamIndex) { _, _ in
+                                focusedField = nil
+                            }
+                    }
+                    Section(header: playersSectionHeader("Coaches")) {
                         HStack {
                             TextField("Coach name", text: $newCoachName)
                                 .textFieldStyle(.roundedBorder)
                                 .focused($focusedField, equals: .newCoach)
                                 .submitLabel(.done)
                                 .onSubmit {
-                                    viewModel.addCoach(name: newCoachName)
+                                    let trimmedName = newCoachName.trimmingCharacters(in: .whitespacesAndNewlines)
+                                    guard !trimmedName.isEmpty else { return }
+
+                                    if let coach = viewModel.addCoach(name: trimmedName) {
+                                        newCoachDraft = coach
+                                    }
                                     newCoachName = ""
                                     focusedField = nil
                                 }
 
                             Button("Add") {
-                                viewModel.addCoach(name: newCoachName)
+                                let trimmedName = newCoachName.trimmingCharacters(in: .whitespacesAndNewlines)
+                                guard !trimmedName.isEmpty else { return }
+
+                                if let coach = viewModel.addCoach(name: trimmedName) {
+                                    newCoachDraft = coach
+                                }
                                 newCoachName = ""
                                 focusedField = nil
                             }
@@ -103,54 +115,11 @@ struct PlayerListView: View {
                         }
 
                         if !viewModel.coaches.isEmpty {
-                            ForEach(viewModel.coaches.sorted { lhs, rhs in
-                                let lhsIsHeadCoach = lhs.role == "Head Coach"
-                                let rhsIsHeadCoach = rhs.role == "Head Coach"
-
-                                if lhsIsHeadCoach != rhsIsHeadCoach {
-                                    return lhsIsHeadCoach
-                                }
-
-                                let lhsNumber = Int(lhs.number)
-                                let rhsNumber = Int(rhs.number)
-
-                                switch (lhsNumber, rhsNumber) {
-                                case let (l?, r?):
-                                    return l < r
-                                case (nil, nil):
-                                    return lhs.name.localizedCaseInsensitiveCompare(rhs.name) == .orderedAscending
-                                case (nil, _?):
-                                    return false
-                                case (_?, nil):
-                                    return true
-                                }
-                            }) { coach in
+                            ForEach(sortedCoaches) { coach in
                                 NavigationLink {
                                     CoachDetailView(viewModel: viewModel, coach: coach)
                                 } label: {
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        HStack(alignment: .firstTextBaseline, spacing: 6) {
-                                            Text(coach.name)
-                                                .font(.headline)
-
-                                            if !coach.role.isEmpty {
-                                                Text("- \(coach.role)")
-                                                    .font(.caption)
-                                                    .foregroundStyle(.secondary)
-                                            }
-                                        }
-
-                                        let contactLine = [
-                                            coach.number.isEmpty ? nil : "#\(coach.number)",
-                                            coach.cell.isEmpty ? nil : coach.cell
-                                        ].compactMap { $0 }.joined(separator: " • ")
-
-                                        if !contactLine.isEmpty {
-                                            Text(contactLine)
-                                                .font(.caption)
-                                                .foregroundStyle(.secondary)
-                                        }
-                                    }
+                                    CoachRowView(coach: coach)
                                 }
                                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                     Button("Delete", role: .destructive) {
@@ -161,115 +130,171 @@ struct PlayerListView: View {
                         }
                     }
 
-                    Section("Players") {
+                    Section(header: playersSectionHeader("Players")) {
                         HStack {
                             TextField("Player name", text: $newPlayerName)
                                 .textFieldStyle(.roundedBorder)
                                 .focused($focusedField, equals: .newPlayer)
                                 .submitLabel(.done)
                                 .onSubmit {
-                                    viewModel.addPlayer(name: newPlayerName)
+                                    let trimmedName = newPlayerName.trimmingCharacters(in: .whitespacesAndNewlines)
+                                    guard !trimmedName.isEmpty else { return }
+
+                                    if let player = viewModel.addPlayer(name: trimmedName) {
+                                        newPlayerDraft = player
+                                    }
                                     newPlayerName = ""
                                     focusedField = nil
                                 }
 
                             Button("Add") {
-                                viewModel.addPlayer(name: newPlayerName)
+                                let trimmedName = newPlayerName.trimmingCharacters(in: .whitespacesAndNewlines)
+                                guard !trimmedName.isEmpty else { return }
+
+                                if let player = viewModel.addPlayer(name: trimmedName) {
+                                    newPlayerDraft = player
+                                }
                                 newPlayerName = ""
                                 focusedField = nil
                             }
                             .buttonStyle(.borderedProminent)
                         }
 
-                        ForEach(viewModel.players.sorted { lhs, rhs in
-                        let lhsNumber = Int(lhs.number)
-                        let rhsNumber = Int(rhs.number)
+                        ForEach(sortedPlayers) { player in
+                            NavigationLink {
+                                PlayerDetailView(viewModel: viewModel, player: player)
+                            } label: {
+                                PlayerRowView(player: player, viewModel: viewModel)
+                                    .id("\(player.id)-\(player.status.rawValue)")
+                            }
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                Button("Delete", role: .destructive) {
+                                    viewModel.deletePlayer(playerID: player.id)
+                                }
 
-                        switch (lhsNumber, rhsNumber) {
-                        case let (l?, r?):
-                            return l < r
-                        case (nil, nil):
-                            return lhs.name.localizedCaseInsensitiveCompare(rhs.name) == .orderedAscending
-                        case (nil, _?):
-                            return false
-                        case (_?, nil):
-                            return true
-                        }
-                    }) { player in
-                        NavigationLink {
-                            PlayerDetailView(viewModel: viewModel, player: player)
-                        } label: {
-                            VStack(alignment: .leading, spacing: 4) {
-                                HStack(spacing: 4) {
-                                    Text(viewModel.displayLabel(for: player))
-                                        .font(.headline)
-                                    if player.status == .guest {
-                                        Text("(Guest)")
-                                            .font(.headline)
-                                            .italic()
-                                            .foregroundStyle(.red)
+                                if player.status != .unavailable {
+                                    Button("Unavailable") {
+                                        viewModel.setPlayerStatus(playerID: player.id, status: .unavailable)
                                     }
-                                }
-                                
-                                PhoneContactMenu(number: player.cell)
-                                    .font(.caption)
-                                
-                                if player.status != .active && player.status != .guest {
-                                    Text(player.status == .injured ? "Injured" : "Unavailable")
-                                        .font(.caption)
-                                        .foregroundStyle(player.status == .injured ? .red : .orange)
+                                    .tint(.orange)
                                 }
 
-                                if player.positionRatings.isEmpty {
-                                    Text("No positions added")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                } else {
-                                    Text(positionSummary(for: player))
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
+                                if player.status != .injured {
+                                    Button("Injured") {
+                                        viewModel.setPlayerStatus(playerID: player.id, status: .injured)
+                                    }
+                                    .tint(.red)
+                                }
+
+                                if player.status != .guest {
+                                    Button("Guest") {
+                                        viewModel.setPlayerStatus(playerID: player.id, status: .guest)
+                                    }
+                                    .tint(.blue)
+                                }
+
+                                if player.status != .active {
+                                    Button("Active") {
+                                        viewModel.setPlayerStatus(playerID: player.id, status: .active)
+                                    }
+                                    .tint(.green)
                                 }
                             }
                         }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            Button("Delete", role: .destructive) {
-                                viewModel.deletePlayer(playerID: player.id)
-                            }
-
-                            Button("Injured") {
-                                viewModel.setPlayerStatus(playerID: player.id, status: .injured)
-                            }
-                            .tint(.red)
-
-                            Button("Unavailable") {
-                                viewModel.setPlayerStatus(playerID: player.id, status: .unavailable)
-                            }
-                            .tint(.red)
-
-                            Button("Guest") {
-                                viewModel.setPlayerStatus(playerID: player.id, status: .guest)
-                            }
-                            .tint(.red)
-
-                            if player.status != .active {
-                                Button("Active") {
-                                    viewModel.setPlayerStatus(playerID: player.id, status: .active)
-                                }
-                                .tint(.red)
-                            }
-                        }
-                    }
                     .onDelete(perform: viewModel.deletePlayers)
                     }
                 }
+                .scrollContentBackground(.hidden)
             }
-            .navigationTitle("Players")
+            .navigationTitle("")
             .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack(spacing: 10) {
+                        Image(systemName: "person.3.fill")
+                            .font(.title2.weight(.bold))
+                            .foregroundStyle(.white)
+                            .shadow(color: .black.opacity(0.45), radius: 2, x: 0, y: 1)
+
+                        Text("Players")
+                            .font(.title.bold())
+                            .foregroundStyle(.white)
+                            .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 2)
+                    }
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 6)
+                    .background(.black.opacity(0.25), in: Capsule())
+                }
+
                 ToolbarItem(placement: .topBarTrailing) {
                     EditButton()
                 }
             }
+            .navigationDestination(item: $newPlayerDraft) { player in
+                PlayerDetailView(viewModel: viewModel, player: player)
+            }
+            .navigationDestination(item: $newCoachDraft) { coach in
+                CoachDetailView(viewModel: viewModel, coach: coach)
+            }
         }
+    }
+
+    private var sortedCoaches: [Coach] {
+        viewModel.coaches.sorted { lhs, rhs in
+            let lhsIsHeadCoach = lhs.role == "Head Coach"
+            let rhsIsHeadCoach = rhs.role == "Head Coach"
+
+            if lhsIsHeadCoach != rhsIsHeadCoach {
+                return lhsIsHeadCoach
+            }
+
+            let lhsNumber = Int(lhs.number)
+            let rhsNumber = Int(rhs.number)
+
+            switch (lhsNumber, rhsNumber) {
+            case let (l?, r?):
+                return l < r
+            case (nil, nil):
+                return lhs.name.localizedCaseInsensitiveCompare(rhs.name) == .orderedAscending
+            case (nil, _?):
+                return false
+            case (_?, nil):
+                return true
+            }
+        }
+    }
+
+    private var sortedPlayers: [Player] {
+        viewModel.players.sorted { lhs, rhs in
+            // Guest sorting logic
+            if lhs.status == .guest && rhs.status != .guest { return false }
+            if rhs.status == .guest && lhs.status != .guest { return true }
+
+            let lhsNumber = Int(lhs.number)
+            let rhsNumber = Int(rhs.number)
+
+            switch (lhsNumber, rhsNumber) {
+            case let (l?, r?):
+                return l < r
+            case (nil, nil):
+                return lhs.name.localizedCaseInsensitiveCompare(rhs.name) == .orderedAscending
+            case (nil, _?):
+                return false
+            case (_?, nil):
+                return true
+            }
+        }
+    }
+
+    
+    private func playersSectionHeader(_ title: String) -> some View {
+        Text(title)
+            .font(.headline.weight(.bold))
+            .foregroundStyle(.white)
+            .textCase(nil)
+            .shadow(color: .black.opacity(0.45), radius: 2, x: 0, y: 1)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 4)
+            .background(.black.opacity(0.22), in: Capsule())
     }
 
     private var comingSoonView: some View {
@@ -292,14 +317,4 @@ struct PlayerListView: View {
         }
     }
 
-    private func positionSummary(for player: Player) -> String {
-        FieldPosition.allCases
-            .compactMap { position in
-                guard let rating = player.positionRatings[position] else { return nil }
-                return "\(position.rawValue): \(rating)"
-            }
-            .joined(separator: " • ")
-    }
 }
-
-

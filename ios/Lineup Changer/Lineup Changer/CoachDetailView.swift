@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MessageUI
 
 // MARK: - Coach Detail
 
@@ -31,6 +32,8 @@ struct CoachDetailView: View {
     @State private var editedNumber = ""
     @State private var selectedRole: CoachRoleOption = .assistantCoach
     @State private var editedCellNumber = ""
+    @State private var isShowingMessageComposer = false
+    @State private var messageAlertText: String?
     @FocusState private var focusedField: CoachDetailFocusedField?
     @Environment(\.dismiss) private var dismiss
 
@@ -98,12 +101,13 @@ struct CoachDetailView: View {
                             }
                         }
 
-                        if let textURL = phoneTextURL(for: editedCellNumber) {
-                            Link(destination: textURL) {
-                                Image(systemName: "message.fill")
-                                    .foregroundStyle(.green)
-                            }
+                        Button {
+                            presentMessageComposer()
+                        } label: {
+                            Image(systemName: "message.fill")
+                                .foregroundStyle(.green)
                         }
+                        .buttonStyle(.plain)
                     }
                 }
 
@@ -132,6 +136,17 @@ struct CoachDetailView: View {
                 }
             }
         }
+        .sheet(isPresented: $isShowingMessageComposer) {
+            MessageComposerView(recipients: [phoneDigits(editedCellNumber)], body: "")
+        }
+        .alert("Unable to Text", isPresented: Binding(
+            get: { messageAlertText != nil },
+            set: { if !$0 { messageAlertText = nil } }
+        )) {
+            Button("OK", role: .cancel) { messageAlertText = nil }
+        } message: {
+            Text(messageAlertText ?? "")
+        }
         .onAppear {
             editedName = currentCoach?.name ?? coach.name
             editedNumber = currentCoach?.number ?? coach.number
@@ -141,6 +156,22 @@ struct CoachDetailView: View {
             }
             editedCellNumber = currentCoach?.cell ?? coach.cell
         }
+    }
+
+    private func presentMessageComposer() {
+        let recipient = phoneDigits(editedCellNumber)
+
+        guard recipient.count == 10 else {
+            messageAlertText = "This coach does not have a valid 10-digit cell number."
+            return
+        }
+
+        guard MFMessageComposeViewController.canSendText() else {
+            messageAlertText = "Text messaging is not available on this device."
+            return
+        }
+
+        isShowingMessageComposer = true
     }
 
     private func saveCoachInfo() {
