@@ -327,23 +327,43 @@ struct LineupOrderView: View {
     // Placeholder screen shown for sports whose lineup features are not yet implemented.
     private var comingSoonView: some View {
         NavigationStack {
-            VStack(spacing: 16) {
-                Image(systemName: "list.number")
-                    .font(.system(size: 48))
-                    .foregroundStyle(.secondary)
+            ZStack {
+                AppSportsBackground()
 
-                Text("\(viewModel.selectedSport.rawValue) Lineup Coming Soon")
-                    .font(.headline)
+                VStack(spacing: 16) {
+                    Image(systemName: "list.number")
+                        .font(.system(size: 48))
+                        .foregroundStyle(.secondary)
 
-                Text("Lineup features for this sport will be available in a future update.")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
+                    Text("\(viewModel.selectedSport.rawValue) Lineup Coming Soon")
+                        .font(.headline)
+
+                    Text("Lineup features for this sport will be available in a future update.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                }
             }
-            .scrollContentBackground(.hidden)
-            .background(Color.clear)
-            .navigationTitle("Lineup")
+            .navigationTitle("")
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack(spacing: 10) {
+                        Image(systemName: "list.number")
+                            .font(.title2.weight(.bold))
+                            .foregroundStyle(.white)
+                            .shadow(color: .black.opacity(0.45), radius: 2, x: 0, y: 1)
+
+                        Text("Lineup")
+                            .font(.title.bold())
+                            .foregroundStyle(.white)
+                            .shadow(color: .black.opacity(0.5), radius: 3, x: 0, y: 2)
+                    }
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 6)
+                    .background(.black.opacity(0.25), in: Capsule())
+                }
+            }
         }
     }
 }

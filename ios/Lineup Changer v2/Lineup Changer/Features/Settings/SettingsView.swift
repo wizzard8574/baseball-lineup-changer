@@ -52,8 +52,10 @@ struct SettingsView: View {
     @State private var gameChangerStatusMessage = ""
     // Tracks keyboard focus for the editable team-name field.
     @FocusState private var isTeamNameFocused: Bool
-    // UserDefaults key used to keep inning count available between launches.
-    private let numberOfInningsDefaultsKey = "numberOfInnings"
+    // Changes whenever active sport/team labels change so stale segmented controls are discarded.
+    private var teamEditorIdentity: String {
+        "\(viewModel.selectedSport.rawValue)-\(viewModel.selectedTeamIndex)-\(viewModel.teamNames.joined(separator: "|"))"
+    }
 
     // MARK: - Body
     // Main settings layout with team, sport, baseball options, data tools, and app info.
@@ -86,11 +88,19 @@ struct SettingsView: View {
                         isTeamNameFocused = false
                     }
                 }
+                .id(teamEditorIdentity)
 
                 // Sport selector. Baseball/softball is currently the fully supported mode.
                 Section(header: settingsSectionHeader("Sport - \(viewModel.selectedSport.rawValue)")) {
                     // Icon-only segmented picker for sport modes.
-                    Picker("Sport", selection: $viewModel.selectedSport) {
+                    Picker("Sport", selection: Binding(
+                        get: { viewModel.selectedSport },
+                        set: { sport in
+                            viewModel.selectSport(sport)
+                            editedTeamName = viewModel.selectedTeamName
+                            isTeamNameFocused = false
+                        }
+                    )) {
                         ForEach(SportType.allCases) { sport in
                             Image(systemName: iconName(for: sport))
                                 .tag(sport)
@@ -240,17 +250,21 @@ struct SettingsView: View {
                 // Keep the edit field in sync with the selected team.
                 editedTeamName = viewModel.selectedTeamName
 
-                // Load inning count from UserDefaults and fall back to seven if invalid.
-                let savedInnings = UserDefaults.standard.integer(forKey: numberOfInningsDefaultsKey)
-                if (1...12).contains(savedInnings) {
-                    viewModel.numberOfInnings = savedInnings
-                } else {
-                    viewModel.numberOfInnings = 7
-                    UserDefaults.standard.set(7, forKey: numberOfInningsDefaultsKey)
-                }
+                // Clamp any restored inning count to the supported range.
+                viewModel.numberOfInnings = min(max(viewModel.numberOfInnings, 1), 12)
             }
             // Refresh the team-name field when switching teams.
             .onChange(of: viewModel.selectedTeamIndex) { _, _ in
+                editedTeamName = viewModel.selectedTeamName
+                isTeamNameFocused = false
+            }
+            // Refresh the edit field when sport changes replace the active team slots.
+            .onChange(of: viewModel.teamNames) { _, _ in
+                editedTeamName = viewModel.selectedTeamName
+                isTeamNameFocused = false
+            }
+            // Segmented pickers can redraw before the local text field sees the new sport state.
+            .onChange(of: viewModel.selectedSport) { _, _ in
                 editedTeamName = viewModel.selectedTeamName
                 isTeamNameFocused = false
             }
@@ -262,8 +276,6 @@ struct SettingsView: View {
                 if clampedValue != newValue {
                     viewModel.numberOfInnings = clampedValue
                 }
-
-                UserDefaults.standard.set(clampedValue, forKey: numberOfInningsDefaultsKey)
             }
         }
         // Presents document pickers and share sheets for Settings workflows.
