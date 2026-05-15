@@ -1,0 +1,24 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/BaseballSoftball/Field/BaseballFieldView+InningSection.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Inning",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 13
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 18
+        }
+      }
+    ]
+  },
+  "version": 1
+}

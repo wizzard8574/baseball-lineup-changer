@@ -1,0 +1,40 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/BaseballSoftball/Players/BaseballPlayersView+StatusActions.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Unavailable",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 14
+        }
+      },
+      {
+        "comment": "",
+        "key": "Injured",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 21
+        }
+      },
+      {
+        "comment": "",
+        "key": "Guest",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 28
+        }
+      },
+      {
+        "comment": "",
+        "key": "Active",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 35
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,40 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/Notes/NotesView+ScreenChrome.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 21
+        }
+      },
+      {
+        "comment": "",
+        "key": "Unable to Text",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 40
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 30
+        }
+      },
+      {
+        "comment": "",
+        "key": "OK",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 44
+        }
+      }
+    ]
+  },
+  "version": 1
+}

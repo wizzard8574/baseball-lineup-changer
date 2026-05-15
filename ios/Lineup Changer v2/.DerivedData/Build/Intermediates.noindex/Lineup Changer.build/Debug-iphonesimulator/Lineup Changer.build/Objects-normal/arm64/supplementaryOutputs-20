@@ -1,0 +1,37 @@
+{
+  "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Models/BasketballPosition.swift" : {
+    "const-values" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/BasketballPosition.swiftconstvalues",
+    "dependencies" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/BasketballPosition.d",
+    "diagnostics" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/BasketballPosition.dia",
+    "object" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/BasketballPosition.o",
+    "swift-dependencies" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/BasketballPosition.swiftdeps"
+  },
+  "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Models/Player.swift" : {
+    "const-values" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/Player.swiftconstvalues",
+    "dependencies" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/Player.d",
+    "diagnostics" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/Player.dia",
+    "object" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/Player.o",
+    "swift-dependencies" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/Player.swiftdeps"
+  },
+  "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Models/SportTeamState.swift" : {
+    "const-values" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/SportTeamState.swiftconstvalues",
+    "dependencies" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/SportTeamState.d",
+    "diagnostics" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/SportTeamState.dia",
+    "object" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/SportTeamState.o",
+    "swift-dependencies" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/SportTeamState.swiftdeps"
+  },
+  "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Models/TeamSnapshot.swift" : {
+    "const-values" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/TeamSnapshot.swiftconstvalues",
+    "dependencies" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/TeamSnapshot.d",
+    "diagnostics" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/TeamSnapshot.dia",
+    "object" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/TeamSnapshot.o",
+    "swift-dependencies" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/TeamSnapshot.swiftdeps"
+  },
+  "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Shared/Formatting/PlayerDisplayHelper.swift" : {
+    "const-values" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/PlayerDisplayHelper.swiftconstvalues",
+    "dependencies" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/PlayerDisplayHelper.d",
+    "diagnostics" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/PlayerDisplayHelper.dia",
+    "object" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/PlayerDisplayHelper.o",
+    "swift-dependencies" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/Lineup Changer.build/Debug-iphonesimulator/Lineup Changer.build/Objects-normal/arm64/PlayerDisplayHelper.swiftdeps"
+  }
+}

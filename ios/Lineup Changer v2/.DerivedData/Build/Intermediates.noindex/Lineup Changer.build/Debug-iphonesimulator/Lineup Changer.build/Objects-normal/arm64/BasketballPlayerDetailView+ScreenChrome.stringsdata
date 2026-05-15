@@ -1,0 +1,64 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/Basketball/Players/BasketballPlayerDetailView+ScreenChrome.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 24
+        }
+      },
+      {
+        "comment": "",
+        "key": "Unable to Text",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 52
+        }
+      },
+      {
+        "comment": "",
+        "key": "Duplicate Player Number",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 60
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 32
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 44
+        }
+      },
+      {
+        "comment": "",
+        "key": "OK",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 56
+        }
+      },
+      {
+        "comment": "",
+        "key": "OK",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 64
+        }
+      }
+    ]
+  },
+  "version": 1
+}

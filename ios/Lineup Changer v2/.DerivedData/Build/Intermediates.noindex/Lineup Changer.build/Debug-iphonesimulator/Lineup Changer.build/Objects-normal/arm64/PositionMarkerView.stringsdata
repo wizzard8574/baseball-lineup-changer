@@ -1,0 +1,16 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/BaseballSoftball/Field/Components/PositionMarkerView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Rating %lld",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 69
+        }
+      }
+    ]
+  },
+  "version": 1
+}

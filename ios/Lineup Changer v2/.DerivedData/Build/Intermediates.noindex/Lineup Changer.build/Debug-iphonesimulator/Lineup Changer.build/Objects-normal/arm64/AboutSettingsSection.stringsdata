@@ -1,0 +1,56 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/Settings/AboutSettingsSection.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Version %@ (Build %@)",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 16
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add players, give each player one or more positions, rate each position, manually set positions or auto-fill the rest of the field.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Legal",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 28
+        }
+      },
+      {
+        "comment": "",
+        "key": "© 2026 Richard C. Morris Jr. All rights reserved.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 31
+        }
+      },
+      {
+        "comment": "",
+        "key": "This application and its contents are proprietary. Unauthorized copying, distribution, modification, or reverse engineering is strictly prohibited.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 34
+        }
+      },
+      {
+        "comment": "",
+        "key": "This app is provided \"as is\" without warranty of any kind, express or implied, including but not limited to fitness for a particular purpose.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 38
+        }
+      }
+    ]
+  },
+  "version": 1
+}

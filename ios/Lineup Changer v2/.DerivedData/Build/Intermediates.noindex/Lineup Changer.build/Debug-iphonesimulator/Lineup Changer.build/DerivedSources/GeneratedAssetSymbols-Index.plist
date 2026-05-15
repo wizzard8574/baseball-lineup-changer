@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>colors</key>
+	<array>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACColorNameLaunchBackgroundBlack</string>
+			<key>relativePath</key>
+			<string>./LaunchBackgroundBlack.colorset</string>
+			<key>swiftSymbol</key>
+			<string>launchBackgroundBlack</string>
+		</dict>
+	</array>
+	<key>images</key>
+	<array>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameBBallCourtView</string>
+			<key>relativePath</key>
+			<string>./BBallCourtView.imageset</string>
+			<key>swiftSymbol</key>
+			<string>bBallCourtView</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameFootballFieldView</string>
+			<key>relativePath</key>
+			<string>./Football_Field_View.imageset</string>
+			<key>swiftSymbol</key>
+			<string>footballFieldView</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameHockeyRinkView</string>
+			<key>relativePath</key>
+			<string>./HockeyRink_View.imageset</string>
+			<key>swiftSymbol</key>
+			<string>hockeyRinkView</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameLCLogo</string>
+			<key>relativePath</key>
+			<string>./LCLogo.imageset</string>
+			<key>swiftSymbol</key>
+			<string>lcLogo</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameLacrossFieldView</string>
+			<key>relativePath</key>
+			<string>./Lacross_Field_View.imageset</string>
+			<key>swiftSymbol</key>
+			<string>lacrossFieldView</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameLaunchScreen</string>
+			<key>relativePath</key>
+			<string>./LaunchScreen.imageset</string>
+			<key>swiftSymbol</key>
+			<string>launchScreen</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameSoccerFieldView</string>
+			<key>relativePath</key>
+			<string>./Soccer_Field_View.imageset</string>
+			<key>swiftSymbol</key>
+			<string>soccerFieldView</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameSplashScreen</string>
+			<key>relativePath</key>
+			<string>./SplashScreen.imageset</string>
+			<key>swiftSymbol</key>
+			<string>splashScreen</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameVolleyballCourtView</string>
+			<key>relativePath</key>
+			<string>./Volleyball_Court_View.imageset</string>
+			<key>swiftSymbol</key>
+			<string>volleyballCourtView</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameBaseballFieldClean</string>
+			<key>relativePath</key>
+			<string>./baseball_field_clean.imageset</string>
+			<key>swiftSymbol</key>
+			<string>baseballFieldClean</string>
+		</dict>
+	</array>
+	<key>symbols</key>
+	<array/>
+</dict>
+</plist>

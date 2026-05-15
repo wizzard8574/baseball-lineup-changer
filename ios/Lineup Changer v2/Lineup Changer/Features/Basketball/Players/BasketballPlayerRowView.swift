@@ -16,7 +16,7 @@ struct BasketballPlayerRowView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 4) {
-                Text(PlayerDisplayHelper.baseDisplayLabel(for: player, showFullNameAndNumber: viewModel.showFullNameAndNumber))
+                Text(PlayerDisplayHelper.baseDisplayLabel(for: player, showFullNameAndNumber: true))
                     .font(.headline)
 
                 if let statusText = PlayerDisplayHelper.inlineStatusText(for: player) {
@@ -29,9 +29,23 @@ struct BasketballPlayerRowView: View {
             PhoneContactMenu(number: player.cell)
                 .font(.caption)
 
-            Text("Basketball roster")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+            if player.basketballPositionRatings.isEmpty {
+                Text("No positions added")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            } else {
+                Text(PlayerDisplayHelper.basketballPositionSummary(for: player))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            if let stats = player.basketballGameChangerStats {
+                Text(stats.lineupDisplayText)
+                    .font(.caption2)
+                    .italic()
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
     }
 }

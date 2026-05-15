@@ -1,0 +1,96 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/BaseballSoftball/Players/BaseballPlayerDetailView+Sections.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Player",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Notes",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 62
+        }
+      },
+      {
+        "comment": "",
+        "key": "Steal Ability",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 70
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cell # must contain exactly 10 digits.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 39
+        }
+      },
+      {
+        "comment": "",
+        "key": "Name",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 23
+        }
+      },
+      {
+        "comment": "",
+        "key": "Number",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 28
+        }
+      },
+      {
+        "comment": "",
+        "key": "Guest",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 36
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cell #",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 48
+        }
+      },
+      {
+        "comment": "",
+        "key": "Steal Ability",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 71
+        }
+      },
+      {
+        "comment": "",
+        "key": "Steal",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 72
+        }
+      },
+      {
+        "comment": "",
+        "key": "No Steal",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 73
+        }
+      }
+    ]
+  },
+  "version": 1
+}

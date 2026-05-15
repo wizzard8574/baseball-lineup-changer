@@ -1,0 +1,40 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/Coaches/CoachDetailView+ScreenChrome.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Unable to Text",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 41
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 19
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 30
+        }
+      },
+      {
+        "comment": "",
+        "key": "OK",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 45
+        }
+      }
+    ]
+  },
+  "version": 1
+}

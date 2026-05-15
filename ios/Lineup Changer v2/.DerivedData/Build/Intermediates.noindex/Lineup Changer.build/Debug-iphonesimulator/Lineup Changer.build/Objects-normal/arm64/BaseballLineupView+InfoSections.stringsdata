@@ -1,0 +1,24 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/BaseballSoftball/Lineup/BaseballLineupView+InfoSections.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Roster Bat is off. Clear the lineup to move everyone to the bench, then drag players between Batting Order and Bench. The lineup is limited to 9 batters and can use a DH.",
+        "location": {
+          "startingColumn": 58,
+          "startingLine": 13
+        }
+      },
+      {
+        "comment": "",
+        "key": "Roster Bat is on. All active roster players are shown in the batting order. Use Edit to reorder them.",
+        "location": {
+          "startingColumn": 233,
+          "startingLine": 13
+        }
+      }
+    ]
+  },
+  "version": 1
+}

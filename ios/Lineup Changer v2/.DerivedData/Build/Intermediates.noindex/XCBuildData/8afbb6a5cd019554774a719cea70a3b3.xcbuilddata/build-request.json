@@ -1,0 +1,75 @@
+{
+  "buildCommand" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildAndRun"
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "5f77552e5164daf7892e38c8bd059ed75a0e9ff882a726d6459c8e8e444af4ea"
+    },
+    {
+      "guid" : "5f77552e5164daf7892e38c8bd059ed7b96804f497c6197f8b5d63ac3d8adc1d"
+    }
+  ],
+  "containerPath" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer.xcodeproj",
+  "continueBuildingAfterErrors" : false,
+  "dependencyScope" : "workspace",
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "arm64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "hostTargetedPlatform" : null,
+      "platform" : "iphonesimulator",
+      "sdk" : "iphonesimulator26.4",
+      "sdkVariant" : "iphonesimulator",
+      "supportedArchitectures" : [
+        "arm64"
+      ],
+      "targetArchitecture" : "arm64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Products",
+      "derivedDataPath" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData",
+      "indexDataStoreFolderPath" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "commandLine" : {
+        "table" : {
+          "CODE_SIGNING_ALLOWED" : "NO"
+        }
+      },
+      "synthesized" : {
+        "table" : {
+          "ASSETCATALOG_FILTER_FOR_DEVICE_MODEL" : "iPhone18,2",
+          "ASSETCATALOG_FILTER_FOR_DEVICE_OS_VERSION" : "26.4.1",
+          "ASSETCATALOG_FILTER_FOR_THINNING_DEVICE_CONFIGURATION" : "iPhone18,2",
+          "BUILD_ACTIVE_RESOURCES_ONLY" : "YES",
+          "CLANG_COVERAGE_MAPPING" : "YES",
+          "CLANG_PROFILE_DATA_DIRECTORY" : "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/.DerivedData/Build/ProfileData",
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_XOJIT_PREVIEWS" : "YES",
+          "ONLY_ACTIVE_ARCH" : "YES",
+          "TARGET_DEVICE_IDENTIFIER" : "9D3148CF-11DE-4974-8EE8-CEF21B13794A",
+          "TARGET_DEVICE_MODEL" : "iPhone18,2",
+          "TARGET_DEVICE_OS_VERSION" : "26.4.1",
+          "TARGET_DEVICE_PLATFORM_NAME" : "iphonesimulator"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "test",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

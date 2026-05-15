@@ -1,0 +1,56 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/BaseballSoftball/Players/BaseballPlayersView+Sections.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Coach name",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 41
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 47
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 61
+        }
+      },
+      {
+        "comment": "",
+        "key": "Player name",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 80
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 86
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 101
+        }
+      }
+    ]
+  },
+  "version": 1
+}

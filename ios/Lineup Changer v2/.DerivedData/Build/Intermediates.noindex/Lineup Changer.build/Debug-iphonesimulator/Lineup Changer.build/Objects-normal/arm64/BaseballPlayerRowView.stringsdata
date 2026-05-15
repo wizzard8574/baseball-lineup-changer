@@ -1,0 +1,16 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/BaseballSoftball/Players/BaseballPlayerRowView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "No positions added",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 44
+        }
+      }
+    ]
+  },
+  "version": 1
+}

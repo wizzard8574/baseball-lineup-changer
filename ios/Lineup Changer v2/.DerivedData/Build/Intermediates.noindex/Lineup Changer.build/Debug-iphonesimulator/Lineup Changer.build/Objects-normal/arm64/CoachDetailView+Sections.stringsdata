@@ -1,0 +1,56 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/Coaches/CoachDetailView+Sections.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Coach",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 12
+        }
+      },
+      {
+        "comment": "",
+        "key": "Name",
+        "location": {
+          "startingColumn": 19,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Number",
+        "location": {
+          "startingColumn": 19,
+          "startingLine": 32
+        }
+      },
+      {
+        "comment": "",
+        "key": "Role",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 43
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cell # must contain exactly 10 digits.",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 73
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cell #",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 53
+        }
+      }
+    ]
+  },
+  "version": 1
+}

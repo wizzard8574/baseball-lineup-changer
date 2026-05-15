@@ -41,17 +41,6 @@
                ReferencedContainer = "container:Lineup Changer.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A5A422C52FA1A9FA006438A2"
-               BuildableName = "Lineup ChangerUITests.xctest"
-               BlueprintName = "Lineup ChangerUITests"
-               ReferencedContainer = "container:Lineup Changer.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

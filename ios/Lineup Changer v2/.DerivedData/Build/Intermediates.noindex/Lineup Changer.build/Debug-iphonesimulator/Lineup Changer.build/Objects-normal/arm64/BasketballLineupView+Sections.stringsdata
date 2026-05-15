@@ -1,0 +1,112 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/Basketball/Lineup/BasketballLineupView+Sections.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Auto Assign Starting Lineup",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 33
+        }
+      },
+      {
+        "comment": "",
+        "key": "Clear Lineup",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 43
+        }
+      },
+      {
+        "comment": "",
+        "key": "Share Starting Lineup",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 54
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add players first, then they will appear here.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 72
+        }
+      },
+      {
+        "comment": "",
+        "key": "Auto Assign Starting Lineup",
+        "location": {
+          "startingColumn": 19,
+          "startingLine": 95
+        }
+      },
+      {
+        "comment": "",
+        "key": "Empty spot",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 129
+        }
+      },
+      {
+        "comment": "",
+        "key": "Move %@ to bench",
+        "location": {
+          "startingColumn": 37,
+          "startingLine": 143
+        }
+      },
+      {
+        "comment": "",
+        "key": "(Guest)",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 117
+        }
+      },
+      {
+        "comment": "",
+        "key": "No bench players.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 171
+        }
+      },
+      {
+        "comment": "",
+        "key": "Drop a starter on a bench player to replace them",
+        "location": {
+          "startingColumn": 15,
+          "startingLine": 184
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add %@ to starting lineup",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 223
+        }
+      },
+      {
+        "comment": "",
+        "key": "(Guest)",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 202
+        }
+      },
+      {
+        "comment": "",
+        "key": "Auto assign picks the best available rated player for positions 1 through 5. Drag players between Starting Lineup and Bench to make manual changes.",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 245
+        }
+      }
+    ]
+  },
+  "version": 1
+}

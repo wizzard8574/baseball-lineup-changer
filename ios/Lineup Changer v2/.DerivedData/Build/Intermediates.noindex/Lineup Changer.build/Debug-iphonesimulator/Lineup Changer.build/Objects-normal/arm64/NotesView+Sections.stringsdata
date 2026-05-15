@@ -1,0 +1,64 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/Notes/NotesView+Sections.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Notes Group",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 37
+        }
+      },
+      {
+        "comment": "",
+        "key": "Text Team",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 62
+        }
+      },
+      {
+        "comment": "",
+        "key": "Clear",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 72
+        }
+      },
+      {
+        "comment": "",
+        "key": "Text Team",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 100
+        }
+      },
+      {
+        "comment": "",
+        "key": "Clear",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 110
+        }
+      },
+      {
+        "comment": "",
+        "key": "Text Coaches",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 138
+        }
+      },
+      {
+        "comment": "",
+        "key": "Clear",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 148
+        }
+      }
+    ]
+  },
+  "version": 1
+}

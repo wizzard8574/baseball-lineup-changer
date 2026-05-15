@@ -1,0 +1,32 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Shared/Components/TeamPickerView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Team",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 18
+        }
+      },
+      {
+        "comment": "",
+        "key": "Team name",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 46
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save Team Name",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 53
+        }
+      }
+    ]
+  },
+  "version": 1
+}

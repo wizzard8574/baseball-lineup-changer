@@ -1,0 +1,40 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Shared/Contact/PhoneNumberFormatting.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Call",
+        "location": {
+          "startingColumn": 37,
+          "startingLine": 142
+        }
+      },
+      {
+        "comment": "",
+        "key": "Text",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 150
+        }
+      },
+      {
+        "comment": "",
+        "key": "Call",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 177
+        }
+      },
+      {
+        "comment": "",
+        "key": "Text",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 184
+        }
+      }
+    ]
+  },
+  "version": 1
+}

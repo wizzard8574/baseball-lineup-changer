@@ -1,0 +1,96 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/Settings/SettingsDataSectionContentView+Chrome.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Delete Player",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 17
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Coach",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 29
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete All Player Data?",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 41
+        }
+      },
+      {
+        "comment": "",
+        "key": "Data Section",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 54
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 25
+        }
+      },
+      {
+        "comment": "",
+        "key": "Choose a player to delete.",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 27
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 37
+        }
+      },
+      {
+        "comment": "",
+        "key": "Choose a coach to delete.",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 39
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Players Only",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 42
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 47
+        }
+      },
+      {
+        "comment": "",
+        "key": "This removes players and player-related lineup data from the current team. Coaches are kept.",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 49
+        }
+      }
+    ]
+  },
+  "version": 1
+}

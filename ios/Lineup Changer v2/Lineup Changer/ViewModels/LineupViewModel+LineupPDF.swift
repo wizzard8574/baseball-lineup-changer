@@ -5,7 +5,7 @@
 //
 //
 // PDFExport.swift contains lineup-grid PDF export support.
-// This extension renders a landscape PDF showing each active/guest player and
+// This extension renders a landscape PDF showing each active player and
 // their assigned position for innings 1 through 9.
 import Foundation
 import SwiftUI
@@ -33,10 +33,10 @@ extension LineupViewModel {
         // Split remaining table width evenly across nine inning columns.
         let inningColumnWidth = (pageWidth - (margin * 2) - orderColumnWidth - nameColumnWidth) / 9
 
-        // Export players in batting-order order, excluding injured/unavailable players.
+        // Export players in batting-order order, excluding non-active players.
         let orderedPlayers = battingOrderIDs
             .compactMap { player(for: $0) }
-            .filter { $0.status == .active || $0.status == .guest }
+            .filter { $0.status == .active }
 
         // UIGraphicsPDFRenderer provides the drawing context for the PDF.
         let renderer = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight))

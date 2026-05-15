@@ -1,0 +1,112 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/BaseballSoftball/Players/BaseballPlayerDetailView+PositionSections.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Add or Update Position",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 12
+        }
+      },
+      {
+        "comment": "",
+        "key": "All positions already assigned.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 14
+        }
+      },
+      {
+        "comment": "",
+        "key": "Position",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 17
+        }
+      },
+      {
+        "comment": "",
+        "key": "Rating",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 23
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save Position",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 29
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 25
+        }
+      },
+      {
+        "comment": "",
+        "key": "Current Positions",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 40
+        }
+      },
+      {
+        "comment": "",
+        "key": "No positions added yet.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 42
+        }
+      },
+      {
+        "comment": "",
+        "key": "Rating",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 61
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 68
+        }
+      },
+      {
+        "comment": "",
+        "key": "Remove",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 74
+        }
+      },
+      {
+        "comment": "",
+        "key": "Scale",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 81
+        }
+      },
+      {
+        "comment": "",
+        "key": "1 = High, 5 = Low. A player is only considered for positions listed here.",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 82
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,104 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/Basketball/Field/BasketballCourtView+Sections.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 39
+        }
+      },
+      {
+        "comment": "",
+        "key": "Auto Fill Positions",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 52
+        }
+      },
+      {
+        "comment": "",
+        "key": "Use this Lineup for All %@",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 61
+        }
+      },
+      {
+        "comment": "",
+        "key": "Clear %@",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 70
+        }
+      },
+      {
+        "comment": "",
+        "key": "Clear All",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 79
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 109
+        }
+      },
+      {
+        "comment": "",
+        "key": "Unassigned",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 115
+        }
+      },
+      {
+        "comment": "",
+        "key": "No bench players",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 148
+        }
+      },
+      {
+        "comment": "",
+        "key": "Put on Court",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 170
+        }
+      },
+      {
+        "comment": "",
+        "key": "Position",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 175
+        }
+      },
+      {
+        "comment": "",
+        "key": "Move to %@",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 177
+        }
+      },
+      {
+        "comment": "",
+        "key": "Each quarter or half can have its own court assignment. Auto Fill Positions picks the best rated available player for each spot and does not use the same player twice. Put on Court uses a bench player's highest rated position. The Position menu and Assigned Lineup pickers let you manually place players anywhere.",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 192
+        }
+      }
+    ]
+  },
+  "version": 1
+}

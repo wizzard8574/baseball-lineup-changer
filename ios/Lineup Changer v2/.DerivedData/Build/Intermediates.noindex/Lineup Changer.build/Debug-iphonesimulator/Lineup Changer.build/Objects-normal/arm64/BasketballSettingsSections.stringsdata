@@ -1,0 +1,72 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/Settings/BasketballSettingsSections.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Show Ratings",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 16
+        }
+      },
+      {
+        "comment": "",
+        "key": "Show Assigned Lineup",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 17
+        }
+      },
+      {
+        "comment": "",
+        "key": "Display First Name and Number",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 18
+        }
+      },
+      {
+        "comment": "",
+        "key": "Show Bench",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Game Format",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 25
+        }
+      },
+      {
+        "comment": "",
+        "key": "Game Format",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 28
+        }
+      },
+      {
+        "comment": "",
+        "key": "4 Quarters",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 29
+        }
+      },
+      {
+        "comment": "",
+        "key": "2 Halves",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 30
+        }
+      }
+    ]
+  },
+  "version": 1
+}

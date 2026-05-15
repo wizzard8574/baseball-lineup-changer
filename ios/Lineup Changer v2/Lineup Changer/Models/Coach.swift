@@ -1,6 +1,6 @@
 // Created by Rich Morris on 5/5/26.
 // Lineup Changer
-// Caoch.swift
+// Coach.swift
 //
 //
 //

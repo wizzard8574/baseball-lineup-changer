@@ -126,6 +126,32 @@ func groupTextURL(for numbers: [String], body: String) -> URL? {
     return components.url
 }
 
+// MARK: - Phone Contact Buttons
+// Direct call and text buttons for editable contact rows.
+struct PhoneContactButtons: View {
+    let number: String
+    let onText: () -> Void
+
+    var body: some View {
+        if phoneDigits(number).count == 10 {
+            if let callURL = phoneCallURL(for: number) {
+                Link(destination: callURL) {
+                    Image(systemName: "phone.fill")
+                        .foregroundStyle(.blue)
+                }
+                .accessibilityLabel("Call")
+            }
+
+            Button(action: onText) {
+                Image(systemName: "message.fill")
+                    .foregroundStyle(.green)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Text")
+        }
+    }
+}
+
 // MARK: - Phone Contact Menu
 // Reusable SwiftUI menu that shows Call and Text actions for a valid contact number.
 struct PhoneContactMenu: View {

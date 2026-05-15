@@ -1,0 +1,40 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/BaseballSoftball/Field/BaseballFieldView+FieldContent.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Choose Player for %@",
+        "location": {
+          "startingColumn": 45,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Choose Player",
+        "location": {
+          "startingColumn": 122,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Unassigned",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 27
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 38
+        }
+      }
+    ]
+  },
+  "version": 1
+}

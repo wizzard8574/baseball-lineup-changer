@@ -1,0 +1,88 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/Basketball/Lineup/BasketballLineupView+ScreenChrome.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 25
+        }
+      },
+      {
+        "comment": "",
+        "key": "Lineup Warning",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 38
+        }
+      },
+      {
+        "comment": "",
+        "key": "Choose Player to Replace",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 49
+        }
+      },
+      {
+        "comment": "",
+        "key": "Choose Bench Replacement",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 71
+        }
+      },
+      {
+        "comment": "",
+        "key": "No starting lineup file available.",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 35
+        }
+      },
+      {
+        "comment": "",
+        "key": "OK",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 42
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 62
+        }
+      },
+      {
+        "comment": "",
+        "key": "Where should %@ enter the game?",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 67
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 85
+        }
+      },
+      {
+        "comment": "",
+        "key": "Who should replace %@ at position %@?",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 92
+        }
+      }
+    ]
+  },
+  "version": 1
+}

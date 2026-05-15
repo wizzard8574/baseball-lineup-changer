@@ -1,0 +1,40 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/BaseballSoftball/Lineup/BaseballLineupView+DesignatedHitter.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "DH",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 13
+        }
+      },
+      {
+        "comment": "",
+        "key": "DH For",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 26
+        }
+      },
+      {
+        "comment": "",
+        "key": "No DH selected",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 17
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select player",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 30
+        }
+      }
+    ]
+  },
+  "version": 1
+}

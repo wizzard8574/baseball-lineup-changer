@@ -1,0 +1,40 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/BaseballSoftball/Field/BaseballFieldView+BenchSection.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "No bench players",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Put In Field",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 32
+        }
+      },
+      {
+        "comment": "",
+        "key": "Position",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 41
+        }
+      },
+      {
+        "comment": "",
+        "key": "Move to %@",
+        "location": {
+          "startingColumn": 44,
+          "startingLine": 43
+        }
+      }
+    ]
+  },
+  "version": 1
+}

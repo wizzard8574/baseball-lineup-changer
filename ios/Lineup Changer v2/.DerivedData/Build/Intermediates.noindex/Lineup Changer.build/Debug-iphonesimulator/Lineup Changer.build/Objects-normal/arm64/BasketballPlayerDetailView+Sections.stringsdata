@@ -1,0 +1,80 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/Basketball/Players/BasketballPlayerDetailView+Sections.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Player",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 11
+        }
+      },
+      {
+        "comment": "",
+        "key": "Name",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 12
+        }
+      },
+      {
+        "comment": "",
+        "key": "Number",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 17
+        }
+      },
+      {
+        "comment": "",
+        "key": "Guest",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 25
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cell # must contain exactly 10 digits.",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 49
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cell #",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 33
+        }
+      },
+      {
+        "comment": "",
+        "key": "Notes",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 56
+        }
+      },
+      {
+        "comment": "",
+        "key": "GameChanger Stats",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 64
+        }
+      },
+      {
+        "comment": "",
+        "key": "No GameChanger stats imported.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 75
+        }
+      }
+    ]
+  },
+  "version": 1
+}

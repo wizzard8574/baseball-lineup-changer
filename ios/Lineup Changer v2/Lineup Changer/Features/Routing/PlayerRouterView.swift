@@ -1,10 +1,10 @@
 // Created by Rich Morris on 5/5/26.
 // Lineup Changer
-// PlayerListView.swift
+// PlayerRouterView.swift
 //
 //
 //
-// PlayerListView routes the Players tab to the selected sport's roster screen.
+// PlayerRouterView routes the Players tab to the selected sport's roster screen.
 import SwiftUI
 
 // MARK: - Player Router View
@@ -14,46 +14,25 @@ struct PlayerRouterView: View {
     @ObservedObject var viewModel: LineupViewModel
 
     // MARK: - Body
-    // Shows the selected sport's roster UI or a placeholder for unsupported sports.
+    // Shows the selected sport's roster UI or a shared placeholder for unsupported sports.
     var body: some View {
         switch viewModel.selectedSport {
         case .baseballSoftball:
             BaseballPlayersView(viewModel: viewModel)
         case .basketball:
             BasketballPlayersView(viewModel: viewModel)
-        default:
-            comingSoonView
+        case .football, .volleyball, .soccer:
+            playerPlaceholderView
         }
     }
 
-    // MARK: - Coming Soon Placeholder
-    // Placeholder screen shown for sports whose roster features are not yet implemented.
-    private var comingSoonView: some View {
-        NavigationStack {
-            ZStack {
-                AppSportsBackground()
-
-                VStack(spacing: 16) {
-                    Image(systemName: "person.3")
-                        .font(.system(size: 48))
-                        .foregroundStyle(.secondary)
-
-                    Text("\(viewModel.selectedSport.rawValue) Players Coming Soon")
-                        .font(.headline)
-
-                    Text("Player setup for this sport will be available in a future update.")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                }
-            }
-            .navigationTitle("")
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    AppToolbarTitle(title: "Players", systemImage: "person.3.fill")
-                }
-            }
-        }
+    private var playerPlaceholderView: some View {
+        SportFeaturePlaceholderView(
+            title: viewModel.selectedSport.playersPlaceholderTitle,
+            message: viewModel.selectedSport.playersPlaceholderMessage,
+            toolbarTitle: "Players",
+            toolbarIconName: "person.3.fill",
+            symbolName: "person.3"
+        )
     }
 }

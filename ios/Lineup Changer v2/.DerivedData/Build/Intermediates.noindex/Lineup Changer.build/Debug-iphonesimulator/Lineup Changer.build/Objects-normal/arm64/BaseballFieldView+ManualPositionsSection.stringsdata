@@ -1,0 +1,40 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/BaseballSoftball/Field/BaseballFieldView+ManualPositionsSection.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Pitcher",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 14
+        }
+      },
+      {
+        "comment": "",
+        "key": "Catcher",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 26
+        }
+      },
+      {
+        "comment": "",
+        "key": "Choose pitcher",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 18
+        }
+      },
+      {
+        "comment": "",
+        "key": "Choose catcher",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 30
+        }
+      }
+    ]
+  },
+  "version": 1
+}

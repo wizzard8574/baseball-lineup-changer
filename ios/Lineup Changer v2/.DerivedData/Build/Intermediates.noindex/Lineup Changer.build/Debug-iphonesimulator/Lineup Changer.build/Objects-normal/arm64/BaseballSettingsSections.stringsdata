@@ -1,0 +1,88 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/Settings/BaseballSettingsSections.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Show Ratings",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 18
+        }
+      },
+      {
+        "comment": "",
+        "key": "Show Assigned Lineup",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 19
+        }
+      },
+      {
+        "comment": "",
+        "key": "Display First Name and Number",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 20
+        }
+      },
+      {
+        "comment": "",
+        "key": "Show Bench",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 24
+        }
+      },
+      {
+        "comment": "",
+        "key": "Fall Ball",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 26
+        }
+      },
+      {
+        "comment": "",
+        "key": "Run Rule",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 28
+        }
+      },
+      {
+        "comment": "",
+        "key": "Youth",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 32
+        }
+      },
+      {
+        "comment": "",
+        "key": "Number of Innings: %lld",
+        "location": {
+          "startingColumn": 17,
+          "startingLine": 38
+        }
+      },
+      {
+        "comment": "",
+        "key": "Roster Bat",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 46
+        }
+      },
+      {
+        "comment": "",
+        "key": "Warn when No Steal P/C Bats After No Steal Runner",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 47
+        }
+      }
+    ]
+  },
+  "version": 1
+}

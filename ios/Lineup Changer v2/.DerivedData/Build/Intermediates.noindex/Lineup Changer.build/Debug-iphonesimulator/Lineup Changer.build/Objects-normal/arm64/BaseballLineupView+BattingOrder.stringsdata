@@ -1,0 +1,184 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/BaseballSoftball/Lineup/BaseballLineupView+BattingOrder.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Add players first, then they will appear here.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 20
+        }
+      },
+      {
+        "comment": "",
+        "key": "Drop here to add a batter to the lineup",
+        "location": {
+          "startingColumn": 15,
+          "startingLine": 116
+        }
+      },
+      {
+        "comment": "",
+        "key": "AVG",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 45
+        }
+      },
+      {
+        "comment": "",
+        "key": "OBP",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 49
+        }
+      },
+      {
+        "comment": "",
+        "key": "OPS",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 53
+        }
+      },
+      {
+        "comment": "",
+        "key": "SLG",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 57
+        }
+      },
+      {
+        "comment": "",
+        "key": "Hits",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 61
+        }
+      },
+      {
+        "comment": "",
+        "key": "RBI",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 65
+        }
+      },
+      {
+        "comment": "",
+        "key": "Runs",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 69
+        }
+      },
+      {
+        "comment": "",
+        "key": "Walks",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 73
+        }
+      },
+      {
+        "comment": "",
+        "key": "Strikeouts",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 77
+        }
+      },
+      {
+        "comment": "",
+        "key": "Sort by GameChanger Stats",
+        "location": {
+          "startingColumn": 19,
+          "startingLine": 81
+        }
+      },
+      {
+        "comment": "",
+        "key": "No bench players.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 103
+        }
+      },
+      {
+        "comment": "",
+        "key": "Drop a batter on a bench player to replace them",
+        "location": {
+          "startingColumn": 55,
+          "startingLine": 133
+        }
+      },
+      {
+        "comment": "",
+        "key": "Drop here to move a player to the bench",
+        "location": {
+          "startingColumn": 107,
+          "startingLine": 133
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add %@ to lineup",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 185
+        }
+      },
+      {
+        "comment": "",
+        "key": "(Guest)",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 161
+        }
+      },
+      {
+        "comment": "",
+        "key": "Steal",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 256
+        }
+      },
+      {
+        "comment": "",
+        "key": "No Steal",
+        "location": {
+          "startingColumn": 58,
+          "startingLine": 256
+        }
+      },
+      {
+        "comment": "",
+        "key": "Move %@ to bench",
+        "location": {
+          "startingColumn": 41,
+          "startingLine": 268
+        }
+      },
+      {
+        "comment": "",
+        "key": "DH",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 224
+        }
+      },
+      {
+        "comment": "",
+        "key": "(Guest)",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 233
+        }
+      }
+    ]
+  },
+  "version": 1
+}

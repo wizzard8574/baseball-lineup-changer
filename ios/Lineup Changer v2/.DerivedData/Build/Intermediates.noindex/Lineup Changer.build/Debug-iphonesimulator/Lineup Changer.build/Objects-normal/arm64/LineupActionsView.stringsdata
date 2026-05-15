@@ -1,0 +1,48 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/BaseballSoftball/Field/Components/LineupActionsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Generate Fall Ball Lineups",
+        "location": {
+          "startingColumn": 55,
+          "startingLine": 23
+        }
+      },
+      {
+        "comment": "",
+        "key": "Auto-Fill Positions",
+        "location": {
+          "startingColumn": 86,
+          "startingLine": 23
+        }
+      },
+      {
+        "comment": "",
+        "key": "Use This Lineup for All Innings",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 35
+        }
+      },
+      {
+        "comment": "",
+        "key": "Clear Inning",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 46
+        }
+      },
+      {
+        "comment": "",
+        "key": "Clear All",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 54
+        }
+      }
+    ]
+  },
+  "version": 1
+}

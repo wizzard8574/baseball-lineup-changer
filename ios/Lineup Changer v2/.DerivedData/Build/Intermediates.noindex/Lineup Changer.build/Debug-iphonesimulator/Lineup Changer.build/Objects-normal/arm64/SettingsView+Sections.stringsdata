@@ -1,0 +1,40 @@
+{
+  "source": "/Users/rmorris/Downloads/Baseball/ios/Lineup Changer v2/Lineup Changer/Features/Settings/SettingsView+Sections.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Team name",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 29
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save Team Name",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 38
+        }
+      },
+      {
+        "comment": "",
+        "key": "Current sport selection only. Field, lineup, player positions, and sport-specific rules will be updated in later phases.",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 63
+        }
+      },
+      {
+        "comment": "",
+        "key": "Sport",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 48
+        }
+      }
+    ]
+  },
+  "version": 1
+}
