@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "BBallCourtView.png",
+      "filename" : "NewBasketBallCourt.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "BBallCourtView 2.png",
+      "filename" : "NewBasketBallCourt 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "BBallCourtView 1.png",
+      "filename" : "NewBasketBallCourt 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

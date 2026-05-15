@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "baseball_field_clean.png",
+      "filename" : "NewBaseballField.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "baseball_field_clean 1.png",
+      "filename" : "NewBaseballField 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "baseball_field_clean 2.png",
+      "filename" : "NewBaseballField 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
