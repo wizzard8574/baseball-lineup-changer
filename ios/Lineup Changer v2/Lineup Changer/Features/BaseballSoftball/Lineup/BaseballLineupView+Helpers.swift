@@ -9,6 +9,10 @@ import UniformTypeIdentifiers
 
 // MARK: - Lineup View Helpers
 extension BaseballLineupView {
+    var hasImportedGameChangerStats: Bool {
+        viewModel.players.contains { $0.gameChangerStats != nil }
+    }
+
     func lineupDisplayLabel(for player: Player) -> String {
         PlayerDisplayHelper.displayLabel(
             for: player,

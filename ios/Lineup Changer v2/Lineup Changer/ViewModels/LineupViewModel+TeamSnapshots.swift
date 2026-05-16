@@ -27,8 +27,16 @@ extension LineupViewModel {
             inningCatcherIDs: [:],
             battingOrderIDs: [],
             baseballLineupBatterCount: nil,
+            showOnlyNineBattersAndDH: false,
+            showSlowSpeedBattingWarnings: true,
+            fallBallEnabled: false,
+            fallBallYouthEnabled: false,
+            fallBallRunRuleEnabled: false,
             designatedHitterID: nil,
             designatedHitterForID: nil,
+            basketballYouthEnabled: false,
+            basketballQuartersPlayedEnabled: false,
+            basketballRequiredQuartersPlayed: 2,
             basketballUsesExplicitStartingLineup: false,
             basketballStartingLineupIDs: [:],
             basketballCourtLineupIDsByPeriod: [:],
@@ -40,10 +48,34 @@ extension LineupViewModel {
     }
 
     // Captures the currently selected team's roster, lineup, notes, and inning data.
-    func currentTeamSnapshot(for sport: SportType? = nil) -> TeamSnapshot {
+    func currentTeamSnapshot(for sport: SportType? = nil, mutatingInningState: Bool = true) -> TeamSnapshot {
         let sport = sport ?? selectedSport
+        var snapshotInningLineups = inningLineups
+        var snapshotInningPitcherIDs = inningPitcherIDs
+        var snapshotInningCatcherIDs = inningCatcherIDs
+
         // Make sure any visible inning edits are included in the snapshot.
-        saveCurrentInningState()
+        if mutatingInningState {
+            saveCurrentInningState()
+            snapshotInningLineups = inningLineups
+            snapshotInningPitcherIDs = inningPitcherIDs
+            snapshotInningCatcherIDs = inningCatcherIDs
+        } else {
+            snapshotInningLineups[selectedInning] = lineup
+
+            if let pitcherID {
+                snapshotInningPitcherIDs[selectedInning] = pitcherID
+            } else {
+                snapshotInningPitcherIDs.removeValue(forKey: selectedInning)
+            }
+
+            if let catcherID {
+                snapshotInningCatcherIDs[selectedInning] = catcherID
+            } else {
+                snapshotInningCatcherIDs.removeValue(forKey: selectedInning)
+            }
+        }
+
         // Store only team-specific state here; global display settings stay in AppState.
         return TeamSnapshot(
             players: players,
@@ -53,14 +85,22 @@ extension LineupViewModel {
             lineup: resolvedLineup,
             lineupIDs: lineup,
             selectedInning: selectedInning,
-            inningLineups: resolvedInningLineups(from: inningLineups),
-            inningLineupIDs: inningLineups,
-            inningPitcherIDs: inningPitcherIDs,
-            inningCatcherIDs: inningCatcherIDs,
+            inningLineups: resolvedInningLineups(from: snapshotInningLineups),
+            inningLineupIDs: snapshotInningLineups,
+            inningPitcherIDs: snapshotInningPitcherIDs,
+            inningCatcherIDs: snapshotInningCatcherIDs,
             battingOrderIDs: battingOrderIDs,
             baseballLineupBatterCount: baseballLineupBatterCount,
+            showOnlyNineBattersAndDH: showOnlyNineBattersAndDH,
+            showSlowSpeedBattingWarnings: showSlowSpeedBattingWarnings,
+            fallBallEnabled: fallBallEnabled,
+            fallBallYouthEnabled: fallBallYouthEnabled,
+            fallBallRunRuleEnabled: fallBallRunRuleEnabled,
             designatedHitterID: designatedHitterID,
             designatedHitterForID: designatedHitterForID,
+            basketballYouthEnabled: basketballYouthEnabled,
+            basketballQuartersPlayedEnabled: basketballQuartersPlayedEnabled,
+            basketballRequiredQuartersPlayed: basketballRequiredQuartersPlayed,
             basketballUsesExplicitStartingLineup: basketballUsesExplicitStartingLineup,
             basketballStartingLineupIDs: basketballStartingLineupIDs,
             basketballCourtLineupIDsByPeriod: basketballCourtLineupIDsByPeriod,
@@ -86,8 +126,16 @@ extension LineupViewModel {
         inningCatcherIDs = snapshot.inningCatcherIDs
         battingOrderIDs = snapshot.battingOrderIDs
         baseballLineupBatterCount = snapshot.baseballLineupBatterCount
+        showOnlyNineBattersAndDH = snapshot.showOnlyNineBattersAndDH ?? showOnlyNineBattersAndDH
+        showSlowSpeedBattingWarnings = snapshot.showSlowSpeedBattingWarnings ?? showSlowSpeedBattingWarnings
+        fallBallEnabled = snapshot.fallBallEnabled ?? fallBallEnabled
+        fallBallRunRuleEnabled = snapshot.fallBallRunRuleEnabled ?? fallBallRunRuleEnabled
+        fallBallYouthEnabled = (snapshot.fallBallEnabled ?? fallBallEnabled) ? (snapshot.fallBallYouthEnabled ?? fallBallYouthEnabled) : false
         designatedHitterID = snapshot.designatedHitterID
         designatedHitterForID = snapshot.designatedHitterForID
+        basketballYouthEnabled = snapshot.basketballYouthEnabled ?? basketballYouthEnabled
+        basketballQuartersPlayedEnabled = (snapshot.basketballYouthEnabled ?? basketballYouthEnabled) ? (snapshot.basketballQuartersPlayedEnabled ?? basketballQuartersPlayedEnabled) : false
+        basketballRequiredQuartersPlayed = snapshot.basketballRequiredQuartersPlayed ?? basketballRequiredQuartersPlayed
         basketballUsesExplicitStartingLineup = snapshot.basketballUsesExplicitStartingLineup ?? false
         basketballStartingLineupIDs = snapshot.basketballStartingLineupIDs ?? [:]
         basketballCourtLineupIDsByPeriod = snapshot.basketballCourtLineupIDsByPeriod ?? [:]

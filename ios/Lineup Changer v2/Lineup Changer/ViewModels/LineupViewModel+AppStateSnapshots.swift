@@ -11,11 +11,11 @@ import Foundation
 extension LineupViewModel {
     // Builds a complete AppState value from the current view-model state.
     func currentAppState() -> AppState {
-        // Refresh the selected team's snapshot before collecting all team data.
-        teamSnapshots[selectedTeamIndex] = currentTeamSnapshot(for: selectedSport)
+        // Build the selected team's snapshot locally so saving does not mutate published state.
+        let selectedSnapshot = currentTeamSnapshot(for: selectedSport, mutatingInningState: false)
         // Replace missing team snapshots with empty snapshots so the saved array is complete.
         let savedSnapshots = teamSnapshots.enumerated().map { index, snapshot in
-            snapshot ?? emptyTeamSnapshot(for: selectedSport)
+            index == selectedTeamIndex ? selectedSnapshot : (snapshot ?? emptyTeamSnapshot(for: selectedSport))
         }
         var savedSportTeamStates = sportTeamStates
         savedSportTeamStates[selectedSport] = SportTeamState(
@@ -47,6 +47,9 @@ extension LineupViewModel {
             showBasketballBenchOnCourt: showBasketballBenchOnCourt,
             showFullNameAndNumberInBasketball: showFullNameAndNumberInBasketball,
             basketballPeriodFormat: basketballPeriodFormat,
+            basketballYouthEnabled: basketballYouthEnabled,
+            basketballQuartersPlayedEnabled: basketballQuartersPlayedEnabled,
+            basketballRequiredQuartersPlayed: basketballRequiredQuartersPlayed,
             showOnlyNineBattersAndDH: showOnlyNineBattersAndDH,
             showSlowSpeedBattingWarnings: showSlowSpeedBattingWarnings,
             fallBallEnabled: fallBallEnabled,
@@ -105,6 +108,9 @@ extension LineupViewModel {
         showBasketballBenchOnCourt = state.showBasketballBenchOnCourt ?? true
         showFullNameAndNumberInBasketball = state.showFullNameAndNumberInBasketball ?? true
         basketballPeriodFormat = state.basketballPeriodFormat ?? .quarters
+        basketballYouthEnabled = state.basketballYouthEnabled ?? false
+        basketballQuartersPlayedEnabled = state.basketballQuartersPlayedEnabled ?? false
+        basketballRequiredQuartersPlayed = state.basketballRequiredQuartersPlayed ?? 2
         showOnlyNineBattersAndDH = state.showOnlyNineBattersAndDH
         baseballLineupBatterCount = state.baseballLineupBatterCount
         basketballUsesExplicitStartingLineup = state.basketballUsesExplicitStartingLineup ?? false
@@ -114,6 +120,11 @@ extension LineupViewModel {
         fallBallEnabled = state.fallBallEnabled ?? false
         fallBallRunRuleEnabled = state.fallBallRunRuleEnabled ?? false
         fallBallYouthEnabled = fallBallEnabled ? (state.fallBallYouthEnabled ?? false) : false
+
+        if teamSnapshots.indices.contains(selectedTeamIndex),
+           let selectedTeamSnapshot = teamSnapshots[selectedTeamIndex] {
+            applyTeamSnapshot(selectedTeamSnapshot)
+        }
     }
 }
 

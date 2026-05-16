@@ -74,10 +74,13 @@ extension BasketballPlayerDetailView {
             return
         }
 
-        viewModel.renamePlayer(playerID: player.id, newName: editedName)
-        viewModel.updatePlayerNumber(playerID: player.id, newNumber: editedNumber)
-        viewModel.updatePlayerCell(playerID: player.id, newCell: editedCellNumber)
-        viewModel.updatePlayerNotes(playerID: player.id, notes: editedNotes)
-        viewModel.setPlayerStatus(playerID: player.id, status: isGuestPlayer ? .guest : .active)
+        viewModel.updateBasketballPlayerProfile(
+            playerID: player.id,
+            name: editedName,
+            number: editedNumber,
+            cell: editedCellNumber,
+            notes: editedNotes,
+            status: isGuestPlayer ? .guest : .active
+        )
     }
 }

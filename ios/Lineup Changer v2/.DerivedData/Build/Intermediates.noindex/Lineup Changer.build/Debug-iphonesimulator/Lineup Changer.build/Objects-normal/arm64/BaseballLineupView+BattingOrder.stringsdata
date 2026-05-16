@@ -7,7 +7,7 @@
         "key": "Add players first, then they will appear here.",
         "location": {
           "startingColumn": 22,
-          "startingLine": 20
+          "startingLine": 22
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "Drop here to add a batter to the lineup",
         "location": {
           "startingColumn": 15,
-          "startingLine": 116
+          "startingLine": 118
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "AVG",
         "location": {
           "startingColumn": 20,
-          "startingLine": 45
+          "startingLine": 47
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "OBP",
         "location": {
           "startingColumn": 20,
-          "startingLine": 49
+          "startingLine": 51
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "OPS",
         "location": {
           "startingColumn": 20,
-          "startingLine": 53
+          "startingLine": 55
         }
       },
       {
@@ -47,7 +47,7 @@
         "key": "SLG",
         "location": {
           "startingColumn": 20,
-          "startingLine": 57
+          "startingLine": 59
         }
       },
       {
@@ -55,7 +55,7 @@
         "key": "Hits",
         "location": {
           "startingColumn": 20,
-          "startingLine": 61
+          "startingLine": 63
         }
       },
       {
@@ -63,7 +63,7 @@
         "key": "RBI",
         "location": {
           "startingColumn": 20,
-          "startingLine": 65
+          "startingLine": 67
         }
       },
       {
@@ -71,7 +71,7 @@
         "key": "Runs",
         "location": {
           "startingColumn": 20,
-          "startingLine": 69
+          "startingLine": 71
         }
       },
       {
@@ -79,7 +79,7 @@
         "key": "Walks",
         "location": {
           "startingColumn": 20,
-          "startingLine": 73
+          "startingLine": 75
         }
       },
       {
@@ -87,7 +87,7 @@
         "key": "Strikeouts",
         "location": {
           "startingColumn": 20,
-          "startingLine": 77
+          "startingLine": 79
         }
       },
       {
@@ -95,7 +95,7 @@
         "key": "Sort by GameChanger Stats",
         "location": {
           "startingColumn": 19,
-          "startingLine": 81
+          "startingLine": 83
         }
       },
       {
@@ -103,7 +103,7 @@
         "key": "No bench players.",
         "location": {
           "startingColumn": 22,
-          "startingLine": 103
+          "startingLine": 105
         }
       },
       {
@@ -111,7 +111,7 @@
         "key": "Drop a batter on a bench player to replace them",
         "location": {
           "startingColumn": 55,
-          "startingLine": 133
+          "startingLine": 135
         }
       },
       {
@@ -119,7 +119,7 @@
         "key": "Drop here to move a player to the bench",
         "location": {
           "startingColumn": 107,
-          "startingLine": 133
+          "startingLine": 135
         }
       },
       {
@@ -127,7 +127,7 @@
         "key": "Add %@ to lineup",
         "location": {
           "startingColumn": 33,
-          "startingLine": 185
+          "startingLine": 187
         }
       },
       {
@@ -135,7 +135,7 @@
         "key": "(Guest)",
         "location": {
           "startingColumn": 30,
-          "startingLine": 161
+          "startingLine": 163
         }
       },
       {
@@ -143,7 +143,7 @@
         "key": "Steal",
         "location": {
           "startingColumn": 48,
-          "startingLine": 256
+          "startingLine": 258
         }
       },
       {
@@ -151,7 +151,7 @@
         "key": "No Steal",
         "location": {
           "startingColumn": 58,
-          "startingLine": 256
+          "startingLine": 258
         }
       },
       {
@@ -159,7 +159,7 @@
         "key": "Move %@ to bench",
         "location": {
           "startingColumn": 41,
-          "startingLine": 268
+          "startingLine": 270
         }
       },
       {
@@ -167,7 +167,7 @@
         "key": "DH",
         "location": {
           "startingColumn": 34,
-          "startingLine": 224
+          "startingLine": 226
         }
       },
       {
@@ -175,7 +175,7 @@
         "key": "(Guest)",
         "location": {
           "startingColumn": 34,
-          "startingLine": 233
+          "startingLine": 235
         }
       }
     ]

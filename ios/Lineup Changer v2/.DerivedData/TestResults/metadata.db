@@ -13,127 +13,157 @@
 				<key>applyingStateWithCopiedBasketballNamesResetsBasketballTeams</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.16108894348144531</real>
+					<real>0.2128291130065918</real>
 				</dict>
 				<key>applyingStateWithoutSportTeamStatesDoesNotCopyBaseballTeamsToBasketball</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.1531980037689209</real>
+					<real>0.31889200210571289</real>
 				</dict>
 				<key>assignLineupUsesBestRatedAvailablePlayersWithoutDuplicates</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.14900994300842285</real>
+					<real>0.28622794151306152</real>
+				</dict>
+				<key>baseballYouthSettingsPersistPerTeam</key>
+				<dict>
+					<key>mrnet</key>
+					<real>0.31838512420654297</real>
 				</dict>
 				<key>basketballCoachesPersistPerTeamWhenSwitchingSports</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.26792120933532715</real>
+					<real>0.32012319564819336</real>
 				</dict>
 				<key>basketballCourtDisplaySettingsPersistInAppState</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.16119503974914551</real>
+					<real>0.22671103477478027</real>
 				</dict>
 				<key>basketballLineupAssignsBestRatedPlayersToStartingPositions</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.11310696601867676</real>
+					<real>0.22458910942077637</real>
 				</dict>
 				<key>basketballLineupMovesPlayersBetweenStartingLineupAndBench</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.26803779602050781</real>
+					<real>0.21263694763183594</real>
 				</dict>
 				<key>basketballPeriodFormatProvidesExpectedPeriodCounts</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.11316084861755371</real>
+					<real>0.21374106407165527</real>
 				</dict>
 				<key>basketballPlayerNumberPersistsInAppState</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.26807308197021484</real>
+					<real>0.2254638671875</real>
+				</dict>
+				<key>basketballPlayerProfileSavesOnSecondTeam</key>
+				<dict>
+					<key>mrnet</key>
+					<real>0.21299195289611816</real>
 				</dict>
 				<key>basketballPlayersPersistWithDefaultTeamNamesWhenSwitchingSports</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.1133430004119873</real>
+					<real>0.22454404830932617</real>
 				</dict>
 				<key>basketballPositionRatingsPersistInAppState</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.26219391822814941</real>
+					<real>0.1679081916809082</real>
+				</dict>
+				<key>basketballYouthQuartersPlayedAutoFillPopulatesAllQuarters</key>
+				<dict>
+					<key>mrnet</key>
+					<real>0.22583603858947754</real>
+				</dict>
+				<key>basketballYouthSettingsPersistPerTeam</key>
+				<dict>
+					<key>mrnet</key>
+					<real>0.28778481483459473</real>
 				</dict>
 				<key>clearBasketballLineupMovesStartersToBenchAndAllowsRefill</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.26808404922485352</real>
+					<real>0.31995201110839844</real>
+				</dict>
+				<key>deleteSelectedTeamResetsOnlySelectedSportTeamSlot</key>
+				<dict>
+					<key>mrnet</key>
+					<real>0.22628283500671387</real>
 				</dict>
 				<key>deletingAPlayerRemovesCurrentAndSavedAssignments</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.14860701560974121</real>
+					<real>0.31978106498718262</real>
 				</dict>
 				<key>designatedHitterDisplaysInSelectedLineupSpot</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.15027594566345215</real>
+					<real>0.3201298713684082</real>
 				</dict>
 				<key>exportedCurrentAppStateImportsIntoFreshViewModel</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.11305618286132812</real>
+					<real>0.16797995567321777</real>
 				</dict>
 				<key>fallBallGenerationIsDeterministicWithInjectedRandomSource</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.11333894729614258</real>
+					<real>0.318756103515625</real>
 				</dict>
 				<key>fallBallOptionsAreBlockedWhenRosterBatIsOff</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.26806187629699707</real>
+					<real>0.21382904052734375</real>
 				</dict>
 				<key>nineBatterAndDHCandidatesFollowBattingOrderChanges</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.1129310131072998</real>
+					<real>0.22467398643493652</real>
 				</dict>
 				<key>playerEditsResolveThroughCurrentRoster</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.11304903030395508</real>
+					<real>0.21376991271972656</real>
 				</dict>
 				<key>rosterBatOffSplitsNineBatterLineupBenchAndMovesPlayers</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.26395678520202637</real>
+					<real>0.32022500038146973</real>
 				</dict>
 				<key>rosterBatOnDisplaysFullLineupWithoutBenchOrDHRestrictions</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.2679901123046875</real>
+					<real>0.21311497688293457</real>
 				</dict>
 				<key>savedStatePersistsLineupIDsAndRestoresFreshPlayerValues</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.26398277282714844</real>
+					<real>0.21318697929382324</real>
+				</dict>
+				<key>switchTeamSlotsSwapsCurrentSportTeamNamesAndData</key>
+				<dict>
+					<key>mrnet</key>
+					<real>0.22507596015930176</real>
 				</dict>
 				<key>switchingSportsUsesSeparateTeamSlots</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.2679588794708252</real>
+					<real>0.22128796577453613</real>
 				</dict>
 				<key>switchingToCopiedBasketballStateResetsBasketballTeams</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.11330509185791016</real>
+					<real>0.32030105590820312</real>
 				</dict>
 				<key>viewModelPersistsToInjectedUserDefaults</key>
 				<dict>
 					<key>mrnet</key>
-					<real>0.26808619499206543</real>
+					<real>0.32073616981506348</real>
 				</dict>
 			</dict>
 		</dict>

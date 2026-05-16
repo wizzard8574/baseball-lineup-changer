@@ -56,4 +56,40 @@ extension LineupViewModel {
         players[index].notes = notes
         save()
     }
+
+    // Updates the Basketball player detail form in one pass to avoid repeated full-state saves.
+    func updateBasketballPlayerProfile(
+        playerID: UUID,
+        name: String,
+        number: String,
+        cell: String,
+        notes: String,
+        status: PlayerStatus
+    ) {
+        let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedName.isEmpty,
+              let index = players.firstIndex(where: { $0.id == playerID }) else { return }
+
+        var updatedPlayer = players[index]
+        updatedPlayer.name = trimmedName
+        updatedPlayer.number = number.trimmingCharacters(in: .whitespacesAndNewlines)
+        updatedPlayer.cell = cell.trimmingCharacters(in: .whitespacesAndNewlines)
+        updatedPlayer.notes = notes
+        updatedPlayer.status = status
+        players[index] = updatedPlayer
+
+        if status != .active {
+            basketballStartingLineupIDs = basketballStartingLineupIDs.filter { _, assignedPlayerID in
+                assignedPlayerID != playerID
+            }
+
+            basketballCourtLineupIDsByPeriod = basketballCourtLineupIDsByPeriod.mapValues { lineup in
+                lineup.filter { _, assignedPlayerID in
+                    assignedPlayerID != playerID
+                }
+            }
+        }
+
+        syncBattingOrder()
+    }
 }

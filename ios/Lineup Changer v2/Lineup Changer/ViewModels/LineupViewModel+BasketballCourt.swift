@@ -45,21 +45,93 @@ extension LineupViewModel {
     }
 
     func autoFillBasketballCourtPositions(for period: Int) {
+        if usesYouthQuarterPlayedAutoFill {
+            autoFillBasketballCourtPositionsForRequiredQuarters()
+            return
+        }
+
         var remainingPlayers = basketballLineupPlayers
         var periodLineup: [BasketballPosition: UUID] = [:]
 
-        for position in BasketballPosition.allCases {
-            let ratedPlayers = remainingPlayers.filter { $0.basketballPositionRatings[position] != nil }
+        var unfilledPositions = BasketballPosition.allCases
 
-            guard let bestPlayer = ratedPlayers.min(by: { lhs, rhs in
+        while let position = nextBasketballCourtPositionToFill(from: unfilledPositions, players: remainingPlayers) {
+            let ratedPlayers = remainingPlayers.filter { $0.basketballPositionRatings[position] != nil }
+            let candidatePlayers = ratedPlayers.isEmpty
+                ? remainingPlayers.filter { !$0.basketballPositionRatings.isEmpty }
+                : ratedPlayers
+
+            guard let bestPlayer = candidatePlayers.min(by: { lhs, rhs in
                 basketballCourtSortsBefore(lhs, rhs, for: position)
-            }) else { continue }
+            }) else {
+                unfilledPositions.removeAll { $0 == position }
+                continue
+            }
 
             periodLineup[position] = bestPlayer.id
             remainingPlayers.removeAll { $0.id == bestPlayer.id }
+            unfilledPositions.removeAll { $0 == position }
         }
 
         basketballCourtLineupIDsByPeriod[period] = periodLineup
+        save()
+    }
+
+    func autoFillBasketballCourtPositionsForRequiredQuarters() {
+        let eligiblePlayers = basketballLineupPlayers.filter { !$0.basketballPositionRatings.isEmpty }
+        guard !eligiblePlayers.isEmpty else {
+            clearAllBasketballCourtLineups()
+            return
+        }
+
+        let periodCount = BasketballPeriodFormat.quarters.periodCount
+        let requiredQuarters = min(max(basketballRequiredQuartersPlayed, 1), periodCount)
+        let requiredQuarterTargets = basketballRequiredQuarterTargets(
+            playerCount: eligiblePlayers.count,
+            requiredQuarters: requiredQuarters,
+            periodCount: periodCount
+        )
+        var playCounts = Dictionary(uniqueKeysWithValues: eligiblePlayers.map { ($0.id, 0) })
+        var generatedLineups: [Int: [BasketballPosition: UUID]] = [:]
+
+        for period in 1...periodCount {
+            var usedPlayerIDs = Set<UUID>()
+            var periodLineup: [BasketballPosition: UUID] = [:]
+            var requiredPlacementsRemaining = requiredQuarterTargets[period - 1]
+
+            var unfilledPositions = BasketballPosition.allCases
+
+            while let position = nextBasketballCourtPositionToFill(
+                from: unfilledPositions,
+                players: eligiblePlayers,
+                usedPlayerIDs: usedPlayerIDs
+            ) {
+                guard let player = bestYouthQuarterPlayer(
+                    for: position,
+                    from: eligiblePlayers,
+                    usedPlayerIDs: usedPlayerIDs,
+                    playCounts: playCounts,
+                    requiredQuarters: requiredQuarters,
+                    requiredPlacementsRemaining: requiredPlacementsRemaining
+                ) else {
+                    unfilledPositions.removeAll { $0 == position }
+                    continue
+                }
+
+                let wasBelowRequiredQuarters = (playCounts[player.id] ?? 0) < requiredQuarters
+                periodLineup[position] = player.id
+                usedPlayerIDs.insert(player.id)
+                playCounts[player.id, default: 0] += 1
+                if wasBelowRequiredQuarters {
+                    requiredPlacementsRemaining = max(0, requiredPlacementsRemaining - 1)
+                }
+                unfilledPositions.removeAll { $0 == position }
+            }
+
+            generatedLineups[period] = periodLineup
+        }
+
+        basketballCourtLineupIDsByPeriod = generatedLineups
         save()
     }
 
@@ -99,6 +171,100 @@ extension LineupViewModel {
             guard let player = basketballStartingPlayer(for: position) else { return nil }
             return (position, player.id)
         })
+    }
+
+    private var usesYouthQuarterPlayedAutoFill: Bool {
+        basketballYouthEnabled
+        && basketballQuartersPlayedEnabled
+        && basketballPeriodFormat == .quarters
+    }
+
+    private func nextBasketballCourtPositionToFill(
+        from positions: [BasketballPosition],
+        players: [Player],
+        usedPlayerIDs: Set<UUID> = []
+    ) -> BasketballPosition? {
+        positions.min { lhs, rhs in
+            let lhsCount = basketballCourtRatedCandidateCount(for: lhs, players: players, usedPlayerIDs: usedPlayerIDs)
+            let rhsCount = basketballCourtRatedCandidateCount(for: rhs, players: players, usedPlayerIDs: usedPlayerIDs)
+            let lhsPriority = lhsCount == 0 ? Int.max : lhsCount
+            let rhsPriority = rhsCount == 0 ? Int.max : rhsCount
+
+            if lhsPriority != rhsPriority {
+                return lhsPriority < rhsPriority
+            }
+
+            return basketballCourtPositionIndex(lhs) < basketballCourtPositionIndex(rhs)
+        }
+    }
+
+    private func basketballCourtRatedCandidateCount(
+        for position: BasketballPosition,
+        players: [Player],
+        usedPlayerIDs: Set<UUID>
+    ) -> Int {
+        players.filter { player in
+            !usedPlayerIDs.contains(player.id)
+            && player.basketballPositionRatings[position] != nil
+        }.count
+    }
+
+    private func basketballCourtPositionIndex(_ position: BasketballPosition) -> Int {
+        BasketballPosition.allCases.firstIndex(of: position) ?? Int.max
+    }
+
+    private func basketballRequiredQuarterTargets(
+        playerCount: Int,
+        requiredQuarters: Int,
+        periodCount: Int
+    ) -> [Int] {
+        let availableSlots = periodCount * BasketballPosition.allCases.count
+        let requiredSlots = min(playerCount * requiredQuarters, availableSlots)
+        let baseRequiredSlots = requiredSlots / periodCount
+        let extraRequiredSlots = requiredSlots % periodCount
+
+        return (0..<periodCount).map { index in
+            baseRequiredSlots + (index < extraRequiredSlots ? 1 : 0)
+        }
+    }
+
+    private func bestYouthQuarterPlayer(
+        for position: BasketballPosition,
+        from players: [Player],
+        usedPlayerIDs: Set<UUID>,
+        playCounts: [UUID: Int],
+        requiredQuarters: Int,
+        requiredPlacementsRemaining: Int
+    ) -> Player? {
+        let availablePlayers = players.filter { player in
+            !usedPlayerIDs.contains(player.id)
+            && player.basketballPositionRatings[position] != nil
+        }
+        let candidatePlayers = availablePlayers.isEmpty
+            ? players.filter { player in
+                !usedPlayerIDs.contains(player.id)
+                && !player.basketballPositionRatings.isEmpty
+            }
+            : availablePlayers
+
+        let playersNeedingRequiredQuarters = candidatePlayers.filter {
+            (playCounts[$0.id] ?? 0) < requiredQuarters
+        }
+        let isPrioritizingRequiredPlayers = requiredPlacementsRemaining > 0 && !playersNeedingRequiredQuarters.isEmpty
+        let prioritizedPlayers = isPrioritizingRequiredPlayers
+            ? playersNeedingRequiredQuarters
+            : candidatePlayers
+
+        return prioritizedPlayers.min { lhs, rhs in
+            let lhsCount = playCounts[lhs.id] ?? 0
+            let rhsCount = playCounts[rhs.id] ?? 0
+
+            if lhsCount != rhsCount && isPrioritizingRequiredPlayers {
+                return lhsCount < rhsCount
+            }
+
+            return basketballCourtSortsBefore(lhs, rhs, for: position)
+        }
     }
 
     private func basketballCourtSortsBefore(_ lhs: Player, _ rhs: Player, for position: BasketballPosition) -> Bool {

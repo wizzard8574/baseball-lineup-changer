@@ -23,6 +23,17 @@ struct BaseballSettingsSections: View {
             ))
             Toggle("Show Bench", isOn: $viewModel.showBenchOnField)
 
+            // Inning count is clamped to the supported 1...12 range elsewhere as well.
+            Stepper(
+                "Number of Innings: \(viewModel.numberOfInnings)",
+                value: $viewModel.numberOfInnings,
+                in: 1...12
+            )
+        }
+
+        // Batting order display and warning preferences.
+        Section(header: SettingsSectionHeader(title: "Youth")) {
+            Toggle("Roster Bat", isOn: $viewModel.showOnlyNineBattersAndDH)
             Toggle("Fall Ball", isOn: $viewModel.fallBallEnabled)
                 .disabled(viewModel.baseballUsesNineBatterAndDH)
             Toggle("Run Rule", isOn: $viewModel.fallBallRunRuleEnabled)
@@ -33,17 +44,6 @@ struct BaseballSettingsSections: View {
                     .disabled(viewModel.baseballUsesNineBatterAndDH)
             }
 
-            // Inning count is clamped to the supported 1...12 range elsewhere as well.
-            Stepper(
-                "Number of Innings: \(viewModel.numberOfInnings)",
-                value: $viewModel.numberOfInnings,
-                in: 1...12
-            )
-        }
-
-        // Batting order display and warning preferences.
-        Section(header: SettingsSectionHeader(title: "Batting Order")) {
-            Toggle("Roster Bat", isOn: $viewModel.showOnlyNineBattersAndDH)
             Toggle("Warn when No Steal P/C Bats After No Steal Runner", isOn: $viewModel.showSlowSpeedBattingWarnings)
         }
     }

@@ -71,9 +71,6 @@ extension BasketballPlayerDetailView {
                 statRow("BPG", stats.bpg)
                 statRow("TS%", stats.trueShootingPercentage)
                 statRow("AST/TO", stats.assistTurnoverRatio)
-            } else {
-                Text("No GameChanger stats imported.")
-                    .foregroundStyle(.secondary)
             }
         }
     }

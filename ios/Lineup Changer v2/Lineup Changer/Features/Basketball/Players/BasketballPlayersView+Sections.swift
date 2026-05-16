@@ -13,7 +13,9 @@ extension BasketballPlayersView {
             teamPickerSection
             coachesSection
             playersSection
-            statsInfoSection
+            if hasImportedGameChangerStats {
+                statsInfoSection
+            }
             infoSection
         }
         .scrollContentBackground(.hidden)
@@ -71,7 +73,9 @@ extension BasketballPlayersView {
     private var playersSection: some View {
         Section(header: basketballSectionHeader("Players")) {
             addPlayerRow
-            gameChangerSortMenu
+            if hasImportedGameChangerStats {
+                gameChangerSortMenu
+            }
             playersListContent
         }
     }
@@ -151,7 +155,7 @@ extension BasketballPlayersView {
                     BasketballPlayerDetailView(viewModel: viewModel, player: player)
                 } label: {
                     BasketballPlayerRowView(player: player, viewModel: viewModel)
-                        .id("\(player.id)-\(player.name)-\(player.number)-\(player.status.rawValue)-\(PlayerDisplayHelper.basketballPositionSummaryValue(for: player))")
+                        .id("\(player.id)-\(player.name)-\(player.number)-\(player.status.rawValue)-\(PlayerDisplayHelper.basketballPositionSummaryValue(for: player))-\(player.basketballGameChangerStats?.lineupDisplayText ?? "")")
                 }
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                     Button("Delete", role: .destructive) {

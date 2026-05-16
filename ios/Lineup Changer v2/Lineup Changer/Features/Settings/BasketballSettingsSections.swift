@@ -32,5 +32,29 @@ struct BasketballSettingsSections: View {
                 .pickerStyle(.segmented)
             }
         }
+
+        Section(header: SettingsSectionHeader(title: "Youth")) {
+            Toggle("Youth", isOn: $viewModel.basketballYouthEnabled)
+
+            if viewModel.basketballYouthEnabled {
+                Toggle("Quarters Played", isOn: $viewModel.basketballQuartersPlayedEnabled)
+                    .disabled(viewModel.basketballPeriodFormat != .quarters)
+
+                if viewModel.basketballQuartersPlayedEnabled {
+                    Stepper(
+                        "Required Quarters: \(viewModel.basketballRequiredQuartersPlayed)",
+                        value: $viewModel.basketballRequiredQuartersPlayed,
+                        in: 1...BasketballPeriodFormat.quarters.periodCount
+                    )
+                    .disabled(viewModel.basketballPeriodFormat != .quarters)
+                }
+
+                if viewModel.basketballPeriodFormat != .quarters {
+                    Text("Quarters Played is available when Game Format is set to 4 Quarters.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
     }
 }

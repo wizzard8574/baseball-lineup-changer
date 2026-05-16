@@ -27,8 +27,16 @@ struct TeamSnapshot: Codable {
     // Team batting order and DH state.
     var battingOrderIDs: [UUID]
     var baseballLineupBatterCount: Int?
+    var showOnlyNineBattersAndDH: Bool?
+    var showSlowSpeedBattingWarnings: Bool?
+    var fallBallEnabled: Bool?
+    var fallBallYouthEnabled: Bool?
+    var fallBallRunRuleEnabled: Bool?
     var designatedHitterID: UUID?
     var designatedHitterForID: UUID?
+    var basketballYouthEnabled: Bool?
+    var basketballQuartersPlayedEnabled: Bool?
+    var basketballRequiredQuartersPlayed: Int?
     var basketballUsesExplicitStartingLineup: Bool?
     var basketballStartingLineupIDs: [BasketballPosition: UUID]?
     var basketballCourtLineupIDsByPeriod: [Int: [BasketballPosition: UUID]]?
@@ -51,8 +59,16 @@ struct TeamSnapshot: Codable {
          inningCatcherIDs: [Int: UUID] = [:],
          battingOrderIDs: [UUID] = [],
          baseballLineupBatterCount: Int? = nil,
+         showOnlyNineBattersAndDH: Bool? = nil,
+         showSlowSpeedBattingWarnings: Bool? = nil,
+         fallBallEnabled: Bool? = nil,
+         fallBallYouthEnabled: Bool? = nil,
+         fallBallRunRuleEnabled: Bool? = nil,
          designatedHitterID: UUID? = nil,
          designatedHitterForID: UUID? = nil,
+         basketballYouthEnabled: Bool? = nil,
+         basketballQuartersPlayedEnabled: Bool? = nil,
+         basketballRequiredQuartersPlayed: Int? = nil,
          basketballUsesExplicitStartingLineup: Bool? = nil,
          basketballStartingLineupIDs: [BasketballPosition: UUID]? = nil,
          basketballCourtLineupIDsByPeriod: [Int: [BasketballPosition: UUID]]? = nil,
@@ -73,8 +89,16 @@ struct TeamSnapshot: Codable {
         self.inningCatcherIDs = inningCatcherIDs
         self.battingOrderIDs = battingOrderIDs
         self.baseballLineupBatterCount = baseballLineupBatterCount
+        self.showOnlyNineBattersAndDH = showOnlyNineBattersAndDH
+        self.showSlowSpeedBattingWarnings = showSlowSpeedBattingWarnings
+        self.fallBallEnabled = fallBallEnabled
+        self.fallBallYouthEnabled = fallBallYouthEnabled
+        self.fallBallRunRuleEnabled = fallBallRunRuleEnabled
         self.designatedHitterID = designatedHitterID
         self.designatedHitterForID = designatedHitterForID
+        self.basketballYouthEnabled = basketballYouthEnabled
+        self.basketballQuartersPlayedEnabled = basketballQuartersPlayedEnabled
+        self.basketballRequiredQuartersPlayed = basketballRequiredQuartersPlayed
         self.basketballUsesExplicitStartingLineup = basketballUsesExplicitStartingLineup
         self.basketballStartingLineupIDs = basketballStartingLineupIDs
         self.basketballCourtLineupIDsByPeriod = basketballCourtLineupIDsByPeriod

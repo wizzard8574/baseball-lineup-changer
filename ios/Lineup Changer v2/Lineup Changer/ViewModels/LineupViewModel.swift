@@ -62,6 +62,27 @@ final class LineupViewModel: ObservableObject {
     @Published var showFullNameAndNumberInBasketball = true { didSet { save() } }
     // Controls whether basketball games use four quarters or two halves.
     @Published var basketballPeriodFormat: BasketballPeriodFormat = .quarters { didSet { save() } }
+    // Enables youth basketball settings.
+    @Published var basketballYouthEnabled = false {
+        didSet {
+            if !basketballYouthEnabled {
+                basketballQuartersPlayedEnabled = false
+            }
+            save()
+        }
+    }
+    // Youth basketball option that tries to guarantee a minimum number of quarters for each player.
+    @Published var basketballQuartersPlayedEnabled = false { didSet { save() } }
+    // Required quarters per player when Youth Quarters Played is enabled.
+    @Published var basketballRequiredQuartersPlayed = 2 {
+        didSet {
+            let clamped = min(max(basketballRequiredQuartersPlayed, 1), BasketballPeriodFormat.quarters.periodCount)
+            if clamped != basketballRequiredQuartersPlayed {
+                basketballRequiredQuartersPlayed = clamped
+            }
+            save()
+        }
+    }
     // Stored with the legacy key, but now represents Roster Bat:
     // true shows the full roster, false uses the 9 batter + DH lineup.
     @Published var showOnlyNineBattersAndDH = false {
@@ -177,6 +198,8 @@ final class LineupViewModel: ObservableObject {
     var sportTeamStates: [SportType: SportTeamState] = [:]
     // Prevents save loops while restoring persisted state.
     var isApplyingSavedState = false
+    // Prevents nested saves while a state snapshot is being encoded.
+    var isSaving = false
     // Prevents the selectedSport didSet observer from duplicating explicit sport selections.
     var isSelectingSport = false
     // Storage used for app state and small launch-time settings.

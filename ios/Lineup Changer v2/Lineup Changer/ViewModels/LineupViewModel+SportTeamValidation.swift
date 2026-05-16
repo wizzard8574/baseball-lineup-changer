@@ -39,6 +39,14 @@ extension LineupViewModel {
             || snapshot.inningLineupIDs.values.contains { !$0.isEmpty }
             || snapshot.pitcherID != nil
             || snapshot.catcherID != nil
+            || snapshot.showOnlyNineBattersAndDH == true
+            || snapshot.showSlowSpeedBattingWarnings == false
+            || snapshot.fallBallEnabled == true
+            || snapshot.fallBallYouthEnabled == true
+            || snapshot.fallBallRunRuleEnabled == true
+            || snapshot.basketballYouthEnabled == true
+            || snapshot.basketballQuartersPlayedEnabled == true
+            || (snapshot.basketballRequiredQuartersPlayed != nil && snapshot.basketballRequiredQuartersPlayed != 2)
             || !(snapshot.preGameNotes ?? "").trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             || !(snapshot.postGameNotes ?? "").trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             || !(snapshot.coachNotes ?? "").trimmingCharacters(in: .whitespacesAndNewlines).isEmpty

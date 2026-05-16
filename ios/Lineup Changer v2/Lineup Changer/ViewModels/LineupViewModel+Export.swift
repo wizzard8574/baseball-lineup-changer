@@ -9,19 +9,47 @@ import Foundation
 
 // MARK: - Export Methods
 extension LineupViewModel {
-    // MARK: Full App State Export
-    // Exports the full app state as encoded JSON data.
-    // The export excludes coaches and GameChanger stats so backup/share files stay lighter
+    // MARK: Selected Team App State Export
+    // Exports only the selected sport and selected team as encoded JSON data.
+    // The export excludes coaches and GameChanger stats so share files stay lighter
     // and avoid including stat data that may have come from an external source.
     func exportAppStateData() -> Data {
-        // Start from the current saved state, then sanitize fields before encoding.
-        var exportState = currentAppState()
+        // Start from the current saved state, then reduce it to the selected sport/team only.
+        let currentState = currentAppState()
+        let selectedSnapshot = teamSnapshotWithoutGameChangerStats(currentTeamSnapshot(for: selectedSport))
+        let selectedTeamNames = [selectedTeamName]
+        let selectedSportTeamState = SportTeamState(
+            selectedTeamIndex: 0,
+            teamNames: selectedTeamNames,
+            teamSnapshots: [selectedSnapshot],
+            hasCustomTeamNames: true
+        )
+
+        var exportState = currentState
         exportState.coaches = []
-        exportState.players = exportState.players.map { playerWithoutGameChangerStats($0) }
-        exportState.lineup = lineupWithoutGameChangerStats(exportState.lineup)
-        exportState.inningLineups = inningLineupsWithoutGameChangerStats(exportState.inningLineups)
-        exportState.teamSnapshots = exportState.teamSnapshots.map { teamSnapshotWithoutGameChangerStats($0) }
-        exportState.sportTeamStates = exportState.sportTeamStates.mapValues { sportTeamStateWithoutGameChangerStats($0) }
+        exportState.players = selectedSnapshot.players
+        exportState.lineup = selectedSnapshot.lineup
+        exportState.lineupIDs = selectedSnapshot.lineupIDs
+        exportState.selectedInning = selectedSnapshot.selectedInning
+        exportState.inningLineups = selectedSnapshot.inningLineups
+        exportState.inningLineupIDs = selectedSnapshot.inningLineupIDs
+        exportState.inningPitcherIDs = selectedSnapshot.inningPitcherIDs
+        exportState.inningCatcherIDs = selectedSnapshot.inningCatcherIDs
+        exportState.battingOrderIDs = selectedSnapshot.battingOrderIDs
+        exportState.baseballLineupBatterCount = selectedSnapshot.baseballLineupBatterCount
+        exportState.designatedHitterID = selectedSnapshot.designatedHitterID
+        exportState.designatedHitterForID = selectedSnapshot.designatedHitterForID
+        exportState.basketballUsesExplicitStartingLineup = selectedSnapshot.basketballUsesExplicitStartingLineup
+        exportState.basketballStartingLineupIDs = selectedSnapshot.basketballStartingLineupIDs
+        exportState.basketballCourtLineupIDsByPeriod = selectedSnapshot.basketballCourtLineupIDsByPeriod
+        exportState.preGameNotes = selectedSnapshot.preGameNotes
+        exportState.postGameNotes = selectedSnapshot.postGameNotes
+        exportState.coachNotes = selectedSnapshot.coachNotes
+        exportState.selectedSport = selectedSport
+        exportState.selectedTeamIndex = 0
+        exportState.teamNames = selectedTeamNames
+        exportState.teamSnapshots = [selectedSnapshot]
+        exportState.sportTeamStates = [selectedSport: selectedSportTeamState]
 
         // Encode the sanitized state into JSON data for sharing or saving.
         do {

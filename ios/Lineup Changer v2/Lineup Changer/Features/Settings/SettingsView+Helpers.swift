@@ -43,6 +43,19 @@ extension SettingsView {
         }
     }
 
+    // MARK: - Team Management
+    func confirmTeamManagementAction(_ action: SettingsTeamManagementAction) {
+        switch action {
+        case .switchTeams:
+            viewModel.switchTeamSlots()
+        case .deleteTeam:
+            viewModel.deleteSelectedTeam()
+        }
+
+        pendingTeamManagementAction = nil
+        syncEditedTeamName()
+    }
+
     // MARK: - Share Helpers
     // Presents the native share sheet for an export file URL.
     func presentShareSheet(url: URL) {
@@ -54,7 +67,7 @@ extension SettingsView {
         do {
             // Create the export data, write it to a temp file, then share it.
             let data = viewModel.exportPlayerNameNumberData()
-            let url = FileManager.default.temporaryDirectory.appendingPathComponent("LineupChanger-Players.json")
+            let url = viewModel.sharedFileURL(fileDescription: "Players", fileExtension: "json")
             try data.write(to: url, options: .atomic)
             backupStatusMessage = "Player file ready to share."
             presentShareSheet(url: url)
@@ -67,7 +80,7 @@ extension SettingsView {
     func sharePlayerData() {
         do {
             let data = viewModel.exportAppStateData()
-            let url = FileManager.default.temporaryDirectory.appendingPathComponent("LineupChanger-Player-Data.json")
+            let url = viewModel.sharedFileURL(fileDescription: "Player Data", fileExtension: "json")
             try data.write(to: url, options: .atomic)
             backupStatusMessage = "Player data file ready to share."
             presentShareSheet(url: url)
@@ -80,7 +93,7 @@ extension SettingsView {
     func shareCoaches() {
         do {
             let data = viewModel.exportCoachData()
-            let url = FileManager.default.temporaryDirectory.appendingPathComponent("LineupChanger-Coaches.json")
+            let url = viewModel.sharedFileURL(fileDescription: "Coaches", fileExtension: "json")
             try data.write(to: url, options: .atomic)
             backupStatusMessage = "Coach file ready to share."
             presentShareSheet(url: url)
@@ -134,4 +147,3 @@ extension SettingsView {
         presentedSheet = nil
     }
 }
-

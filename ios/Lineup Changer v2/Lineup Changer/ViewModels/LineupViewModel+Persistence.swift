@@ -14,9 +14,12 @@ extension LineupViewModel {
     // Encodes the current app state and stores it in UserDefaults.
     func save() {
         // Avoid recursive saves while a saved state is actively being restored.
-        guard !isApplyingSavedState else { return }
+        guard !isApplyingSavedState, !isSaving else { return }
 
         do {
+            isSaving = true
+            defer { isSaving = false }
+
             // Build a complete AppState snapshot before encoding it.
             let data = try JSONEncoder().encode(currentAppState())
             userDefaults.set(data, forKey: saveKey)

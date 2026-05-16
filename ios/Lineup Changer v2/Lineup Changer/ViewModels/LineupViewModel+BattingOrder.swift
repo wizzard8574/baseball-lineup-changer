@@ -18,13 +18,21 @@ extension LineupViewModel {
     func syncBattingOrder() {
         // Remove IDs for players that no longer exist.
         let existingIDs = Set(players.map { $0.id })
-        battingOrderIDs.removeAll { !existingIDs.contains($0) }
+        var syncedBattingOrderIDs = battingOrderIDs.filter { existingIDs.contains($0) }
 
         // Append any new players that are missing from the batting order.
-        for player in players where !battingOrderIDs.contains(player.id) {
-            battingOrderIDs.append(player.id)
+        for player in players where !syncedBattingOrderIDs.contains(player.id) {
+            syncedBattingOrderIDs.append(player.id)
         }
-        syncDesignatedHitterSelection()
+
+        if syncedBattingOrderIDs != battingOrderIDs {
+            battingOrderIDs = syncedBattingOrderIDs
+        }
+
+        if selectedSport.showsBaseballSettings {
+            syncDesignatedHitterSelection()
+        }
+
         save()
     }
     // Finds a player by ID.
@@ -72,7 +80,7 @@ extension LineupViewModel {
     }
 
     func syncDesignatedHitterSelection() {
-        guard baseballUsesNineBatterAndDH else { return }
+        guard selectedSport.showsBaseballSettings, baseballUsesNineBatterAndDH else { return }
 
         clampBaseballLineupBatterCount()
 

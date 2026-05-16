@@ -38,6 +38,18 @@ extension SettingsView {
             Button("Save Team Name") {
                 saveEditedTeamName()
             }
+
+            Button {
+                pendingTeamManagementAction = .switchTeams
+            } label: {
+                Label("Switch Teams", systemImage: "arrow.left.arrow.right")
+            }
+
+            Button(role: .destructive) {
+                pendingTeamManagementAction = .deleteTeam
+            } label: {
+                Label("Delete Team", systemImage: "trash")
+            }
         }
         .id(teamEditorIdentity)
     }

@@ -8,6 +8,10 @@ import Foundation
 
 // MARK: - Basketball Player Sorting
 extension BasketballPlayersView {
+    var hasImportedGameChangerStats: Bool {
+        viewModel.players.contains { $0.basketballGameChangerStats != nil }
+    }
+
     var sortedCoaches: [Coach] {
         viewModel.coaches.sorted { lhs, rhs in
             let lhsIsHeadCoach = lhs.role == "Head Coach"

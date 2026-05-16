@@ -14,7 +14,9 @@ extension BasketballPlayerDetailView {
             Form {
                 playerProfileSection
                 notesSection
-                gameChangerStatsSection
+                if currentPlayer?.basketballGameChangerStats != nil {
+                    gameChangerStatsSection
+                }
                 basketballAddPositionSection
                 basketballCurrentPositionsSection
                 basketballRatingScaleSection

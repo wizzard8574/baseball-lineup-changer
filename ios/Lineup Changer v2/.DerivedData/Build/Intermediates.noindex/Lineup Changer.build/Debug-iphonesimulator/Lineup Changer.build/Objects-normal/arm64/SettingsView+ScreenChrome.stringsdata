@@ -17,6 +17,30 @@
           "startingColumn": 28,
           "startingLine": 29
         }
+      },
+      {
+        "comment": "",
+        "key": "Switch Teams",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 71
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Team",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 75
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 80
+        }
       }
     ]
   },

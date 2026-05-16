@@ -35,6 +35,9 @@ struct AppState: Codable {
     var showBasketballBenchOnCourt: Bool?
     var showFullNameAndNumberInBasketball: Bool?
     var basketballPeriodFormat: BasketballPeriodFormat?
+    var basketballYouthEnabled: Bool?
+    var basketballQuartersPlayedEnabled: Bool?
+    var basketballRequiredQuartersPlayed: Int?
     var showOnlyNineBattersAndDH: Bool
     var showSlowSpeedBattingWarnings: Bool
     // Game format and lineup generation settings.
@@ -80,6 +83,9 @@ struct AppState: Codable {
          showBasketballBenchOnCourt: Bool?,
          showFullNameAndNumberInBasketball: Bool?,
          basketballPeriodFormat: BasketballPeriodFormat?,
+         basketballYouthEnabled: Bool?,
+         basketballQuartersPlayedEnabled: Bool?,
+         basketballRequiredQuartersPlayed: Int?,
          showOnlyNineBattersAndDH: Bool,
          showSlowSpeedBattingWarnings: Bool,
          fallBallEnabled: Bool?,
@@ -120,6 +126,9 @@ struct AppState: Codable {
         self.showBasketballBenchOnCourt = showBasketballBenchOnCourt
         self.showFullNameAndNumberInBasketball = showFullNameAndNumberInBasketball
         self.basketballPeriodFormat = basketballPeriodFormat
+        self.basketballYouthEnabled = basketballYouthEnabled
+        self.basketballQuartersPlayedEnabled = basketballQuartersPlayedEnabled
+        self.basketballRequiredQuartersPlayed = basketballRequiredQuartersPlayed
         self.showOnlyNineBattersAndDH = showOnlyNineBattersAndDH
         self.showSlowSpeedBattingWarnings = showSlowSpeedBattingWarnings
         self.fallBallEnabled = fallBallEnabled
@@ -163,6 +172,9 @@ struct AppState: Codable {
         case showBasketballBenchOnCourt
         case showFullNameAndNumberInBasketball
         case basketballPeriodFormat
+        case basketballYouthEnabled
+        case basketballQuartersPlayedEnabled
+        case basketballRequiredQuartersPlayed
         case showOnlyNineBattersAndDH
         case showSlowSpeedBattingWarnings
         case fallBallEnabled
@@ -207,6 +219,9 @@ struct AppState: Codable {
         showBasketballBenchOnCourt = try container.decodeIfPresent(Bool.self, forKey: .showBasketballBenchOnCourt)
         showFullNameAndNumberInBasketball = try container.decodeIfPresent(Bool.self, forKey: .showFullNameAndNumberInBasketball)
         basketballPeriodFormat = try container.decodeIfPresent(BasketballPeriodFormat.self, forKey: .basketballPeriodFormat)
+        basketballYouthEnabled = try container.decodeIfPresent(Bool.self, forKey: .basketballYouthEnabled)
+        basketballQuartersPlayedEnabled = try container.decodeIfPresent(Bool.self, forKey: .basketballQuartersPlayedEnabled)
+        basketballRequiredQuartersPlayed = try container.decodeIfPresent(Int.self, forKey: .basketballRequiredQuartersPlayed)
         showOnlyNineBattersAndDH = try container.decodeIfPresent(Bool.self, forKey: .showOnlyNineBattersAndDH) ?? false
         showSlowSpeedBattingWarnings = try container.decodeIfPresent(Bool.self, forKey: .showSlowSpeedBattingWarnings) ?? true
         fallBallEnabled = try container.decodeIfPresent(Bool.self, forKey: .fallBallEnabled)

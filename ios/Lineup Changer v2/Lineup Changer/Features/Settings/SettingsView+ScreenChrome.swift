@@ -52,6 +52,37 @@ extension SettingsView {
             .onChange(of: viewModel.numberOfInnings) { _, newValue in
                 clampInningCount(newValue)
             }
+            // Confirm team-wide changes before swapping or deleting saved team data.
+            .confirmationDialog(
+                pendingTeamManagementAction?.title ?? "",
+                isPresented: Binding(
+                    get: { pendingTeamManagementAction != nil },
+                    set: { isPresented in
+                        if !isPresented {
+                            pendingTeamManagementAction = nil
+                        }
+                    }
+                ),
+                titleVisibility: .visible,
+                presenting: pendingTeamManagementAction
+            ) { action in
+                switch action {
+                case .switchTeams:
+                    Button("Switch Teams") {
+                        confirmTeamManagementAction(action)
+                    }
+                case .deleteTeam:
+                    Button("Delete Team", role: .destructive) {
+                        confirmTeamManagementAction(action)
+                    }
+                }
+
+                Button("Cancel", role: .cancel) {
+                    pendingTeamManagementAction = nil
+                }
+            } message: { action in
+                Text(action.message(selectedTeamName: viewModel.selectedTeamName))
+            }
         }
         // Presents document pickers and share sheets for Settings workflows.
         .sheet(item: $presentedSheet) { sheet in

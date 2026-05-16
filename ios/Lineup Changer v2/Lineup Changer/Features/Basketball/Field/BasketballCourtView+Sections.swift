@@ -189,7 +189,7 @@ extension BasketballCourtView {
 
     private var infoSection: some View {
         basketballCourtGroupedSection("How assignment works") {
-            Text("Each quarter or half can have its own court assignment. Auto Fill Positions picks the best rated available player for each spot and does not use the same player twice. Put on Court uses a bench player's highest rated position. The Position menu and Assigned Lineup pickers let you manually place players anywhere.")
+            Text(viewModel.basketballYouthEnabled && viewModel.basketballQuartersPlayedEnabled && viewModel.basketballPeriodFormat == .quarters ? "Youth Quarters Played fills all 4 quarters at once and tries to give each player the required number of quarters while still choosing top-rated positions. If the roster needs more than 20 total court spots, the app distributes quarters as evenly as possible. Put on Court uses a bench player's highest rated position. The Position menu and Assigned Lineup pickers let you manually place players anywhere." : "Each quarter or half can have its own court assignment. Auto Fill Positions picks the best rated available player for each spot and does not use the same player twice. Put on Court uses a bench player's highest rated position. The Position menu and Assigned Lineup pickers let you manually place players anywhere.")
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }

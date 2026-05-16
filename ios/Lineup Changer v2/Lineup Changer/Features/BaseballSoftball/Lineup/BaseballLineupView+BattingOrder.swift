@@ -10,7 +10,9 @@ import SwiftUI
 extension BaseballLineupView {
     var battingOrderSection: some View {
         lineupGroupedSection("Batting Order") {
-            gameChangerSortMenu
+            if hasImportedGameChangerStats {
+                gameChangerSortMenu
+            }
 
             if !displayedBatters.isEmpty || !benchBatters.isEmpty {
                 lineupRowDivider

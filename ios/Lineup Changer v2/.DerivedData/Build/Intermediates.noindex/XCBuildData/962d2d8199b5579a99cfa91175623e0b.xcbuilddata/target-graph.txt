@@ -1,0 +1,4 @@
+Target dependency graph (2 targets)
+Target 'Lineup ChangerTests' in project 'Lineup Changer'
+➜ Explicit dependency on target 'Lineup Changer' in project 'Lineup Changer'
+Target 'Lineup Changer' in project 'Lineup Changer' (no dependencies)

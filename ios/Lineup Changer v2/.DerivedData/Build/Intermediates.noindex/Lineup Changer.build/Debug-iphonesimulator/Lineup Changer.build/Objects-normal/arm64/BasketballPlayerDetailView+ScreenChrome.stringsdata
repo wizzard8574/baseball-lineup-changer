@@ -7,7 +7,7 @@
         "key": "",
         "location": {
           "startingColumn": 26,
-          "startingLine": 24
+          "startingLine": 26
         }
       },
       {
@@ -15,7 +15,7 @@
         "key": "Unable to Text",
         "location": {
           "startingColumn": 16,
-          "startingLine": 52
+          "startingLine": 54
         }
       },
       {
@@ -23,7 +23,7 @@
         "key": "Duplicate Player Number",
         "location": {
           "startingColumn": 16,
-          "startingLine": 60
+          "startingLine": 62
         }
       },
       {
@@ -31,7 +31,7 @@
         "key": "Save",
         "location": {
           "startingColumn": 24,
-          "startingLine": 32
+          "startingLine": 34
         }
       },
       {
@@ -39,7 +39,7 @@
         "key": "Done",
         "location": {
           "startingColumn": 24,
-          "startingLine": 44
+          "startingLine": 46
         }
       },
       {
@@ -47,7 +47,7 @@
         "key": "OK",
         "location": {
           "startingColumn": 20,
-          "startingLine": 56
+          "startingLine": 58
         }
       },
       {
@@ -55,7 +55,7 @@
         "key": "OK",
         "location": {
           "startingColumn": 20,
-          "startingLine": 64
+          "startingLine": 66
         }
       }
     ]

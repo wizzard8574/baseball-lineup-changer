@@ -110,19 +110,21 @@ extension LineupViewModel {
             }
         }
 
-        // Apply imported stats to current roster players and count successful matches.
+        // Apply imported stats to a fresh roster value so SwiftUI publishes the changes.
+        var updatedPlayers = players
         var matchCount = 0
-        for index in players.indices {
+        for index in updatedPlayers.indices {
             // Prefer name match, then fall back to jersey-number match.
-            let normalizedName = normalizePlayerName(players[index].name)
-            let normalizedNumber = players[index].number.trimmingCharacters(in: .whitespacesAndNewlines)
+            let normalizedName = normalizePlayerName(updatedPlayers[index].name)
+            let normalizedNumber = updatedPlayers[index].number.trimmingCharacters(in: .whitespacesAndNewlines)
 
             if let stats = importedStatsByName[normalizedName] ?? importedStatsByNumber[normalizedNumber] {
-                players[index].gameChangerStats = stats
+                updatedPlayers[index].gameChangerStats = stats
                 matchCount += 1
             }
         }
 
+        players = updatedPlayers
         save()
         return matchCount
     }
@@ -204,18 +206,20 @@ extension LineupViewModel {
             }
         }
 
+        var updatedPlayers = players
         var matchCount = 0
-        for index in players.indices {
-            let rosterKeys = basketballGameChangerNameKeys(for: players[index])
-            let normalizedNumber = players[index].number.trimmingCharacters(in: .whitespacesAndNewlines)
+        for index in updatedPlayers.indices {
+            let rosterKeys = basketballGameChangerNameKeys(for: updatedPlayers[index])
+            let normalizedNumber = updatedPlayers[index].number.trimmingCharacters(in: .whitespacesAndNewlines)
             let stats = rosterKeys.lazy.compactMap { importedStatsByName[$0] }.first ?? importedStatsByNumber[normalizedNumber]
 
             if let stats {
-                players[index].basketballGameChangerStats = stats
+                updatedPlayers[index].basketballGameChangerStats = stats
                 matchCount += 1
             }
         }
 
+        players = updatedPlayers
         save()
         return matchCount
     }
@@ -223,16 +227,17 @@ extension LineupViewModel {
     // MARK: GameChanger Stats Cleanup
     // Removes imported GameChanger stats for the currently selected sport and team only.
     func clearGameChangerStats() {
-        // Iterate by index so each Player value can be updated in place.
-        for index in players.indices {
+        var updatedPlayers = players
+        for index in updatedPlayers.indices {
             switch selectedSport {
             case .basketball:
-                players[index].basketballGameChangerStats = nil
+                updatedPlayers[index].basketballGameChangerStats = nil
             default:
-                players[index].gameChangerStats = nil
+                updatedPlayers[index].gameChangerStats = nil
             }
         }
 
+        players = updatedPlayers
         teamSnapshots[selectedTeamIndex] = currentTeamSnapshot(for: selectedSport)
         sportTeamStates[selectedSport] = currentSportTeamState(for: selectedSport)
         save()

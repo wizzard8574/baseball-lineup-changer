@@ -25,6 +25,9 @@ extension LineupViewModel {
         teamSnapshots[selectedTeamIndex] = currentTeamSnapshot(for: selectedSport)
         selectedTeamIndex = safeIndex
 
+        let wasApplyingSavedState = isApplyingSavedState
+        isApplyingSavedState = true
+
         // Restore an existing snapshot or start the destination team empty.
         if let snapshot = teamSnapshots[safeIndex] {
             applyTeamSnapshot(snapshot)
@@ -32,6 +35,7 @@ extension LineupViewModel {
             applyTeamSnapshot(emptyTeamSnapshot(for: selectedSport))
         }
 
+        isApplyingSavedState = wasApplyingSavedState
         save()
     }
 
@@ -43,6 +47,59 @@ extension LineupViewModel {
         teamNames[selectedTeamIndex] = trimmed
         var selectedSportState = currentSportTeamState(for: selectedSport)
         selectedSportState.hasCustomTeamNames = true
+        sportTeamStates[selectedSport] = selectedSportState
+        save()
+    }
+
+    // Swaps Team 1 and Team 2 for the currently selected sport.
+    func switchTeamSlots() {
+        teamSnapshots[selectedTeamIndex] = currentTeamSnapshot(for: selectedSport)
+
+        var updatedNames = normalizedTeamNames(teamNames, for: selectedSport)
+        var updatedSnapshots = teamSnapshots.enumerated().map { _, snapshot in
+            snapshot ?? emptyTeamSnapshot(for: selectedSport)
+        }
+
+        updatedNames.swapAt(0, 1)
+        updatedSnapshots.swapAt(0, 1)
+
+        teamNames = updatedNames
+        teamSnapshots = updatedSnapshots.map(Optional.some)
+        selectedTeamIndex = selectedTeamIndex == 0 ? 1 : 0
+
+        let wasApplyingSavedState = isApplyingSavedState
+        isApplyingSavedState = true
+        applyTeamSnapshot(updatedSnapshots[selectedTeamIndex])
+        isApplyingSavedState = wasApplyingSavedState
+
+        var selectedSportState = currentSportTeamState(for: selectedSport)
+        selectedSportState.hasCustomTeamNames = updatedNames != defaultTeamNames(for: selectedSport)
+        sportTeamStates[selectedSport] = selectedSportState
+        save()
+    }
+
+    // Deletes the selected team slot for the current sport by resetting its name and data.
+    func deleteSelectedTeam() {
+        let deletedIndex = selectedTeamIndex
+        let defaults = defaultTeamNames(for: selectedSport)
+        var updatedNames = normalizedTeamNames(teamNames, for: selectedSport)
+        var updatedSnapshots = teamSnapshots.enumerated().map { _, snapshot in
+            snapshot ?? emptyTeamSnapshot(for: selectedSport)
+        }
+
+        updatedNames[deletedIndex] = defaults[deletedIndex]
+        updatedSnapshots[deletedIndex] = emptyTeamSnapshot(for: selectedSport)
+
+        teamNames = updatedNames
+        teamSnapshots = updatedSnapshots.map(Optional.some)
+
+        let wasApplyingSavedState = isApplyingSavedState
+        isApplyingSavedState = true
+        applyTeamSnapshot(updatedSnapshots[deletedIndex])
+        isApplyingSavedState = wasApplyingSavedState
+
+        var selectedSportState = currentSportTeamState(for: selectedSport)
+        selectedSportState.hasCustomTeamNames = updatedNames != defaults
         sportTeamStates[selectedSport] = selectedSportState
         save()
     }

@@ -22,6 +22,10 @@ extension BaseballLineupView {
             designatedHitterSection
         }
 
+        if hasImportedGameChangerStats {
+            statsInfoSection
+        }
+
         howItWorksSection
     }
 

@@ -50,10 +50,23 @@ extension LineupViewModel {
             inningCatcherIDs: snapshot.inningCatcherIDs,
             battingOrderIDs: snapshot.battingOrderIDs,
             baseballLineupBatterCount: snapshot.baseballLineupBatterCount,
+            showOnlyNineBattersAndDH: snapshot.showOnlyNineBattersAndDH,
+            showSlowSpeedBattingWarnings: snapshot.showSlowSpeedBattingWarnings,
+            fallBallEnabled: snapshot.fallBallEnabled,
+            fallBallYouthEnabled: snapshot.fallBallYouthEnabled,
+            fallBallRunRuleEnabled: snapshot.fallBallRunRuleEnabled,
             designatedHitterID: snapshot.designatedHitterID,
             designatedHitterForID: snapshot.designatedHitterForID,
+            basketballYouthEnabled: snapshot.basketballYouthEnabled,
+            basketballQuartersPlayedEnabled: snapshot.basketballQuartersPlayedEnabled,
+            basketballRequiredQuartersPlayed: snapshot.basketballRequiredQuartersPlayed,
+            basketballUsesExplicitStartingLineup: snapshot.basketballUsesExplicitStartingLineup,
+            basketballStartingLineupIDs: snapshot.basketballStartingLineupIDs,
+            basketballCourtLineupIDsByPeriod: snapshot.basketballCourtLineupIDsByPeriod,
             preGameNotes: snapshot.preGameNotes,
-            postGameNotes: snapshot.postGameNotes
+            postGameNotes: snapshot.postGameNotes,
+            coachNotes: snapshot.coachNotes,
+            selectedSport: snapshot.selectedSport
         )
     }
 

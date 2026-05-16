@@ -65,6 +65,38 @@
           "startingColumn": 26,
           "startingLine": 30
         }
+      },
+      {
+        "comment": "",
+        "key": "Quarters Played is available when Game Format is set to 4 Quarters.",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 53
+        }
+      },
+      {
+        "comment": "",
+        "key": "Youth",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 37
+        }
+      },
+      {
+        "comment": "",
+        "key": "Quarters Played",
+        "location": {
+          "startingColumn": 24,
+          "startingLine": 40
+        }
+      },
+      {
+        "comment": "",
+        "key": "Required Quarters: %lld",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 45
+        }
       }
     ]
   },

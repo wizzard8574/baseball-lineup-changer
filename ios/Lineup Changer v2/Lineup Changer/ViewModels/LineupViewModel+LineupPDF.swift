@@ -40,8 +40,8 @@ extension LineupViewModel {
 
         // UIGraphicsPDFRenderer provides the drawing context for the PDF.
         let renderer = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight))
-        // Save the generated PDF in the temporary directory using a filesystem-safe team name.
-        let url = FileManager.default.temporaryDirectory.appendingPathComponent("\(safeFileName(selectedTeamName))-Lineup.pdf")
+        // Save the generated PDF in the temporary directory using a filesystem-safe team/sport/file name.
+        let url = sharedFileURL(fileDescription: "Lineup Grid", fileExtension: "pdf")
 
         try renderer.writePDF(to: url) { context in
             // Tracks which player row should be drawn next across one or more pages.
@@ -173,11 +173,4 @@ extension LineupViewModel {
         text.draw(in: rect, withAttributes: attributes)
     }
 
-    // MARK: - File Name Helpers
-    // Replaces characters that are invalid in file names.
-    private func safeFileName(_ name: String) -> String {
-        // Characters not allowed or problematic in generated file names.
-        let invalidCharacters = CharacterSet(charactersIn: "/\\?%*|\"<>:")
-        return name.components(separatedBy: invalidCharacters).joined(separator: "-")
-    }
 }

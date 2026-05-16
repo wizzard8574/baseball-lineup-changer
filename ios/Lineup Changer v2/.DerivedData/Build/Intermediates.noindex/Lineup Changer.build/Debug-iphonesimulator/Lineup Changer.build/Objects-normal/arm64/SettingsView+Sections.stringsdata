@@ -20,10 +20,26 @@
       },
       {
         "comment": "",
+        "key": "Switch Teams",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 45
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Team",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 51
+        }
+      },
+      {
+        "comment": "",
         "key": "Current sport selection only. Field, lineup, player positions, and sport-specific rules will be updated in later phases.",
         "location": {
           "startingColumn": 18,
-          "startingLine": 63
+          "startingLine": 75
         }
       },
       {
@@ -31,7 +47,7 @@
         "key": "Sport",
         "location": {
           "startingColumn": 20,
-          "startingLine": 48
+          "startingLine": 60
         }
       }
     ]

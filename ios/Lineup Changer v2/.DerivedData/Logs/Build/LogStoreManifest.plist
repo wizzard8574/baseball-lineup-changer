@@ -6,7 +6,7 @@
 	<integer>12</integer>
 	<key>logs</key>
 	<dict>
-		<key>0EA4439B-52E1-46D3-951F-C67517736641</key>
+		<key>1F475ACC-74F0-4BF8-8537-B8868C2E7CCF</key>
 		<dict>
 			<key>className</key>
 			<string>IDECommandLineBuildLog</string>
@@ -15,7 +15,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>0EA4439B-52E1-46D3-951F-C67517736641.xcactivitylog</string>
+			<string>1F475ACC-74F0-4BF8-8537-B8868C2E7CCF.xcactivitylog</string>
 			<key>hasPrimaryLog</key>
 			<true/>
 			<key>primaryObservable</key>
@@ -38,17 +38,17 @@
 			<key>schemeIdentifier-sharedScheme</key>
 			<integer>1</integer>
 			<key>signature</key>
-			<string>Building project Lineup Changer with scheme Lineup Changer</string>
+			<string>Testing project Lineup Changer with scheme Lineup Changer</string>
 			<key>timeStartedRecording</key>
-			<real>800567559.54970801</real>
+			<real>800650932.70064199</real>
 			<key>timeStoppedRecording</key>
-			<real>800567565.10596299</real>
+			<real>800650941.21113098</real>
 			<key>title</key>
-			<string>Building project Lineup Changer with scheme Lineup Changer</string>
+			<string>Testing project Lineup Changer with scheme Lineup Changer</string>
 			<key>uniqueIdentifier</key>
-			<string>0EA4439B-52E1-46D3-951F-C67517736641</string>
+			<string>1F475ACC-74F0-4BF8-8537-B8868C2E7CCF</string>
 		</dict>
-		<key>352B303B-18AA-4B9A-AD4E-BE7C3FF579C0</key>
+		<key>383D0338-1F83-44C3-9199-20FA9F91BB27</key>
 		<dict>
 			<key>className</key>
 			<string>IDECommandLineBuildLog</string>
@@ -57,7 +57,49 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>352B303B-18AA-4B9A-AD4E-BE7C3FF579C0.xcactivitylog</string>
+			<string>383D0338-1F83-44C3-9199-20FA9F91BB27.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Lineup Changer project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Lineup Changer</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Testing project Lineup Changer with scheme Lineup Changer</string>
+			<key>timeStartedRecording</key>
+			<real>800651142.76683795</real>
+			<key>timeStoppedRecording</key>
+			<real>800651150.62963295</real>
+			<key>title</key>
+			<string>Testing project Lineup Changer with scheme Lineup Changer</string>
+			<key>uniqueIdentifier</key>
+			<string>383D0338-1F83-44C3-9199-20FA9F91BB27</string>
+		</dict>
+		<key>A8E1675A-545D-46B6-A990-B19DF3FA1892</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A8E1675A-545D-46B6-A990-B19DF3FA1892.xcactivitylog</string>
 			<key>hasPrimaryLog</key>
 			<true/>
 			<key>primaryObservable</key>
@@ -82,13 +124,13 @@
 			<key>signature</key>
 			<string>Building project Lineup Changer with scheme Lineup Changer</string>
 			<key>timeStartedRecording</key>
-			<real>800565566.08016002</real>
+			<real>800650887.14818704</real>
 			<key>timeStoppedRecording</key>
-			<real>800565573.49302602</real>
+			<real>800650894.88814497</real>
 			<key>title</key>
 			<string>Building project Lineup Changer with scheme Lineup Changer</string>
 			<key>uniqueIdentifier</key>
-			<string>352B303B-18AA-4B9A-AD4E-BE7C3FF579C0</string>
+			<string>A8E1675A-545D-46B6-A990-B19DF3FA1892</string>
 		</dict>
 	</dict>
 </dict>

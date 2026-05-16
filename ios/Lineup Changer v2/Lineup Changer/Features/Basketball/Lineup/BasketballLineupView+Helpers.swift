@@ -130,8 +130,7 @@ extension BasketballLineupView {
     func prepareBasketballLineupShare() {
         do {
             let shareText = basketballLineupTextExport()
-            let fileName = safeBasketballLineupShareFileName(for: viewModel.selectedTeamName)
-            let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent("\(fileName).txt")
+            let fileURL = viewModel.sharedFileURL(fileDescription: "Starting Lineup", fileExtension: "txt")
 
             try shareText.write(to: fileURL, atomically: true, encoding: .utf8)
 
@@ -167,16 +166,6 @@ extension BasketballLineupView {
         }
 
         return lines.joined(separator: "\n")
-    }
-
-    private func safeBasketballLineupShareFileName(for teamName: String) -> String {
-        let invalidCharacters = CharacterSet(charactersIn: "/\\?%*|\"<>:")
-        let safeName = teamName
-            .components(separatedBy: invalidCharacters)
-            .joined(separator: "-")
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-
-        return safeName.isEmpty ? "Starting Lineup" : safeName
     }
 
     func handleBasketballLineupDrop(_ providers: [NSItemProvider], toStartingIndex index: Int) -> Bool {

@@ -13,12 +13,32 @@ struct LineupChangerTests {
         exportingViewModel.battingOrderIDs = [playerID]
         exportingViewModel.lineup = [.firstBase: playerID]
         exportingViewModel.inningLineups = [1: [.firstBase: playerID]]
+        exportingViewModel.updateSelectedTeamName("Selected Baseball Team")
+
+        exportingViewModel.selectTeam(1)
+        let otherTeamPlayer = Player(name: "Other Team Player", number: "99")
+        exportingViewModel.players = [otherTeamPlayer]
+        exportingViewModel.battingOrderIDs = [otherTeamPlayer.id]
+        exportingViewModel.updateSelectedTeamName("Other Baseball Team")
+        exportingViewModel.selectTeam(0)
+
+        exportingViewModel.selectSport(.basketball)
+        let basketballPlayer = Player(name: "Basketball Player", number: "23")
+        exportingViewModel.players = [basketballPlayer]
+        exportingViewModel.battingOrderIDs = [basketballPlayer.id]
+        exportingViewModel.updateSelectedTeamName("Basketball Team")
+        exportingViewModel.selectSport(.baseballSoftball)
 
         let data = exportingViewModel.exportAppStateData()
         let decodedState = try JSONDecoder().decode(AppState.self, from: data)
         #expect(decodedState.lineupIDs[.firstBase] == playerID)
         #expect(decodedState.inningLineupIDs[1]?[.firstBase] == playerID)
-        #expect(decodedState.teamSnapshots.count == 2)
+        #expect(decodedState.players.map(\.name) == ["Riley Adams"])
+        #expect(decodedState.teamNames == ["Selected Baseball Team"])
+        #expect(decodedState.teamSnapshots.count == 1)
+        #expect(decodedState.sportTeamStates.count == 1)
+        #expect(decodedState.sportTeamStates[.baseballSoftball]?.teamSnapshots.count == 1)
+        #expect(decodedState.sportTeamStates[.basketball] == nil)
 
         let importingViewModel = makeViewModel()
         try importingViewModel.importAppStateData(data)
@@ -67,6 +87,103 @@ struct LineupChangerTests {
         #expect(viewModel.players.map(\.name) == ["Basketball Player"])
     }
 
+    @Test func switchTeamSlotsSwapsCurrentSportTeamNamesAndData() {
+        let viewModel = makeViewModel()
+        let teamOnePlayer = Player(name: "Team One Player")
+        viewModel.players = [teamOnePlayer]
+        viewModel.battingOrderIDs = [teamOnePlayer.id]
+        viewModel.updateSelectedTeamName("Team One")
+
+        viewModel.selectTeam(1)
+        let teamTwoPlayer = Player(name: "Team Two Player")
+        viewModel.players = [teamTwoPlayer]
+        viewModel.battingOrderIDs = [teamTwoPlayer.id]
+        viewModel.updateSelectedTeamName("Team Two")
+
+        viewModel.selectTeam(0)
+        viewModel.switchTeamSlots()
+
+        #expect(viewModel.selectedTeamIndex == 1)
+        #expect(viewModel.selectedTeamName == "Team One")
+        #expect(viewModel.players.map(\.name) == ["Team One Player"])
+
+        viewModel.selectTeam(0)
+
+        #expect(viewModel.selectedTeamName == "Team Two")
+        #expect(viewModel.players.map(\.name) == ["Team Two Player"])
+    }
+
+    @Test func deleteSelectedTeamResetsOnlySelectedSportTeamSlot() {
+        let viewModel = makeViewModel()
+        viewModel.selectSport(.basketball)
+        let teamOnePlayer = Player(name: "Basketball Team One Player")
+        viewModel.players = [teamOnePlayer]
+        viewModel.battingOrderIDs = [teamOnePlayer.id]
+        viewModel.updateSelectedTeamName("Basketball Team One")
+
+        viewModel.selectTeam(1)
+        let teamTwoPlayer = Player(name: "Basketball Team Two Player")
+        viewModel.players = [teamTwoPlayer]
+        viewModel.battingOrderIDs = [teamTwoPlayer.id]
+        viewModel.updateSelectedTeamName("Basketball Team Two")
+
+        viewModel.deleteSelectedTeam()
+
+        #expect(viewModel.selectedTeamIndex == 1)
+        #expect(viewModel.selectedTeamName == "Basketball Team 2")
+        #expect(viewModel.players.isEmpty)
+        #expect(viewModel.battingOrderIDs.isEmpty)
+
+        viewModel.selectTeam(0)
+
+        #expect(viewModel.selectedTeamName == "Basketball Team One")
+        #expect(viewModel.players.map(\.name) == ["Basketball Team One Player"])
+    }
+
+    @Test func baseballYouthSettingsPersistPerTeam() {
+        let viewModel = makeViewModel()
+
+        viewModel.showOnlyNineBattersAndDH = true
+        viewModel.fallBallEnabled = true
+        viewModel.fallBallYouthEnabled = true
+        viewModel.showSlowSpeedBattingWarnings = false
+
+        viewModel.selectTeam(1)
+
+        #expect(viewModel.showOnlyNineBattersAndDH == false)
+        #expect(viewModel.fallBallEnabled == false)
+        #expect(viewModel.fallBallYouthEnabled == false)
+        #expect(viewModel.showSlowSpeedBattingWarnings == true)
+
+        viewModel.selectTeam(0)
+
+        #expect(viewModel.showOnlyNineBattersAndDH == true)
+        #expect(viewModel.fallBallEnabled == true)
+        #expect(viewModel.fallBallYouthEnabled == true)
+        #expect(viewModel.showSlowSpeedBattingWarnings == false)
+    }
+
+    @Test func basketballYouthSettingsPersistPerTeam() {
+        let viewModel = makeViewModel()
+
+        viewModel.selectSport(.basketball)
+        viewModel.basketballYouthEnabled = true
+        viewModel.basketballQuartersPlayedEnabled = true
+        viewModel.basketballRequiredQuartersPlayed = 3
+
+        viewModel.selectTeam(1)
+
+        #expect(viewModel.basketballYouthEnabled == false)
+        #expect(viewModel.basketballQuartersPlayedEnabled == false)
+        #expect(viewModel.basketballRequiredQuartersPlayed == 2)
+
+        viewModel.selectTeam(0)
+
+        #expect(viewModel.basketballYouthEnabled == true)
+        #expect(viewModel.basketballQuartersPlayedEnabled == true)
+        #expect(viewModel.basketballRequiredQuartersPlayed == 3)
+    }
+
     @Test func basketballPositionRatingsPersistInAppState() {
         let defaults = makeUserDefaults()
         let player = Player(
@@ -99,6 +216,35 @@ struct LineupChangerTests {
 
         #expect(restoredViewModel.players.first?.name == "Basketball Player")
         #expect(restoredViewModel.players.first?.number == "23")
+    }
+
+    @Test func basketballPlayerProfileSavesOnSecondTeam() {
+        let defaults = makeUserDefaults()
+        let viewModel = LineupViewModel(userDefaults: defaults)
+
+        viewModel.selectSport(.basketball)
+        viewModel.selectTeam(1)
+        let player = viewModel.addPlayer(name: "Temporary Name")!
+        viewModel.updateBasketballPlayerProfile(
+            playerID: player.id,
+            name: "Second Team Player",
+            number: "42",
+            cell: "5551234567",
+            notes: "Ready",
+            status: .active
+        )
+
+        #expect(viewModel.players.first?.name == "Second Team Player")
+        #expect(viewModel.players.first?.number == "42")
+        #expect(viewModel.players.first?.cell == "5551234567")
+        #expect(viewModel.players.first?.notes == "Ready")
+
+        let restoredViewModel = LineupViewModel(userDefaults: defaults)
+        restoredViewModel.selectSport(.basketball)
+        restoredViewModel.selectTeam(1)
+
+        #expect(restoredViewModel.players.first?.name == "Second Team Player")
+        #expect(restoredViewModel.players.first?.number == "42")
     }
 
     @Test func basketballPlayersPersistWithDefaultTeamNamesWhenSwitchingSports() {
@@ -214,6 +360,9 @@ struct LineupChangerTests {
         viewModel.showBasketballBenchOnCourt = false
         viewModel.showFullNameAndNumberInBasketball = false
         viewModel.basketballPeriodFormat = .halves
+        viewModel.basketballYouthEnabled = true
+        viewModel.basketballQuartersPlayedEnabled = true
+        viewModel.basketballRequiredQuartersPlayed = 3
 
         let data = try JSONEncoder().encode(viewModel.currentAppState())
         let decodedState = try JSONDecoder().decode(AppState.self, from: data)
@@ -223,6 +372,9 @@ struct LineupChangerTests {
         #expect(decodedState.showBasketballBenchOnCourt == false)
         #expect(decodedState.showFullNameAndNumberInBasketball == false)
         #expect(decodedState.basketballPeriodFormat == .halves)
+        #expect(decodedState.basketballYouthEnabled == true)
+        #expect(decodedState.basketballQuartersPlayedEnabled == true)
+        #expect(decodedState.basketballRequiredQuartersPlayed == 3)
 
         let restoredViewModel = makeViewModel()
         restoredViewModel.applyAppState(decodedState)
@@ -233,6 +385,44 @@ struct LineupChangerTests {
         #expect(restoredViewModel.showBasketballBenchOnCourt == false)
         #expect(restoredViewModel.showFullNameAndNumberInBasketball == false)
         #expect(restoredViewModel.basketballPeriodFormat == .halves)
+        #expect(restoredViewModel.basketballYouthEnabled == true)
+        #expect(restoredViewModel.basketballQuartersPlayedEnabled == true)
+        #expect(restoredViewModel.basketballRequiredQuartersPlayed == 3)
+    }
+
+    @Test func basketballYouthQuartersPlayedAutoFillPopulatesAllQuarters() {
+        let viewModel = makeViewModel()
+        let players = (1...8).map {
+            Player(name: "Player \($0)", number: "\($0)", basketballPositionRatings: [.one: 1, .two: 1, .three: 1, .four: 1, .five: 1])
+        }
+
+        viewModel.selectSport(.basketball)
+        viewModel.players = players
+        viewModel.battingOrderIDs = players.map(\.id)
+        viewModel.basketballYouthEnabled = true
+        viewModel.basketballQuartersPlayedEnabled = true
+        viewModel.basketballRequiredQuartersPlayed = 2
+
+        viewModel.autoFillBasketballCourtPositions(for: 1)
+
+        #expect(viewModel.basketballCourtLineupIDsByPeriod.keys.sorted() == [1, 2, 3, 4])
+
+        for period in 1...4 {
+            let lineup = viewModel.basketballCourtLineupIDs(for: period)
+            #expect(lineup.count == 5)
+            #expect(Set(lineup.values).count == 5)
+        }
+
+        let playCounts = viewModel.basketballCourtLineupIDsByPeriod
+            .values
+            .flatMap(\.values)
+            .reduce(into: [UUID: Int]()) { counts, playerID in
+                counts[playerID, default: 0] += 1
+            }
+
+        for player in players {
+            #expect((playCounts[player.id] ?? 0) >= 2)
+        }
     }
 
     @Test func basketballPeriodFormatProvidesExpectedPeriodCounts() {

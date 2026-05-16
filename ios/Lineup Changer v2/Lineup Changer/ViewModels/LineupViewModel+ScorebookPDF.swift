@@ -15,9 +15,8 @@ extension LineupViewModel {
     func createScorebookPDF() throws -> URL {
         // Standard US Letter PDF page size in points.
         let pageRect = CGRect(x: 0, y: 0, width: 612, height: 792)
-        // Write each export to a unique temporary file so sharing does not overwrite prior PDFs.
-        let outputURL = FileManager.default.temporaryDirectory
-            .appendingPathComponent("LineupChangerScorebook-\(UUID().uuidString).pdf")
+        // Write the export with the team, sport, and file type in the name.
+        let outputURL = sharedFileURL(fileDescription: "Scorebook", fileExtension: "pdf")
         // UIGraphicsPDFRenderer provides the drawing context for the generated PDF pages.
         let renderer = UIGraphicsPDFRenderer(bounds: pageRect)
         try renderer.writePDF(to: outputURL) { context in
