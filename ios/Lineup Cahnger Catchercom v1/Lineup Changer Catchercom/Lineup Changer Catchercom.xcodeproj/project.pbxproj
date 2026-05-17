@@ -7,62 +7,62 @@
 	objects = {
 
 /* Begin PBXContainerItemProxy section */
-		A5A422BD2FA1A9FA006438A2 /* PBXContainerItemProxy */ = {
+		A54438332FB970190020F006 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A5A422A72FA1A9F6006438A2 /* Project object */;
+			containerPortal = A544381D2FB970160020F006 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A5A422AE2FA1A9F6006438A2;
-			remoteInfo = "Baseball Positions and Lineup";
+			remoteGlobalIDString = A54438242FB970160020F006;
+			remoteInfo = "Lineup Changer Catchercom";
 		};
-		A5A422C72FA1A9FA006438A2 /* PBXContainerItemProxy */ = {
+		A544383D2FB970190020F006 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A5A422A72FA1A9F6006438A2 /* Project object */;
+			containerPortal = A544381D2FB970160020F006 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A5A422AE2FA1A9F6006438A2;
-			remoteInfo = "Baseball Positions and Lineup";
+			remoteGlobalIDString = A54438242FB970160020F006;
+			remoteInfo = "Lineup Changer Catchercom";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A5A422AF2FA1A9F6006438A2 /* Lineup Changer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lineup Changer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5A422BC2FA1A9FA006438A2 /* Lineup ChangerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lineup ChangerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5A422C62FA1A9FA006438A2 /* Lineup ChangerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lineup ChangerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A54438252FB970160020F006 /* Lineup Changer Catchercom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lineup Changer Catchercom.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A54438322FB970190020F006 /* Lineup Changer CatchercomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lineup Changer CatchercomTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A544383C2FB970190020F006 /* Lineup Changer CatchercomUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lineup Changer CatchercomUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		A5A422B12FA1A9F6006438A2 /* Lineup Changer */ = {
+		A54438272FB970160020F006 /* Lineup Changer Catchercom */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Lineup Changer";
+			path = "Lineup Changer Catchercom";
 			sourceTree = "<group>";
 		};
-		A5A422BF2FA1A9FA006438A2 /* Lineup ChangerTests */ = {
+		A54438352FB970190020F006 /* Lineup Changer CatchercomTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Lineup ChangerTests";
+			path = "Lineup Changer CatchercomTests";
 			sourceTree = "<group>";
 		};
-		A5A422C92FA1A9FA006438A2 /* Lineup_ChangerUITests */ = {
+		A544383F2FB970190020F006 /* Lineup Changer CatchercomUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Lineup_ChangerUITests;
+			path = "Lineup Changer CatchercomUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A5A422AC2FA1A9F6006438A2 /* Frameworks */ = {
+		A54438222FB970160020F006 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A5A422B92FA1A9FA006438A2 /* Frameworks */ = {
+		A544382F2FB970190020F006 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A5A422C32FA1A9FA006438A2 /* Frameworks */ = {
+		A54438392FB970190020F006 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -72,22 +72,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A5A422A62FA1A9F6006438A2 = {
+		A544381C2FB970160020F006 = {
 			isa = PBXGroup;
 			children = (
-				A5A422B12FA1A9F6006438A2 /* Lineup Changer */,
-				A5A422BF2FA1A9FA006438A2 /* Lineup ChangerTests */,
-				A5A422C92FA1A9FA006438A2 /* Lineup_ChangerUITests */,
-				A5A422B02FA1A9F6006438A2 /* Products */,
+				A54438272FB970160020F006 /* Lineup Changer Catchercom */,
+				A54438352FB970190020F006 /* Lineup Changer CatchercomTests */,
+				A544383F2FB970190020F006 /* Lineup Changer CatchercomUITests */,
+				A54438262FB970160020F006 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		A5A422B02FA1A9F6006438A2 /* Products */ = {
+		A54438262FB970160020F006 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A5A422AF2FA1A9F6006438A2 /* Lineup Changer.app */,
-				A5A422BC2FA1A9FA006438A2 /* Lineup ChangerTests.xctest */,
-				A5A422C62FA1A9FA006438A2 /* Lineup ChangerUITests.xctest */,
+				A54438252FB970160020F006 /* Lineup Changer Catchercom.app */,
+				A54438322FB970190020F006 /* Lineup Changer CatchercomTests.xctest */,
+				A544383C2FB970190020F006 /* Lineup Changer CatchercomUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,134 +95,134 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A5A422AE2FA1A9F6006438A2 /* Lineup Changer */ = {
+		A54438242FB970160020F006 /* Lineup Changer Catchercom */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A5A422D02FA1A9FA006438A2 /* Build configuration list for PBXNativeTarget "Lineup Changer" */;
+			buildConfigurationList = A54438462FB970190020F006 /* Build configuration list for PBXNativeTarget "Lineup Changer Catchercom" */;
 			buildPhases = (
-				A5A422AB2FA1A9F6006438A2 /* Sources */,
-				A5A422AC2FA1A9F6006438A2 /* Frameworks */,
-				A5A422AD2FA1A9F6006438A2 /* Resources */,
+				A54438212FB970160020F006 /* Sources */,
+				A54438222FB970160020F006 /* Frameworks */,
+				A54438232FB970160020F006 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				A5A422B12FA1A9F6006438A2 /* Lineup Changer */,
+				A54438272FB970160020F006 /* Lineup Changer Catchercom */,
 			);
-			name = "Lineup Changer";
+			name = "Lineup Changer Catchercom";
 			packageProductDependencies = (
 			);
-			productName = "Baseball Positions and Lineup";
-			productReference = A5A422AF2FA1A9F6006438A2 /* Lineup Changer.app */;
+			productName = "Lineup Changer Catchercom";
+			productReference = A54438252FB970160020F006 /* Lineup Changer Catchercom.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A5A422BB2FA1A9FA006438A2 /* Lineup ChangerTests */ = {
+		A54438312FB970190020F006 /* Lineup Changer CatchercomTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A5A422D32FA1A9FA006438A2 /* Build configuration list for PBXNativeTarget "Lineup ChangerTests" */;
+			buildConfigurationList = A54438492FB970190020F006 /* Build configuration list for PBXNativeTarget "Lineup Changer CatchercomTests" */;
 			buildPhases = (
-				A5A422B82FA1A9FA006438A2 /* Sources */,
-				A5A422B92FA1A9FA006438A2 /* Frameworks */,
-				A5A422BA2FA1A9FA006438A2 /* Resources */,
+				A544382E2FB970190020F006 /* Sources */,
+				A544382F2FB970190020F006 /* Frameworks */,
+				A54438302FB970190020F006 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A5A422BE2FA1A9FA006438A2 /* PBXTargetDependency */,
+				A54438342FB970190020F006 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				A5A422BF2FA1A9FA006438A2 /* Lineup ChangerTests */,
+				A54438352FB970190020F006 /* Lineup Changer CatchercomTests */,
 			);
-			name = "Lineup ChangerTests";
+			name = "Lineup Changer CatchercomTests";
 			packageProductDependencies = (
 			);
-			productName = "Baseball Positions and LineupTests";
-			productReference = A5A422BC2FA1A9FA006438A2 /* Lineup ChangerTests.xctest */;
+			productName = "Lineup Changer CatchercomTests";
+			productReference = A54438322FB970190020F006 /* Lineup Changer CatchercomTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A5A422C52FA1A9FA006438A2 /* Lineup ChangerUITests */ = {
+		A544383B2FB970190020F006 /* Lineup Changer CatchercomUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A5A422D62FA1A9FA006438A2 /* Build configuration list for PBXNativeTarget "Lineup ChangerUITests" */;
+			buildConfigurationList = A544384C2FB970190020F006 /* Build configuration list for PBXNativeTarget "Lineup Changer CatchercomUITests" */;
 			buildPhases = (
-				A5A422C22FA1A9FA006438A2 /* Sources */,
-				A5A422C32FA1A9FA006438A2 /* Frameworks */,
-				A5A422C42FA1A9FA006438A2 /* Resources */,
+				A54438382FB970190020F006 /* Sources */,
+				A54438392FB970190020F006 /* Frameworks */,
+				A544383A2FB970190020F006 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A5A422C82FA1A9FA006438A2 /* PBXTargetDependency */,
+				A544383E2FB970190020F006 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				A5A422C92FA1A9FA006438A2 /* Lineup_ChangerUITests */,
+				A544383F2FB970190020F006 /* Lineup Changer CatchercomUITests */,
 			);
-			name = "Lineup ChangerUITests";
+			name = "Lineup Changer CatchercomUITests";
 			packageProductDependencies = (
 			);
-			productName = "Baseball Positions and LineupUITests";
-			productReference = A5A422C62FA1A9FA006438A2 /* Lineup ChangerUITests.xctest */;
+			productName = "Lineup Changer CatchercomUITests";
+			productReference = A544383C2FB970190020F006 /* Lineup Changer CatchercomUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A5A422A72FA1A9F6006438A2 /* Project object */ = {
+		A544381D2FB970160020F006 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2640;
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
-					A5A422AE2FA1A9F6006438A2 = {
+					A54438242FB970160020F006 = {
 						CreatedOnToolsVersion = 26.4.1;
 					};
-					A5A422BB2FA1A9FA006438A2 = {
+					A54438312FB970190020F006 = {
 						CreatedOnToolsVersion = 26.4.1;
-						TestTargetID = A5A422AE2FA1A9F6006438A2;
+						TestTargetID = A54438242FB970160020F006;
 					};
-					A5A422C52FA1A9FA006438A2 = {
+					A544383B2FB970190020F006 = {
 						CreatedOnToolsVersion = 26.4.1;
-						TestTargetID = A5A422AE2FA1A9F6006438A2;
+						TestTargetID = A54438242FB970160020F006;
 					};
 				};
 			};
-			buildConfigurationList = A5A422AA2FA1A9F6006438A2 /* Build configuration list for PBXProject "Lineup Changer" */;
+			buildConfigurationList = A54438202FB970160020F006 /* Build configuration list for PBXProject "Lineup Changer Catchercom" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = A5A422A62FA1A9F6006438A2;
+			mainGroup = A544381C2FB970160020F006;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = A5A422B02FA1A9F6006438A2 /* Products */;
+			productRefGroup = A54438262FB970160020F006 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A5A422AE2FA1A9F6006438A2 /* Lineup Changer */,
-				A5A422BB2FA1A9FA006438A2 /* Lineup ChangerTests */,
-				A5A422C52FA1A9FA006438A2 /* Lineup ChangerUITests */,
+				A54438242FB970160020F006 /* Lineup Changer Catchercom */,
+				A54438312FB970190020F006 /* Lineup Changer CatchercomTests */,
+				A544383B2FB970190020F006 /* Lineup Changer CatchercomUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A5A422AD2FA1A9F6006438A2 /* Resources */ = {
+		A54438232FB970160020F006 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A5A422BA2FA1A9FA006438A2 /* Resources */ = {
+		A54438302FB970190020F006 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A5A422C42FA1A9FA006438A2 /* Resources */ = {
+		A544383A2FB970190020F006 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -232,21 +232,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A5A422AB2FA1A9F6006438A2 /* Sources */ = {
+		A54438212FB970160020F006 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A5A422B82FA1A9FA006438A2 /* Sources */ = {
+		A544382E2FB970190020F006 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A5A422C22FA1A9FA006438A2 /* Sources */ = {
+		A54438382FB970190020F006 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -256,20 +256,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A5A422BE2FA1A9FA006438A2 /* PBXTargetDependency */ = {
+		A54438342FB970190020F006 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A5A422AE2FA1A9F6006438A2 /* Lineup Changer */;
-			targetProxy = A5A422BD2FA1A9FA006438A2 /* PBXContainerItemProxy */;
+			target = A54438242FB970160020F006 /* Lineup Changer Catchercom */;
+			targetProxy = A54438332FB970190020F006 /* PBXContainerItemProxy */;
 		};
-		A5A422C82FA1A9FA006438A2 /* PBXTargetDependency */ = {
+		A544383E2FB970190020F006 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A5A422AE2FA1A9F6006438A2 /* Lineup Changer */;
-			targetProxy = A5A422C72FA1A9FA006438A2 /* PBXContainerItemProxy */;
+			target = A54438242FB970160020F006 /* Lineup Changer Catchercom */;
+			targetProxy = A544383D2FB970190020F006 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		A5A422CE2FA1A9FA006438A2 /* Debug */ = {
+		A54438442FB970190020F006 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -304,6 +304,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = BCRTJ69L93;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -332,7 +333,7 @@
 			};
 			name = Debug;
 		};
-		A5A422CF2FA1A9FA006438A2 /* Release */ = {
+		A54438452FB970190020F006 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -367,6 +368,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = BCRTJ69L93;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -388,7 +390,7 @@
 			};
 			name = Release;
 		};
-		A5A422D12FA1A9FA006438A2 /* Debug */ = {
+		A54438472FB970190020F006 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -398,20 +400,17 @@
 				DEVELOPMENT_TEAM = BCRTJ69L93;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Lineup Changer.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Lineup Changer";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.02;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rmj.coachai;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Test.Lineup-Changer-Catchercom";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -423,7 +422,7 @@
 			};
 			name = Debug;
 		};
-		A5A422D22FA1A9FA006438A2 /* Release */ = {
+		A54438482FB970190020F006 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -433,20 +432,17 @@
 				DEVELOPMENT_TEAM = BCRTJ69L93;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Lineup Changer.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Lineup Changer";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.02;
-				PRODUCT_BUNDLE_IDENTIFIER = com.rmj.coachai;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Test.Lineup-Changer-Catchercom";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -458,16 +454,17 @@
 			};
 			name = Release;
 		};
-		A5A422D42FA1A9FA006438A2 /* Debug */ = {
+		A544384A2FB970190020F006 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BCRTJ69L93;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Test.Baseball-Positions-and-LineupTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "Test.Lineup-Changer-CatchercomTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -475,20 +472,21 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lineup Changer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Lineup Changer";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lineup Changer Catchercom.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Lineup Changer Catchercom";
 			};
 			name = Debug;
 		};
-		A5A422D52FA1A9FA006438A2 /* Release */ = {
+		A544384B2FB970190020F006 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BCRTJ69L93;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Test.Baseball-Positions-and-LineupTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "Test.Lineup-Changer-CatchercomTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -496,18 +494,19 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lineup Changer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Lineup Changer";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lineup Changer Catchercom.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Lineup Changer Catchercom";
 			};
 			name = Release;
 		};
-		A5A422D72FA1A9FA006438A2 /* Debug */ = {
+		A544384D2FB970190020F006 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BCRTJ69L93;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Test.Baseball-Positions-and-LineupUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "Test.Lineup-Changer-CatchercomUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -515,18 +514,19 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Baseball Positions and Lineup";
+				TEST_TARGET_NAME = "Lineup Changer Catchercom";
 			};
 			name = Debug;
 		};
-		A5A422D82FA1A9FA006438A2 /* Release */ = {
+		A544384E2FB970190020F006 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BCRTJ69L93;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Test.Baseball-Positions-and-LineupUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "Test.Lineup-Changer-CatchercomUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -534,50 +534,50 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Baseball Positions and Lineup";
+				TEST_TARGET_NAME = "Lineup Changer Catchercom";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A5A422AA2FA1A9F6006438A2 /* Build configuration list for PBXProject "Lineup Changer" */ = {
+		A54438202FB970160020F006 /* Build configuration list for PBXProject "Lineup Changer Catchercom" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5A422CE2FA1A9FA006438A2 /* Debug */,
-				A5A422CF2FA1A9FA006438A2 /* Release */,
+				A54438442FB970190020F006 /* Debug */,
+				A54438452FB970190020F006 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A5A422D02FA1A9FA006438A2 /* Build configuration list for PBXNativeTarget "Lineup Changer" */ = {
+		A54438462FB970190020F006 /* Build configuration list for PBXNativeTarget "Lineup Changer Catchercom" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5A422D12FA1A9FA006438A2 /* Debug */,
-				A5A422D22FA1A9FA006438A2 /* Release */,
+				A54438472FB970190020F006 /* Debug */,
+				A54438482FB970190020F006 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A5A422D32FA1A9FA006438A2 /* Build configuration list for PBXNativeTarget "Lineup ChangerTests" */ = {
+		A54438492FB970190020F006 /* Build configuration list for PBXNativeTarget "Lineup Changer CatchercomTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5A422D42FA1A9FA006438A2 /* Debug */,
-				A5A422D52FA1A9FA006438A2 /* Release */,
+				A544384A2FB970190020F006 /* Debug */,
+				A544384B2FB970190020F006 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A5A422D62FA1A9FA006438A2 /* Build configuration list for PBXNativeTarget "Lineup ChangerUITests" */ = {
+		A544384C2FB970190020F006 /* Build configuration list for PBXNativeTarget "Lineup Changer CatchercomUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5A422D72FA1A9FA006438A2 /* Debug */,
-				A5A422D82FA1A9FA006438A2 /* Release */,
+				A544384D2FB970190020F006 /* Debug */,
+				A544384E2FB970190020F006 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = A5A422A72FA1A9F6006438A2 /* Project object */;
+	rootObject = A544381D2FB970160020F006 /* Project object */;
 }
