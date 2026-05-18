@@ -5,6 +5,7 @@ struct CommonView: View {
     @State private var commonItems: [CommonMessageItem] = CommonMessageItem.loadSavedOrder()
     @State private var newCommonTitle = ""
     @State private var newCommonLocation: CatcherLocation = .middle
+    @State private var lastSpokenCommonItemID: String?
     @FocusState private var isNewCommonTitleFocused: Bool
 
     var body: some View {
@@ -31,33 +32,40 @@ struct CommonView: View {
                             .foregroundStyle(.secondary)
                     } else {
                         ForEach(commonItems) { item in
-                            CommonMessageRow(
-                                item: item,
-                                onSend: {
-                                    audio.sendCommonMessage(
-                                        title: item.title,
-                                        payload: item.payloadValue,
-                                        location: item.location
-                                    )
+                            VStack(alignment: .leading, spacing: 6) {
+                                CommonMessageRow(
+                                    item: item,
+                                    onSend: {
+                                        lastSpokenCommonItemID = item.id
+                                        audio.sendCommonMessage(
+                                            title: item.title,
+                                            payload: item.payloadValue,
+                                            location: item.location
+                                        )
+                                    }
+                                )
+
+                                if lastSpokenCommonItemID == item.id {
+                                    SpokenMessageText(message: audio.lastMessage)
                                 }
-                            )
+                            }
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 Button("Delete", role: .destructive) {
                                     deleteCommonItem(item)
                                 }
                             }
                         }
+                        .onMove(perform: moveCommonItems)
                     }
-
-                    Text(audio.lastMessage)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
                 }
                 .catcherListRowBackground()
             }
             .scrollContentBackground(.hidden)
             .background(Color.clear)
             .navigationTitle("Common")
+            .toolbar {
+                EditButton()
+            }
             .onChange(of: commonItems) { _, newValue in
                 CommonMessageItem.saveOrder(newValue)
             }
@@ -96,14 +104,20 @@ struct CommonView: View {
         let trimmedTitle = newCommonTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedTitle.isEmpty else { return }
 
+        isNewCommonTitleFocused = false
         commonItems.append(.custom(title: trimmedTitle, location: newCommonLocation))
         newCommonTitle = ""
         newCommonLocation = .middle
-        isNewCommonTitleFocused = false
     }
 
     private func deleteCommonItem(_ item: CommonMessageItem) {
         commonItems.removeAll { $0.id == item.id }
+    }
+
+    private func moveCommonItems(from source: IndexSet, to destination: Int) {
+        withAnimation(.snappy) {
+            commonItems.move(fromOffsets: source, toOffset: destination)
+        }
     }
 }
 

@@ -39,6 +39,11 @@ struct ContentView: View {
                         }
                 }
 
+                HistoryView(audio: audio)
+                    .tabItem {
+                        Label("History", systemImage: "clock.arrow.circlepath")
+                    }
+
                 SettingsView(
                     showCallsTab: $showCallsTab,
                     showPlaysTab: $showPlaysTab,

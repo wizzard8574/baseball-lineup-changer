@@ -6,8 +6,11 @@ import Foundation
 final class CatcherAudioManager: NSObject, ObservableObject {
     @Published private(set) var audioState = "Audio ready."
     @Published private(set) var lastMessage = "No call sent yet."
+    @Published private(set) var history: [CallHistoryItem] = CallHistoryItem.loadSavedHistory()
 
     private let speechSynthesizer = AVSpeechSynthesizer()
+    private let voiceEngine = AVAudioEngine()
+    private var isTransmittingVoice = false
 
     var canSendSignal: Bool {
         true
@@ -43,10 +46,40 @@ final class CatcherAudioManager: NSObject, ObservableObject {
     }
 
     func startVoiceTransmit() {
-        lastMessage = "Voice transmit started"
+        guard !isTransmittingVoice else { return }
+
+        switch AVAudioSession.sharedInstance().recordPermission {
+        case .granted:
+            beginVoiceTransmit()
+        case .denied:
+            audioState = "Microphone access is off."
+            lastMessage = "Enable microphone access in Settings."
+        case .undetermined:
+            AVAudioSession.sharedInstance().requestRecordPermission { [weak self] isGranted in
+                Task { @MainActor in
+                    guard let self else { return }
+
+                    if isGranted {
+                        self.beginVoiceTransmit()
+                    } else {
+                        self.audioState = "Microphone access is off."
+                        self.lastMessage = "Enable microphone access in Settings."
+                    }
+                }
+            }
+        @unknown default:
+            audioState = "Microphone access is unavailable."
+            lastMessage = "Could not start voice transmit."
+        }
     }
 
     func stopVoiceTransmit() {
+        guard isTransmittingVoice else { return }
+
+        voiceEngine.stop()
+        voiceEngine.disconnectNodeOutput(voiceEngine.inputNode)
+        isTransmittingVoice = false
+        audioState = "Audio ready."
         lastMessage = "Voice transmit stopped"
     }
 
@@ -56,7 +89,19 @@ final class CatcherAudioManager: NSObject, ObservableObject {
         markSent(messageTitle)
     }
 
+    func sendPlay(title: String, number: String) {
+        speak(number)
+        markSent("\(title): \(number)")
+    }
+
+    func clearHistory() {
+        history = []
+        CallHistoryItem.saveHistory(history)
+    }
+
     private func speak(_ text: String) {
+        stopVoiceTransmit()
+
         do {
             let audioSession = AVAudioSession.sharedInstance()
             try audioSession.setCategory(.playback, mode: .spokenAudio, options: [.duckOthers])
@@ -83,6 +128,73 @@ final class CatcherAudioManager: NSObject, ObservableObject {
 
     private func markSent(_ title: String) {
         lastMessage = "Spoke \(title)"
+        history.insert(CallHistoryItem(title: title, sentAt: Date()), at: 0)
+        CallHistoryItem.saveHistory(history)
+    }
+
+    private func beginVoiceTransmit() {
+        do {
+            if speechSynthesizer.isSpeaking {
+                speechSynthesizer.stopSpeaking(at: .immediate)
+            }
+
+            let audioSession = AVAudioSession.sharedInstance()
+            try audioSession.setCategory(
+                .playAndRecord,
+                mode: .voiceChat,
+                options: [.allowBluetoothHFP, .allowBluetoothA2DP, .defaultToSpeaker, .duckOthers]
+            )
+            try audioSession.setActive(true)
+
+            if voiceEngine.isRunning {
+                voiceEngine.stop()
+            }
+
+            let inputNode = voiceEngine.inputNode
+            let inputFormat = inputNode.outputFormat(forBus: 0)
+            voiceEngine.disconnectNodeOutput(inputNode)
+            voiceEngine.connect(inputNode, to: voiceEngine.mainMixerNode, format: inputFormat)
+
+            voiceEngine.prepare()
+            try voiceEngine.start()
+
+            isTransmittingVoice = true
+            audioState = "Live mic is on."
+            lastMessage = "Hold to talk"
+        } catch {
+            voiceEngine.stop()
+            isTransmittingVoice = false
+            audioState = "Could not start live mic."
+            lastMessage = error.localizedDescription
+        }
+    }
+}
+
+struct CallHistoryItem: Identifiable, Equatable, Codable {
+    let id: String
+    let title: String
+    let sentAt: Date
+
+    private static let storageKey = "catchercom.callHistory"
+
+    init(id: String = UUID().uuidString, title: String, sentAt: Date) {
+        self.id = id
+        self.title = title
+        self.sentAt = sentAt
+    }
+
+    static func loadSavedHistory() -> [CallHistoryItem] {
+        guard let data = UserDefaults.standard.data(forKey: storageKey),
+              let savedHistory = try? JSONDecoder().decode([CallHistoryItem].self, from: data) else {
+            return []
+        }
+
+        return savedHistory
+    }
+
+    static func saveHistory(_ history: [CallHistoryItem]) {
+        guard let data = try? JSONEncoder().encode(history) else { return }
+        UserDefaults.standard.set(data, forKey: storageKey)
     }
 }
 

@@ -15,6 +15,18 @@ struct ListSectionHeader: View {
     }
 }
 
+struct SpokenMessageText: View {
+    let message: String
+
+    var body: some View {
+        Text(message)
+            .font(.footnote)
+            .foregroundStyle(.secondary)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, 4)
+    }
+}
+
 extension View {
     func catcherListRowBackground() -> some View {
         listRowBackground(Color.white.opacity(0.12))

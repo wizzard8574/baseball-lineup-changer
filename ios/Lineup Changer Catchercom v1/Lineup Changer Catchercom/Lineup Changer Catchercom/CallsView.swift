@@ -4,6 +4,8 @@ struct CallsView: View {
     @ObservedObject var audio: CatcherAudioManager
     @State private var pitchOrder: [PitchCallItem] = PitchCallItem.loadSavedOrder()
     @State private var newPitchTitle = ""
+    @State private var lastSpokenPitchID: String?
+    @FocusState private var isNewPitchTitleFocused: Bool
 
     var body: some View {
         NavigationStack {
@@ -24,7 +26,15 @@ struct CallsView: View {
                     addPitchRow
 
                     ForEach(pitchOrder) { pitch in
-                        PitchSignRow(item: pitch, audio: audio)
+                        VStack(alignment: .leading, spacing: 6) {
+                            PitchSignRow(item: pitch, audio: audio) {
+                                lastSpokenPitchID = pitch.id
+                            }
+
+                            if lastSpokenPitchID == pitch.id {
+                                SpokenMessageText(message: audio.lastMessage)
+                            }
+                        }
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 Button("Delete", role: .destructive) {
                                     deletePitch(pitch)
@@ -32,10 +42,6 @@ struct CallsView: View {
                             }
                     }
                     .onMove(perform: movePitch)
-
-                    Text(audio.lastMessage)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
                 }
                 .catcherListRowBackground()
             }
@@ -57,6 +63,7 @@ struct CallsView: View {
             TextField("New pitch", text: $newPitchTitle)
                 .textInputAutocapitalization(.words)
                 .textFieldStyle(.roundedBorder)
+                .focused($isNewPitchTitleFocused)
                 .submitLabel(.done)
                 .onSubmit(addPitch)
 
@@ -75,6 +82,7 @@ struct CallsView: View {
         let trimmedTitle = newPitchTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedTitle.isEmpty else { return }
 
+        isNewPitchTitleFocused = false
         pitchOrder.append(.custom(trimmedTitle))
         newPitchTitle = ""
     }
@@ -138,6 +146,7 @@ private struct PitchCallItem: Identifiable, Equatable, Codable {
 private struct PitchSignRow: View {
     let item: PitchCallItem
     @ObservedObject var audio: CatcherAudioManager
+    let onSend: () -> Void
 
     var body: some View {
         HStack(spacing: 12) {
@@ -164,6 +173,7 @@ private struct PitchSignRow: View {
 
     private func locationButton(_ location: CatcherLocation, width: CGFloat = 52) -> some View {
         Button {
+            onSend()
             audio.sendSignal(pitchTitle: item.title, pitchPayload: item.payloadValue, location: location)
         } label: {
             Text(location.title)

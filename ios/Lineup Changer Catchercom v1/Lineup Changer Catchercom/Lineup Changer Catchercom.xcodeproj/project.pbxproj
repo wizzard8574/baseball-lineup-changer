@@ -403,6 +403,7 @@
 				INFOPLIST_FILE = "Lineup-Changer-Catchercom-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Lineup Changer Catchercom";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Lineup Changer uses the microphone for hold-to-talk catcher communication.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -439,6 +440,7 @@
 				INFOPLIST_FILE = "Lineup-Changer-Catchercom-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Lineup Changer Catchercom";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Lineup Changer uses the microphone for hold-to-talk catcher communication.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
