@@ -1,7 +1,11 @@
 import SwiftUI
 
 struct ListSectionHeader: View {
+    // MARK: - Properties
+
     let title: String
+
+    // MARK: - Body
 
     var body: some View {
         Text(title)
@@ -16,7 +20,11 @@ struct ListSectionHeader: View {
 }
 
 struct SpokenMessageText: View {
+    // MARK: - Properties
+
     let message: String
+
+    // MARK: - Body
 
     var body: some View {
         Text(message)
@@ -28,6 +36,8 @@ struct SpokenMessageText: View {
 }
 
 extension View {
+    // MARK: - List Styling
+
     func catcherListRowBackground() -> some View {
         listRowBackground(Color.white.opacity(0.12))
     }

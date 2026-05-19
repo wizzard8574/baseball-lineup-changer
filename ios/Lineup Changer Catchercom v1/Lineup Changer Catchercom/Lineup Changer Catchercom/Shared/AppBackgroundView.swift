@@ -1,8 +1,11 @@
 import SwiftUI
 
 struct AppBackgroundView: View {
+    // MARK: - Body
+
     var body: some View {
         ZStack {
+            // Shared game-day background used behind every tab.
             LinearGradient(
                 colors: [
                     Color.black.opacity(0.95),
@@ -54,6 +57,8 @@ struct AppBackgroundView: View {
 }
 
 extension View {
+    // MARK: - Screen Styling
+
     func appScreenBackground() -> some View {
         background(AppBackgroundView())
             .toolbarBackground(.hidden, for: .navigationBar)

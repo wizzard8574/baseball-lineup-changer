@@ -1,8 +1,15 @@
-
+//
+//  AudioVoiceCard.swift
+//  Lineup Changer Catchercom
+//
+//  Created by Rich Morris on 5/18/26.
+//
 
 import SwiftUI
 
 struct AudioVoiceCard: View {
+    // MARK: - Properties
+
     let statusTitle: String
     let statusIcon: String
     let audioState: String
@@ -10,6 +17,8 @@ struct AudioVoiceCard: View {
     let canTransmit: Bool
     let startTransmit: () -> Void
     let stopTransmit: () -> Void
+
+    // MARK: - Body
 
     var body: some View {
         HStack(spacing: 12) {
@@ -33,6 +42,7 @@ struct AudioVoiceCard: View {
                 .foregroundStyle(canTransmit ? .blue : .secondary)
                 .opacity(canTransmit ? 1 : 0.35)
                 .contentShape(Rectangle())
+                // A zero-distance drag gives this button press-and-hold behavior instead of a normal tap.
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { _ in

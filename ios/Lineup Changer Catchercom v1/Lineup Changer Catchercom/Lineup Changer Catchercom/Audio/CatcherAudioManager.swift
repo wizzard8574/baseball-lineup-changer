@@ -1,22 +1,37 @@
+//
+//  CatcherAudioManager.swift
+//  Lineup Changer Catchercom
+//
+//  Created by Rich Morris on 5/18/26.
+//
+
 import AVFoundation
 import Combine
 import Foundation
 
 @MainActor
 final class CatcherAudioManager: NSObject, ObservableObject {
+    // MARK: - Published State
+
+    // Published values drive the audio card, the "what was spoken" labels, and the History tab.
     @Published private(set) var audioState = "Audio ready."
     @Published private(set) var lastMessage = "No call sent yet."
     @Published private(set) var history: [CallHistoryItem] = CallHistoryItem.loadSavedHistory()
     @Published private(set) var outputDeviceName = "iPhone Speaker"
 
+    // MARK: - Audio Engines
+
     private let speechSynthesizer = AVSpeechSynthesizer()
     private let voiceEngine = AVAudioEngine()
     private var isTransmittingVoice = false
+
+    // MARK: - Initialization
 
     override init() {
         super.init()
         updateOutputDeviceName()
 
+        // Keep the displayed output device current when the user connects or disconnects headphones.
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(audioRouteDidChange),
@@ -29,9 +44,13 @@ final class CatcherAudioManager: NSObject, ObservableObject {
         NotificationCenter.default.removeObserver(self)
     }
 
+    // MARK: - Capabilities
+
     var canSendSignal: Bool {
         true
     }
+
+    // MARK: - Signal Playback
 
     func sendSignal(pitch: CatcherPitch, location: CatcherLocation) {
         let signal = CatcherSignal(pitch: pitch, location: location)
@@ -62,9 +81,12 @@ final class CatcherAudioManager: NSObject, ObservableObject {
         markSent(title)
     }
 
+    // MARK: - Voice Transmit
+
     func startVoiceTransmit() {
         guard !isTransmittingVoice else { return }
 
+        // iOS requires explicit microphone permission before we can route live voice through the audio engine.
         switch AVAudioApplication.shared.recordPermission {
         case .granted:
             beginVoiceTransmit()
@@ -100,6 +122,8 @@ final class CatcherAudioManager: NSObject, ObservableObject {
         lastMessage = "Voice transmit stopped"
     }
 
+    // MARK: - Common and Plays
+
     func sendCommonMessage(title: String, payload: String, location: CatcherLocation) {
         let messageTitle = "\(title) \(location.title)"
         speak(messageTitle)
@@ -111,12 +135,17 @@ final class CatcherAudioManager: NSObject, ObservableObject {
         markSent("\(title): \(number)")
     }
 
+    // MARK: - History
+
     func clearHistory() {
         history = []
         CallHistoryItem.saveHistory(history)
     }
 
+    // MARK: - Speech
+
     private func speak(_ text: String) {
+        // Sending a spoken call should always stop live mic mode first so speech and mic audio do not fight.
         stopVoiceTransmit()
 
         do {
@@ -145,10 +174,13 @@ final class CatcherAudioManager: NSObject, ObservableObject {
     }
 
     private func markSent(_ title: String) {
+        // Newest calls stay at the top of History, then persist immediately so nothing is lost on app close.
         lastMessage = "Spoke \(title)"
         history.insert(CallHistoryItem(title: title, sentAt: Date()), at: 0)
         CallHistoryItem.saveHistory(history)
     }
+
+    // MARK: - Microphone Routing
 
     private func beginVoiceTransmit() {
         do {
@@ -159,8 +191,8 @@ final class CatcherAudioManager: NSObject, ObservableObject {
             let audioSession = AVAudioSession.sharedInstance()
             try audioSession.setCategory(
                 .playAndRecord,
-                mode: .voiceChat,
-                options: [.allowBluetoothA2DP, .defaultToSpeaker, .duckOthers]
+                mode: .default,
+                options: [.allowBluetoothA2DP, .duckOthers]
             )
             try audioSession.setActive(true)
             try preferBuiltInMicrophone(audioSession)
@@ -173,6 +205,7 @@ final class CatcherAudioManager: NSObject, ObservableObject {
             let inputNode = voiceEngine.inputNode
             let inputFormat = inputNode.outputFormat(forBus: 0)
             voiceEngine.disconnectNodeOutput(inputNode)
+            // This creates the push-to-talk path: phone microphone into the active audio output route.
             voiceEngine.connect(inputNode, to: voiceEngine.mainMixerNode, format: inputFormat)
 
             voiceEngine.prepare()
@@ -192,10 +225,13 @@ final class CatcherAudioManager: NSObject, ObservableObject {
     private func preferBuiltInMicrophone(_ audioSession: AVAudioSession) throws {
         guard let availableInputs = audioSession.availableInputs else { return }
 
+        // Use the phone as the coach's microphone even when audio output is going to a connected device.
         if let builtInMicrophone = availableInputs.first(where: { $0.portType == .builtInMic }) {
             try audioSession.setPreferredInput(builtInMicrophone)
         }
     }
+
+    // MARK: - Output Route
 
     @objc private func audioRouteDidChange() {
         Task { @MainActor in
@@ -215,83 +251,7 @@ final class CatcherAudioManager: NSObject, ObservableObject {
     }
 }
 
-struct CallHistoryItem: Identifiable, Equatable, Codable {
-    let id: String
-    let title: String
-    let sentAt: Date
-
-    private static let storageKey = "catchercom.callHistory"
-
-    init(id: String = UUID().uuidString, title: String, sentAt: Date) {
-        self.id = id
-        self.title = title
-        self.sentAt = sentAt
-    }
-
-    static func loadSavedHistory() -> [CallHistoryItem] {
-        guard let data = UserDefaults.standard.data(forKey: storageKey),
-              let savedHistory = try? JSONDecoder().decode([CallHistoryItem].self, from: data) else {
-            return []
-        }
-
-        return savedHistory
-    }
-
-    static func saveHistory(_ history: [CallHistoryItem]) {
-        guard let data = try? JSONEncoder().encode(history) else { return }
-        UserDefaults.standard.set(data, forKey: storageKey)
-    }
-}
-
-enum CatcherPitch: String, CaseIterable, Identifiable {
-    case fastball
-    case curveball
-    case change
-    case splitter
-    case cutter
-
-    var id: String { rawValue }
-
-    var title: String {
-        switch self {
-        case .fastball:
-            return "Fastball"
-        case .curveball:
-            return "Curveball"
-        case .change:
-            return "Change"
-        case .splitter:
-            return "Splitter"
-        case .cutter:
-            return "Cutter"
-        }
-    }
-}
-
-enum CatcherLocation: String, CaseIterable, Identifiable {
-    case up
-    case down
-    case out
-    case `in`
-    case middle
-
-    var id: String { rawValue }
-
-    var title: String {
-        switch self {
-        case .up:
-            return "Up"
-        case .down:
-            return "Down"
-        case .out:
-            return "Out"
-        case .in:
-            return "In"
-        case .middle:
-            return "Middle"
-        }
-    }
-}
+// MARK: - Signal Model
 
 struct CatcherSignal {
     let pitch: CatcherPitch
@@ -300,15 +260,4 @@ struct CatcherSignal {
     var title: String {
         "\(pitch.title) \(location.title)"
     }
-}
-
-enum CatcherNumberSign: String, CaseIterable, Identifiable {
-    case one = "1"
-    case two = "2"
-    case twentyTwo = "22"
-    case three = "3"
-    case thirtyThree = "33"
-
-    var id: String { rawValue }
-    var title: String { rawValue }
 }

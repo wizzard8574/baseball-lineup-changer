@@ -1,7 +1,22 @@
+//
+//  HistoryView.swift
+//  Lineup Changer Catchercom
+//
+//  Created by Rich Morris on 5/18/26.
+//
+
 import SwiftUI
 
 struct HistoryView: View {
+    // MARK: - Dependencies
+
     @ObservedObject var audio: CatcherAudioManager
+
+    // MARK: - State
+
+    @State private var exportFile: PitchHistoryExportFile?
+
+    // MARK: - Body
 
     var body: some View {
         NavigationStack {
@@ -23,18 +38,36 @@ struct HistoryView: View {
             .background(Color.clear)
             .navigationTitle("History")
             .toolbar {
-                Button("Clear") {
-                    audio.clearHistory()
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button {
+                        exportFile = PitchHistoryCSVExporter.makeFile(from: audio.history)
+                    } label: {
+                        Label("Export", systemImage: "square.and.arrow.up")
+                    }
+                    .disabled(audio.history.isEmpty)
+
+                    Button("Clear") {
+                        audio.clearHistory()
+                    }
+                    .disabled(audio.history.isEmpty)
                 }
-                .disabled(audio.history.isEmpty)
+            }
+            .sheet(item: $exportFile) { file in
+                ShareSheet(activityItems: [file.url])
             }
             .appScreenBackground()
         }
     }
 }
 
+// MARK: - History Row
+
 private struct HistoryRow: View {
+    // MARK: Properties
+
     let item: CallHistoryItem
+
+    // MARK: Body
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -43,7 +76,7 @@ private struct HistoryRow: View {
 
             Text(item.sentAt, format: .dateTime.hour().minute().second())
                 .font(.caption)
-                .foregroundStyle(.secondary)
+            .foregroundStyle(.secondary)
         }
     }
 }

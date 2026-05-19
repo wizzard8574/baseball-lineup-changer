@@ -8,15 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    // MARK: - Shared State
+
+    // One audio manager is shared by every tab so the last spoken message, output route, and history stay in sync.
     @StateObject private var audio = CatcherAudioManager()
-    @State private var showCallsTab = true
-    @State private var showPlaysTab = true
-    @State private var showMessageTab = true
+
+    // These settings let the user hide tabs they do not need without deleting saved calls, plays, or history.
+    @AppStorage("catchercom.settings.showCallsTab") private var showCallsTab = true
+    @AppStorage("catchercom.settings.showPlaysTab") private var showPlaysTab = true
+    @AppStorage("catchercom.settings.showMessageTab") private var showMessageTab = true
+    @AppStorage("catchercom.settings.showHistoryTab") private var showHistoryTab = true
+
+    // MARK: - Body
 
     var body: some View {
         ZStack {
             AppBackgroundView()
 
+            // Settings can hide working tabs without deleting any saved data.
             TabView {
                 if showCallsTab {
                     CallsView(audio: audio)
@@ -39,15 +48,18 @@ struct ContentView: View {
                         }
                 }
 
-                HistoryView(audio: audio)
-                    .tabItem {
-                        Label("History", systemImage: "clock.arrow.circlepath")
-                    }
+                if showHistoryTab {
+                    HistoryView(audio: audio)
+                        .tabItem {
+                            Label("History", systemImage: "clock.arrow.circlepath")
+                        }
+                }
 
                 SettingsView(
                     showCallsTab: $showCallsTab,
                     showPlaysTab: $showPlaysTab,
-                    showMessageTab: $showMessageTab
+                    showMessageTab: $showMessageTab,
+                    showHistoryTab: $showHistoryTab
                 )
                 .tabItem {
                     Label("Settings", systemImage: "gearshape")
