@@ -18,7 +18,7 @@ struct Lineup_Changer_CatchercomApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
                 .onAppear {
                     // Keep the phone awake while the app is open so a coach does not have to unlock mid-game.
                     UIApplication.shared.isIdleTimerDisabled = true

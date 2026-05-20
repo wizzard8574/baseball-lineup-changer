@@ -21,6 +21,9 @@ struct SettingsView: View {
                     Toggle("Show History", isOn: $showHistoryTab)
                 }
                 .listRowBackground(Color.white.opacity(0.12))
+
+                AboutSettingsSection()
+                    .listRowBackground(Color.white.opacity(0.12))
             }
             .scrollContentBackground(.hidden)
             .background(Color.clear)
